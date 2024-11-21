@@ -1,0 +1,179 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px;">
+            <div class="row">
+                <div class="col-sm-9" style="padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Schedule Interviews</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        View Candidate Applications for Your Job Openings
+                    </div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="p-16 bg-light-primary rounded">
+                            <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                        <path d="M12 9h.01"></path>
+                                        <path d="M11 12h1v4h1"></path>
+                                    </svg>
+                                </i-tabler>
+                                Schedule Interview
+                            </h5>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: -10px;">
+                                <div class="form-group" style="max-width: 100%;">
+                                    <select id="employmentType" class="form-control custom-input" [(ngModel)]="jobValue"
+                                            (change)="onJobChange(jobValue)"
+                                            (focus)="onJobFocus()"
+                                            (blur)="onJobBlur()"
+                                            style="height: 40px;" required>
+                                        <option value="placeholder" disabled selected>Select Job Title</option> <!-- Placeholder -->
+                                        <option *ngFor="let job of jobs" [value]="job.job_id">{{ job.title }}</option>
+                                    </select>
+                                    <label for="customInput" [ngClass]="{'active': isJobFocused || jobValue}">Job Title</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6" style="margin-top: -10px;">
+                                <div class="form-group" style="max-width: 100%;">
+                                    <select id="applicantName" class="form-control custom-input"
+                                            [(ngModel)]="statusValue" 
+                                            (focus)="onStatusFocus()"
+                                            (blur)="onStatusBlur()"
+                                            style="height: 40px;" required>
+                                        <option value="placeholder" disabled selected>Select Applicant</option> <!-- Placeholder -->
+                                        <option *ngFor="let application of filteredApplications" [value]="application.application_id">
+                                            {{ application.first_name }} {{ application.last_name }}
+                                        </option>
+                                    </select>
+                                    <label for="customInput"
+                                           [ngClass]="{'active': isStatusFocused || statusValue}">Applicant Name</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-top: 5px;">
+                                    <input type="date" class="form-control custom-input" id="interviewDate" #customInput
+                                        (focus)="onDateFocus()" (blur)="onDateBlur()"
+                                        [placeholder]="isDateFocused ? '' : ''" [(ngModel)]="DateValue" required />
+                                    <label for="interviewDate"
+                                        [ngClass]="{'active': isDateFocused || DateValue}">Interview Date</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-top: 5px;">
+                                    <input type="time" class="form-control custom-input" id="interviewTime" #customInput
+                                        (focus)="onTimeFocus()" (blur)="onTimeBlur()"
+                                        [placeholder]="isTimeFocused ? '' : ''" [(ngModel)]="TimeValue" required />
+                                    <label for="interviewTime"
+                                        [ngClass]="{'active': isTimeFocused || TimeValue}">Interview Time</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: -10px;">
+                                <div class="form-group" style="max-width: 100%;">
+                                    <select id="interviewer" class="form-control custom-input"
+                                        [(ngModel)]="InterviewerValue" 
+                                        (focus)="onInterviewerFocus()"
+                                        (blur)="onInterviewerBlur()" required>
+                                        <option value="placeholder" disabled selected>Select Interviewer</option> <!-- Placeholder -->
+                                        <option *ngFor="let interviewer of interviewers" [value]="interviewer.employee_id">{{ interviewer.full_name }}</option>
+                                    </select>
+                                    <label for="interviewer"
+                                        [ngClass]="{'active': isInterviewerFocused || InterviewerValue}">Interviewer</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-top: 5px;">
+                                    <select id="interviewType" class="form-control custom-input"
+                                        [(ngModel)]="InterviewTypeValue" 
+                                        (focus)="onInterviewTypeFocus()"
+                                        (blur)="onInterviewTypeBlur()" required>
+                                        <option value="placeholder" disabled selected>Select Interview Type</option> <!-- Placeholder -->
+                                        <option value="HR interview">HR Interview</option>
+                                        <option value="Technical interview">Technical Interview</option>
+                                        <option value="Managerial interview">Managerial Interview</option>
+                                    </select>
+                                    <label for="interviewType"
+                                        [ngClass]="{'active': isInterviewTypeFocused || InterviewTypeValue}">Interview Type</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: -10px;">
+                                <div class="form-group" style="max-width: 100%;">
+                                    <select id="interviewMode" class="form-control custom-input"
+                                        [(ngModel)]="InterviewModeValue" 
+                                        (focus)="onInterviewModeFocus()"
+                                        (blur)="onInterviewModeBlur()" required>
+                                        <option value="placeholder" disabled selected>Select Interview Mode</option> <!-- Placeholder -->
+                                        <option value="in-person">In Person</option>
+                                        <option value="video-call">Video Call</option>
+                                        <option value="phone-call">Phone Call</option>
+                                        <option value="teams-call">Teams Call</option>
+                                    </select>
+                                    <label for="interviewMode"
+                                        [ngClass]="{'active': isInterviewModeFocused || InterviewModeValue}">Interview Mode</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6" *ngIf="InterviewModeValue === 'inPerson'">
+                                <div class="form-group" style="margin-top: 5px;">
+                                    <input type="text" class="form-control custom-input" id="locationInput" #customInput
+                                        (focus)="onInterviewLocationFocus()" (blur)="onInterviewLocationBlur()"
+                                        [placeholder]="isInterviewLocationFocused ? '' : ''"
+                                        [(ngModel)]="InterviewLocationValue" required />
+                                    <label for="locationInput"
+                                        [ngClass]="{'active': isInterviewLocationFocused || InterviewLocationValue}">Interview Location</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button mat-button color="primary"
+                                style="background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                (click)="scheduleInterview()" required>
+                                Schedule Interview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+        <span>{{ errorMessage }}</span>
+        <button (click)="dismissError()">X</button>
+    </div>
+</div>

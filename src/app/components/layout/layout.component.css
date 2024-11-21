@@ -1,0 +1,66 @@
+/* src/styles.css */
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
+
+
+
+app-navbar {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    height: 4rem;
+    z-index: 2;
+}
+
+main {
+    position: absolute;
+    width: 100%;
+    top: 3rem;
+    z-index: 1;
+}
+
+
+
+app-sidebar {
+    position: fixed;
+    left: 0rem;
+    width: 60px;
+    height: calc(100vh - 3rem);
+    /* box-shadow: 0px 0px 10px black; */
+    background-color: white;
+    border-top:1px solid white ;
+    overflow: hidden;
+    border-right: 1px solid rgb(218, 218, 218); /* Optional: Add a right border */
+    white-space: nowrap;
+    transition: width 250ms ease-in;
+    background: rgb(255, 255, 255); 
+    /* background-image: url('../assets/img/faces/sidebar-1.jpg'); */
+    /* background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgb(255, 255, 255);
+    filter: brightness(70%) grayscale(100%)  ;
+    opacity: 0.1; */
+    
+    
+}
+.app-side-nav-open {
+    width: 250px;
+    /* background-image: url('../assets/img/faces/sidebar-1.jpg');
+    opacity: 0.1; */
+}
+.display-area {
+    position: absolute;
+    left: 60px;
+    width: calc(100% - 60px);
+    transition: left 250ms ease-in, width 250ms ease-in;
+    
+}
+
+.display-area-shrink {
+    width: calc(100% - 250px);
+    left: 250px;
+}
+
+
+

@@ -1,0 +1,330 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Candidate Applications</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        View Candidate Applications for Your Job Openings</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- <br> -->
+        <div class="card mb-4" style="border-radius: 10px;">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-4" style="margin-top: -10px;">
+                        <div class="form-group" style="max-width: 100%; ">
+                            <select id="employmentType" class="form-control custom-input" [(ngModel)]="JobValue"
+                                (change)="onJobChange($event)" (focus)="onJobFocus()" (blur)="onJobBlur()"
+                                style="height: 50px;">
+                                <option *ngFor="let job of jobs" [value]="job.title">{{ job.title }}</option>
+
+                            </select>
+                            <label for="customInput" [ngClass]="{'active': isJobFocused || JobValue}">Job Title</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top: -10px;">
+                        <div class="form-group" style="max-width: 100%; ">
+                            <select id="employmentType" class="form-control custom-input" [(ngModel)]="StatusValue"
+                                (change)="onStatusChange($event)" (focus)="onStatusFocus()" (blur)="onStatusBlur()"
+                                style="height: 50px;">
+                                <option value="submitted">Applied</option>
+                                <option value="shortlisted">Shortlisted</option>
+                                <option value="interviewing">Interviewing</option>
+                                <option value="offered">Offered</option>
+                                <option value="accepted">Accepted</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="hired">Hired</option>
+                            </select>
+                            <label for="customInput"
+                                [ngClass]="{'active': isStatusFocused || StatusValue}">Status</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="margin-top: -10px; ">
+                        <div class="form-group" style="max-width: 100%; ">
+                            <input type="date" class="form-control custom-input" id="customInput" #customInput
+                                (focus)="onDeadlineFocus()" (blur)="onDeadlineBlur()"
+                                [placeholder]="isDeadlineFocused ? '' : ''" [(ngModel)]="DeadlineValue"
+                                style="height: 50px; left: 30px;" />
+                            <label for="customInput"
+                                [ngClass]="{'active': isDeadlineFocused || DeadlineValue}">Application
+                                Deadline</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+            <div class="card-body">
+                <mat-card>
+                    <mat-card-content>
+                        <div class="table-container">
+                            <ng-container>
+                                <div class="table-section">
+                                    <table mat-table multitemplatedatarows
+                                        class="mat-mdc-table mdc-data-table__table cdk-table" role="table">
+                                        <thead role="rowgroup">
+                                            <tr role="row" mat-header-row
+                                                class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                                                <th mat-header-cell> Id </th>
+                                                <th mat-header-cell> Applicant Name </th>
+                                                <th mat-header-cell> Job Title </th>
+                                                <th mat-header-cell> Status </th>
+                                                <th mat-header-cell> Date Applied </th>
+                                                <th mat-header-cell> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody role="rowgroup" class="mdc-data-table__content"
+                                            *ngFor="let application of filteredApplications; let i = index">
+                                            <tr role="row" mat-row class="mat-mdc-row mdc-data-table__row cdk-row">
+                                                <td mat-cell> {{ application.application_id }} </td>
+                                                <td mat-cell> {{ application.first_name }} </td>
+                                                <td mat-cell> {{ application.job_title }} </td>
+                                                <td mat-cell>
+                                                    <span [ngClass]="{
+                                                        'status-submitted': application.application_status === 'submitted',
+                                                        'status-interviewing': application.application_status === 'interviewing',
+                                                        'status-rejected': application.application_status === 'rejected',
+                                                        'status-shortlisted': application.application_status === 'shortlisted',
+                                                        'status-hired': application.application_status === 'hired',
+                                                        'status-accepted': application.application_status === 'accepted',
+                                                        'status-offered': application.application_status === 'offered'
+                                                    }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                        {{ application.application_status }}
+                                                    </span>
+                                                </td>
+                                                <td mat-cell> {{ application.submitted_at }} </td>
+                                                <td mat-cell>
+                                                    <button mat-icon-button aria-label="expand row"
+                                                        (click)="toggleDetailRow(i)"
+                                                        class="mdc-icon-button mat-mdc-icon-button">
+                                                        <mat-icon class="material-icons">{{ expandedIndex === i ?
+                                                            'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="expandedIndex === i" role="row" mat-row
+                                                class="mat-mdc-row mdc-data-table__row cdk-row example-detail-row">
+                                                <td mat-cell
+                                                    class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-expandedDetail mat-column-expandedDetail"
+                                                    colspan="6">
+                                                    <mat-card class="mat-card-detail">
+                                                        <mat-card-content>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <!-- Left Section -->
+                                                                <div class="d-flex align-items-center gap-12">
+                                                                    <span
+                                                                        class="bg-light-primary1 text-primary icon-48 rounded f-w-600 d-flex align-items-center justify-content-center">
+                                                                        <img src="/assets/img/faces/user-1.jpg"
+                                                                            width="50" class="object-cover"
+                                                                            style="border-radius: 10px; margin-right: 30px; margin-bottom: 10px;">
+                                                                    </span>
+                                                                    <div>
+                                                                        <div class="f-s-14 f-w-600 mat-subtitle-1">
+                                                                            <strong>{{ application.first_name
+                                                                                }}</strong>
+                                                                        </div> <!-- Bold -->
+                                                                        <div class="f-s-14"><em>{{ application.job_title
+                                                                                }}</em></div> <!-- Italic -->
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Right Section (Mobile Number and Email) -->
+                                                                <div class="text-end">
+                                                                    <div class="f-s-14">{{ application.phone_number }}
+                                                                    </div>
+                                                                    <div class="f-s-14">{{ application.email }}</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="text-center">
+                                                                <button mat-button color="primary"
+                                                                    style="background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                                                    (click)="openApplicantModal(application)">
+                                                                    View
+                                                                </button>
+
+                                                                <button mat-button color="warn"
+                                                                    style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">Move
+                                                                    to Next Stage
+                                                                </button>
+                                                                <button mat-button color="accent"
+                                                                    style="background-color: #fa896b; color: white; padding: 8px; border-radius: 7px;">Reject
+                                                                </button>
+                                                            </div>
+
+
+                                                        </mat-card-content>
+                                                    </mat-card>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <div id="applicantModal" class="modal" style="display: none;">
+            <div class="modal-content" style="display: flex;"> <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <div style="background-color: #ecf2ff; border-radius: 10px;">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding: 30px;">
+                                <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                                    style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                                    Application Information</h4>
+                                    
+                                <div class="d-flex align-items-top overflow-hidden"
+                                    style="margin-top: 20px; color: #626263;">
+                                    Applicant Details
+                                </div>
+                            </div>
+                            <div class="col-sm-3 text-right position-relative">
+                                <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                                    <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                                        style="margin-bottom: -75px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <span class="close-button" (click)="closeApplicantModal()">&times;</span>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <h4>Applicant Information</h4> -->
+                            <div class="p-16 bg-light-primary rounded">
+                                <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                    style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                            <path d="M12 9h.01"></path>
+                                            <path d="M11 12h1v4h1"></path>
+                                        </svg>
+    
+    
+                                    </i-tabler>Applicant Information
+                                </h5>
+                            </div>
+                            <br>
+                            <p><strong>Applicant Name:</strong> {{ selectedApplication?.first_name }}</p>
+                            <p><strong>Email:</strong> {{ selectedApplication?.email }}</p>
+                            <p><strong>Phone Number:</strong> {{ selectedApplication?.phone_number }}</p>
+                            <p><strong>Status:</strong> {{ selectedApplication?.application_status }}</p>
+                            <p><strong>Date Applied:</strong> {{ selectedApplication?.submitted_at }}</p>
+        
+                            <!-- Job Information Section -->
+                            <div class="p-16 bg-light-primary rounded">
+                                <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                    style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                            <path d="M12 9h.01"></path>
+                                            <path d="M11 12h1v4h1"></path>
+                                        </svg>
+    
+    
+                                    </i-tabler>Job Information
+                                </h5>
+                            </div>
+                            <br>
+                            <p><strong>Job Title:</strong> {{ selectedApplication?.job_title }}</p>
+                            <p><strong>Job Description:</strong> {{ selectedApplication?.job_description }}</p>
+                            <p><strong>Department:</strong> {{ selectedApplication?.department }}</p>
+                            <p><strong>Location:</strong> {{ selectedApplication?.location }}</p>
+        
+                            <!-- Application Status Section -->
+                            <div class="p-16 bg-light-primary rounded">
+                                <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                    style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                            <path d="M12 9h.01"></path>
+                                            <path d="M11 12h1v4h1"></path>
+                                        </svg>
+    
+    
+                                    </i-tabler>Application Status
+                                </h5>
+                            </div>
+                            <br>
+
+                            <p><strong>Current Status:</strong> {{ selectedApplication?.application_status }}</p>
+                            <div class="form-group d-flex align-items-center">
+                                <label for="statusChange" class="me-2">Change Status</label>
+                                <select id="statusChange" class="form-control custom-input" style="margin-right: 10px;"
+                                    [(ngModel)]="newStatusValue" (change)="onStatusChange($event)">
+                                    <option value="submitted">Applied</option>
+                                    <option value="shortlisted">Shortlisted</option>
+                                    <option value="interviewing">Interviewing</option>
+                                    <option value="offered">Offered</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="hired">Hired</option>
+                                </select>
+                                <button mat-button color="primary"
+                                    style="background-color: #44b7f7; color: white; padding: 8px 16px; border-radius: 7px;"
+                                    (click)="saveStatus()">Save </button>
+                            </div>                        </div>
+                        <div class="col-md-6">
+                            <div style="flex: 0 0 40%; margin-left: 20px;"> <!-- Fixed width for resume display -->
+                                <div class="p-16 bg-light-primary rounded">
+                                    <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                        style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                        <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                <path d="M12 9h.01"></path>
+                                                <path d="M11 12h1v4h1"></path>
+                                            </svg>
+        
+        
+                                        </i-tabler>Resume
+                                    </h5>
+                                </div>
+                                <br>
+                                <iframe [src]="resumePath" width="100%" height="500px" style="border: 1px solid #ccc;"></iframe>
+                                <!-- Alternative Method: Use [src]="safeResumeUrl(resumePath)" if using HttpClient with Angular for security -->
+                                <!-- <embed [src]="resumePath" type="application/pdf" width="100%" height="500px" /> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+
+    </div>
+</div>

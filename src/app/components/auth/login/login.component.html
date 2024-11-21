@@ -1,0 +1,132 @@
+<!-- <p>login works!</p> -->
+
+<main id="page-content" class="d-flex nm-aic nm-vh-md-100" style="position: relative;">
+    
+    <div class="overlay"></div>
+
+    <div class="nm-tm-wr">
+        
+        <div class="container">
+            <form (ngSubmit)="login()">
+                
+
+                <div class="nm-hr nm-up-rl-3">
+                    <h2>Login</h2>
+                    <ul class="social-buttons">
+                        <li class="nm-hvr">
+                            <a href="http://google.com/">
+                                <i class="bi bi-google"></i>
+                            </a>
+                        </li>
+                        <li class="nm-hvr">
+                            <a href="https://twitter.com/">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="nm-hvr">
+                            <a href="https://www.facebook.com/">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+
+                <div class="" >
+
+                    <!-- <span class="nm-gp-pp"><i class="bi bi-person-fill"></i></span> -->
+                    <!-- <input type="text" class="form-control" id="inputUsername" tabindex="1" placeholder="Username" required=""> -->
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-person-fill"></i></span>
+                            </div>
+                            <div class="col-md-10" style="margin-left: 10px;">
+                                <input type="text" 
+                                    class="form-control" 
+                                    id="username" 
+                                    name="username"
+                                    #customEmail
+                                    (focus)="onEmailFocus()" 
+                                    (blur)="onEmailBlur()"
+                                    [placeholder]="isEmailFocused ? 'ex x0000xxxxx' : ''" 
+                                    [(ngModel)]="username" 
+                                    required />
+                                <label for="customEmail" [ngClass]="{'active': isEmailFocused || username}">Username *</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-lock-fill"></i></span>
+                            </div>
+                            <div class="col-md-10" style="margin-left: 10px;">
+                                <input type="password" 
+                                    class="form-control" 
+                                    id="password" 
+                                    name="password"
+                                    #customEmail
+                                    (focus)="onPasswordFocus()" 
+                                    (blur)="onPasswordBlur()"
+                                    [placeholder]="isPasswordFocused ? '' : ''" 
+                                    [(ngModel)]="password"
+                                    required /> <!-- Required attribute -->
+                                <label for="customPassword" [ngClass]="{'active': isPasswordFocused || password}">Password *</label>
+                                <span class="outline"></span>
+                                <!-- Eye icon to toggle password visibility -->
+                                <i id="eye-icon" class="bi bi-eye hidden" (click)="togglePasswordVisibility()" style="position: absolute; top: 0.9rem; right: 1.5rem; cursor: pointer;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group nm-gp">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label nm-check" for="rememberMe">Keep me logged in</label>
+                    </div>
+                </div>
+
+                <div class="row nm-aic nm-mb-1">
+                    <div class="col-sm-6 nm-mb-1 nm-mb-sm-0">
+                        <button type="submit" class="btn btn-primary nm-hvr nm-btn-2"   >Log In</button>
+                    </div>
+
+                    <div class="col-sm-6 nm-sm-tr">
+                        <a class="nm-fs-1 nm-fw-bd" href="recover.html">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <footer
+                    style="text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #97a4af; font-weight: 400;">
+                    Don't have an account? <a class="nm-fs-1 nm-fw-bd" style="font-size: 0.75rem;"
+                        routerLink="/signup">Signup</a></footer>
+            </form>
+        </div>
+    </div>
+    <!-- Error message container -->
+    <div *ngIf="errorMessage" class="error-message">
+        <span>{{ errorMessage }}</span>
+        <button (click)="dismissError()">X</button>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+

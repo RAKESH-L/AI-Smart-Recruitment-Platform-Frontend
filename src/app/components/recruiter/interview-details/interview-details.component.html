@@ -1,0 +1,101 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Interview Details</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Interview details here</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 text-right" style="margin-top: -10px;">
+                        <div class="form-group" style="max-width: 100%; ">
+                            <select id="employmentType" class="form-control custom-input" [(ngModel)]="StatusValue"
+                                (focus)="onStatusFocus()" (blur)="onStatusBlur()" style="height: 50px;">
+                                <option value="scheduled">scheduled</option>
+                                <option value="completed">completed</option>
+                                <option value="cancelled">cancelled</option>
+
+                            </select>
+                            <label for="customInput" [ngClass]="{'active': isStatusFocused || StatusValue}">Sort By
+                                Status</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                </div>
+                <mat-card>
+                    <mat-card-content>
+                        <div class="table-container">
+                            <ng-container>
+                                <div class="table-section">
+                                    <table mat-table multitemplatedatarows
+                                        class="mat-mdc-table mdc-data-table__table cdk-table" role="table">
+                                        <thead role="rowgroup">
+                                            <tr role="row" mat-header-row
+                                                class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                                                <th mat-header-cell> Id </th>
+                                                <th mat-header-cell> Applicant Name </th>
+                                                <th mat-header-cell> Interview Type </th>
+                                                <th mat-header-cell> Status </th>
+                                                <th mat-header-cell> Interview Date </th>
+                                                <th mat-header-cell> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody role="rowgroup" class="mdc-data-table__content"
+                                            *ngFor="let interview of interviews; let i = index">
+                                            <tr role="row" mat-row class="mat-mdc-row mdc-data-table__row cdk-row">
+                                                <td mat-cell> {{interview.interview_id}} </td>
+                                                <td mat-cell> {{interview.applicant_first_name}} </td>
+                                                <td mat-cell> {{interview.type}} </td>
+                                                <td mat-cell>
+                                                    <span [ngClass]="{
+                                                        'status-submitted': interview.status === 'scheduled',
+                                                        'status-interviewing': interview.status === 'completed',
+                                                        'status-rejected': interview.status === 'cancelled',
+                                                        
+                                                    }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                        {{ interview.status }}
+                                                    </span>
+                                                </td>
+                                                <td mat-cell> {{interview.schedule_date}} </td>
+                                                <!-- <td mat-cell> {{interview.interview_id}} </td> -->
+
+
+                                                <td mat-cell>
+                                                    <button mat-button color="primary"
+                                                        style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                                        >
+                                                        View
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+/* cropped-image.component.css */
+.image-cropper {
+    width: 100px; /* set to desired cropped width */
+    height: 40px; /* adjust this value to crop from the bottom */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .cropped-image {
+    width: 190px; /* original width of the image */
+    position: absolute;
+    top: 0;
+    left: 50%; /* Adjusted to crop from both left and right */
+    transform: translateX(-40%); /* Translate to center the image */
+    clip-path: inset(0 40% 40% 40%); /* crop 50% from the top */
+  
+  }
+  
+  .image-cropper1 {
+    width: 190px; /* same as the image width */
+    height: 125px; /* adjust this value to crop from the top */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .cropped-image1 {
+    
+    width: 190px; /* original width of the image */
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(55% 0 0 0); /* crop 50% from the top */
+    margin-top: 10px;
+  }
+  
+  
+  nav{
+      height: 75%;
+  }
+  
+  .side-nav-button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+  }
+  
+  .side-nav-button:hover {
+      background-color: gray;
+      border-radius: 20%;
+  }
+  
+  .dropdown-menu-end::before {
+      left: -10px !important;
+    }
+  
+    .dropdown-menu-light .dropdown-item:hover {
+      background-color: purple;
+      color: white;
+      padding: 5px 10px;
+      margin: 0 0px; /* Adjust the margin as needed */
+      border-radius: 2px;
+      
+      width: auto;
+      
+      margin: 0 0.3125rem;
+      transition: all 150ms linear;
+      /* padding: 0.625rem 1.25rem; */
+      overflow: hidden;
+      
+    }
+  
+    .custom-button-size {
+      transform: scale(0.9); /* Adjust the scaling factor as needed */
+    }
+    
+  
