@@ -1,0 +1,159 @@
+
+<nav class="navbar navbar-expand navbar-light bg-light px-2">
+    <div class="side-nav-button p-2 me-3 text-Light" (click)="toggleSidebar()">
+      <i [ngClass]="{'bi-layout-text-sidebar-reverse': !menuStatus, 'bi-layout-text-sidebar': menuStatus}"></i>
+    </div>
+    <!-- cropped-image.component.html -->
+  <div class="image-cropper">
+    <!-- <img src="/assets/img/logo/3.png" width="" class="cropped-image"> -->
+  </div>
+  <div class="image-cropper1">
+    <!-- <img src="/assets/img/logo/3.png" width="" class="cropped-image1"> -->
+  </div>
+  
+  
+    <!-- <a class="navbar-brand px-4" href="#">Essence - The Skill Lab</a> -->
+  
+    <div class="navbar-collapse">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <!-- <a class="nav-link dropdown-toggle" href="#" role="button"
+          data-bs-toggle="dropdown">
+            Menu 1
+          </a>
+          <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Child 1</a></li>
+            <li><a class="dropdown-item" href="#">Child 1</a></li>
+            <li><a class="dropdown-item" href="#">Child 1</a></li>
+  
+          </ul> -->
+  
+        </li>
+        
+      </ul>
+  
+    </div>
+  
+    <!-- src="../../../assets/img/faces/marc.jpg" -->
+    
+    
+  
+  
+    <form class="d-flex me-5">
+      <input class="form-control me-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-Light" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+  
+    
+  
+    
+    <div class="profile-logo ">
+      <button mat-icon-button="" class="" data-bs-toggle="dropdown">
+        <i class="bi bi-bell-fill"></i> 
+      </button>
+      <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end">
+        <li><a href="#" class="dropdown-item">Generate Skillset</a></li>
+        <li><a href="#" class="dropdown-item">Update Your Jira Board</a></li>
+        <li><a href="#" class="dropdown-item">Enhance your skill like Poornesh</a></li>
+      </ul>
+    </div>  
+    
+    <div class="profile-logo dropdown" (click)="toggleProfileDropdown()">
+      
+      <button mat-icon-button=""  class="  " data-bs-toggle="dropdown">
+        
+        <!-- <img src="/assets/img/faces/user-1.jpg" width="35" class="rounded-circle object-cover"> -->
+        
+                            <img src="/assets/img/faces/user-.jpg" 
+                                 width="35" class="rounded-circle object-cover"
+                                 >
+      </button>
+  
+  
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-end" [ngClass]="{'show': isProfileDropdownOpen}">
+        <h3 class="card-title" style="margin-left: 30px; font-weight: bold;">User Profile</h3> 
+        <div class="d-flex align-items-center">
+          
+          
+          <img src="../../../assets/img/faces/user-1.jpg" alt="Profile Image" width="95" style="border-radius: 50%; margin-left: 20px;"> 
+          <div class="ms-2">
+            
+            <div style="width: 200px;"> <!-- Set the card width to 250px -->
+              <p class="card-title">{{employeeData.full_name}}</p>
+              <p class="card-text">{{employeeData.role}}</p>
+              <p class="card-text">Age: 25</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="dropdown-divider" style="margin-top: 30px; margin-bottom: 30px; margin-left: 20px; margin-right: 20px;"></div> <!-- Divider between sections -->
+        <a class="p-y-16 text-decoration-none d-block text-hover-primary ng-star-inserted" style="margin-bottom: 20px;" routerLink="/user-profile"><div class="d-flex align-items-center">
+          <button mat-mini-fab="" class="text-primary bg-light-primary shadow-none rounded mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base" mat-button-is-fab="true" style="margin-left: 20px; background-color: #eaf8ff;">
+            <span class="mat-mdc-button-persistent-ripple mdc-fab__ripple">
+  
+            </span>
+            <span class="mdc-button__label"><img width="20" src="../../../assets/img/icon/icon-account.svg">
+            </span>
+            <span class="mat-mdc-focus-indicator"></span>
+            <span class="mat-mdc-button-touch-target"></span>
+            <span class="mat-mdc-button-ripple"></span>
+          </button>
+          <div class="m-l-16" style="margin-left: 20px;">
+            <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text" routerLink="/layout/user-profile"> My Profile </h5>
+            <span class="mat-body-1" style="color: black;">Account Settings</span>
+          </div>
+        </div>
+      </a>
+  
+      <a class="p-y-16 text-decoration-none d-block text-hover-primary ng-star-inserted" style="margin-bottom: 20px;" href="/"><div class="d-flex align-items-center">
+        <button mat-mini-fab="" class="text-primary bg-light-primary shadow-none rounded mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base" mat-button-is-fab="true" style="margin-left: 20px; background-color: #eaf8ff;">
+          <span class="mat-mdc-button-persistent-ripple mdc-fab__ripple">
+  
+          </span>
+          <span class="mdc-button__label"><img width="20" src="../../../assets/img/icon/icon-inbox.svg">
+          </span>
+          <span class="mat-mdc-focus-indicator"></span>
+          <span class="mat-mdc-button-touch-target"></span>
+          <span class="mat-mdc-button-ripple"></span>
+        </button>
+        <div class="m-l-16" style="margin-left: 20px;">
+          <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text" > My Inbox </h5>
+          <span class="mat-body-1" style="color: black;">Messages and Email</span>
+        </div>
+      </div>
+    </a>
+        
+    
+    <a class="p-y-16 text-decoration-none d-block text-hover-primary ng-star-inserted" style="margin-bottom: 20px;" href="/"><div class="d-flex align-items-center">
+      <button mat-mini-fab="" class="text-primary bg-light-primary shadow-none rounded mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base" mat-button-is-fab="true" style="margin-left: 20px; background-color: #eaf8ff;">
+        <span class="mat-mdc-button-persistent-ripple mdc-fab__ripple">
+  
+        </span>
+        <span class="mdc-button__label"><img width="20" src="../../../assets/img/icon/icon-tasks.svg">
+        </span>
+        <span class="mat-mdc-focus-indicator"></span>
+        <span class="mat-mdc-button-touch-target"></span>
+        <span class="mat-mdc-button-ripple"></span>
+      </button>
+      <div class="m-l-16" style="margin-left: 20px;">
+        <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text" > My Task </h5>
+        <span class="mat-body-1" style="color: black;">To do and Daily Task</span>
+      </div>
+    </div>
+  </a>
+  
+  <a mat-stroked-button="" color="primary" class="w-100 mdc-button mdc-button--outlined mat-mdc-outlined-button mat-primary mat-mdc-button-base custom-button-size" (click)="logout()" aria-disabled="false" mat-button-is-fab="false">
+    <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+    <span class="mdc-button__label">Logout</span><span class="mat-mdc-focus-indicator"></span>
+    <span class="mat-mdc-button-touch-target"></span>
+    <span class="mat-mdc-button-ripple"></span>
+  </a>
+  
+      </div>
+      
+    </div>
+  
+  
+    
+  </nav>
+    

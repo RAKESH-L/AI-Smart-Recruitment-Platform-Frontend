@@ -1,0 +1,22 @@
+<p>candidate-layout works!</p>
+<!-- layout.component.html -->
+<div class="container-fluid g-0">
+    <app-navbar (sideNavToggled)="sideNavStatus = $event;"></app-navbar>
+  
+    <main>
+      <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open': sideNavStatus}" class="black-border">
+        <div class="sidebar-content"></div>
+      </app-sidebar>
+  
+      <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
+        <router-outlet></router-outlet>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+  
+
+  
+

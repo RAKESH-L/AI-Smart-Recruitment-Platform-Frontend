@@ -1,0 +1,458 @@
+.m-b-16 {
+    margin-bottom: 16px !important;
+}
+
+/* card.component.css */
+.custom-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: gray;
+    cursor: pointer;
+    margin: 5px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Remove default text decoration */
+    position: relative; /* To position the underline relative to the button */
+    margin-right: 50px; /* Add space between buttons */
+  }
+  
+  .custom-button.active {
+    color: #5d87ff;
+    padding-bottom: 5px; /* Add padding between the text and the underline */
+  }
+  
+  .custom-button.active::after {
+    content: '';
+    display: block;
+    height: 2px; /* Line height */
+    background: #5d87ff; /* Line color */
+    width: 150%; /* Full width of the button */
+    position: absolute;
+    bottom: -13px; /* Position at the bottom of the button */
+    left: -22px;
+  }
+  
+  .custom-button i {
+    font-size: 24px;
+    margin-right: 5px; /* Add spacing between the icon and the text */
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+  }
+  
+
+ /* card.component.css */
+/* ... (previous styles) */
+
+.card {
+    margin: 20px 0; 
+  }
+  
+  .card-body {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px; /* Add spacing between image and button */
+  }
+  
+  .user-info img {
+    width: 100px; /* Adjust the image size as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 5px; /* Add spacing between image and button */
+  }
+  
+  .edit-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #5d87ff;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    text-decoration: underline; /* Add underline to the "Edit" text */
+  }
+  
+  /* ... (previous styles) */
+  
+  .button-spacing {
+    margin-right: 10px; /* You can adjust the margin value to control the spacing */
+  }
+
+ .mat-mdc-card-title{
+    font-family: Plus Jakarta Sans, sans-serif;
+ }
+.form-control:focus {
+    border-color: #5d87ff;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+}
+
+.highlight-blue:focus {
+    border-color: #5d87ff;
+}
+
+.highlight-on-hover:hover {
+    border-color: #5d87ff;
+    color: white; /* Add this to change text color for better visibility */
+}
+
+.input-container input {
+    width: 45%; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-control {
+    height: 50px; /* Adjust the height as needed */
+}
+
+.text-area{
+    min-height: 100px; /* You can adjust this to make it taller */
+    max-height: 300px; /* Limit the maximum height if desired */
+    padding: 10px; /* Ensure there's padding for text */
+    font-size: 14px; /* Adjust font size for readability */
+}
+
+.stepper {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .stepper li {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .circle {
+    background-color: #007bff; /* Circle background color */
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .step-name {
+    font-weight: bold;
+    margin-top: 10px; /* Adjust the spacing between step number and name */
+  }
+  
+  .stepper li:not(:last-child):after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -65px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 130px;
+    height: 1px;
+    background-color: #ccc; /* Line color between steps */
+  }
+  
+  .stepper li.active {
+    font-weight: bold;
+    color: #007bff; /* Color for active step */
+  }
+  
+  .step-content {
+    margin-top: 20px;
+  }
+  
+
+  
+  .form-group {
+    position: relative;
+    margin-left: 100px;
+    margin: 1rem;
+  }
+  
+  .form-control {
+    border: 1px solid #ccc; /* Set the initial border color */
+    transition: border-color 0.1s ease-in-out;
+    padding: 10px; /* Add some padding to create space for the label */
+  }
+  
+  .form-control:focus {
+    border-color: #5d87ff; /* Set border color to transparent when focused */
+    box-shadow: none; /* Set box-shadow to none when focused */
+  }
+  .custom-input {
+    padding: 5px; /* Adjust padding */
+    left: 30px;
+    font-size: 14px; /* Adjust font size */
+    height: 40px;
+}
+  
+  label {
+    position: absolute;
+    top: 50%; /* Adjust the initial top position */
+    left: 10px; /* Adjust the left position */
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    color: gray; /* Set label color to match the focused state */
+    background-color: #fff; /* Set a background color for the label */
+    padding: 0 5px; /* Add padding for better appearance */
+    border-radius: 5px; /* Add border radius for the label */
+    transform: translateY(-50%); /* Move label up when focused */
+  }
+  
+  label.active {
+    top: 0;
+    left: 10px; /* Maintain the same left position */
+    font-size: 0.6rem;
+    padding: 0 5px; /* Add padding for better appearance */
+    border-radius: 5px; /* Add border radius for the label */
+    transform: translateY(-50%); /* Move label even further up when focused */
+    color: #5d87ff;
+  }
+  
+
+
+
+
+
+
+  .table-container {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    height: 100%; /* Take the full height of the card */
+}
+
+.table-section {
+    flex: 1; /* This allows each section to grow equally */
+    margin-bottom: 10px; /* Space between sections */
+    
+}
+
+.table-section table {
+    width: 100%; /* Ensure each table takes full width */
+    
+}
+
+/* Optional: Style the horizontal line if required */
+.full-width-divider {
+    border: none;
+    border-top: 2px solid #ddd;
+    margin: 10px 0; /* Margin above and below the line */
+}
+
+.table-container {
+    width: 100%; /* Ensure full width */
+}
+
+.table-section {
+    margin-bottom: 20px; /* Space between sections if needed */
+}
+
+.mat-card {
+    margin-top: 10px; /* Optionally space out cards if needed */
+}
+
+.mat-card-detail {
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light grey border */
+    margin-top: 10px; /* Space above the card */
+    padding: 16px; /* Inner padding */
+    background-color: #ffffff; /* Light background for visibility */
+}
+
+.mat-mdc-cell, .mat-mdc-header-cell {
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+/* Ensure table rows do not have extra spacing */
+.mat-mdc-row {
+    height: auto; /* Let height adjust automatically */
+}
+
+/* Optionally, control the detail row appearance */
+.example-detail-row {
+    transition: none; /* Disable transition for height changes, if desired */
+}
+
+/* Remove the border collapse gap if necessary */
+table {
+    border-collapse: collapse; /* Ensures rows stick together without space */
+}
+
+.mat-card-detail {
+    margin: 0; /* Remove outer margin for the detail card */
+}
+
+  
+
+
+
+
+
+
+
+.f-w-600 {
+    font-weight: 500 !important;
+}
+
+.f-s-12 {
+    font-size: 12px !important;
+}
+.p-y-4 {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+.p-6 {
+    padding: 7px !important;
+}
+.rounded {
+    border-radius: 7px !important;
+}
+.status-submitted {
+    background-color: #ecf2ff!important; /* Submitted color */
+    color: #5d87ff!important;
+}
+
+.status-interviewing {
+    background-color: #fef5e5!important; /* Interviewing color */
+    color: #ffae1f!important;
+}
+
+.status-rejected {
+    background-color: #fdede8!important; /* Rejected color */
+    color: #fa896b!important;
+}
+.status-shortlisted{
+    background-color: #e8f7ff!important;
+    color: #49beff!important;
+}
+.status-hired, .status-offered, .status-accepted{
+    background-color: #e6fffa!important;
+    color: #13deb9!important;
+}
+
+/* .text-accent {
+    color: #49beff !important;
+} */
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+/* Modal popup window */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Prevent scrolling */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: absolute; /* Position absolute for centering */
+  top: 50%; /* Position it in the middle */
+  left: 50%; /* Position it in the middle */
+  transform: translate(-50%, -50%); /* Center vertically and horizontally */
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Can adjust as needed */
+  /* max-width: 600px;  */
+  max-height: 80%; /* Prevent overflow beyond window height */
+  border-radius: 10px; /* Rounded corners */
+  overflow-y: auto; /* Allow scrolling only if modal content exceeds max height */
+}
+
+/* Close button styling */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+/* Header css */
+.p-16 {
+  padding: 16px !important;
+}
+
+.rounded {
+  border-radius: 7px !important;
+}
+.bg-light-primary {
+  background-color: #ecf2ff !important;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+
+.error-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #e6fffa!important;
+  color: #13deb9 ;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.error-message span {
+  margin-right: 10px;
+}
+
+.error-message button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

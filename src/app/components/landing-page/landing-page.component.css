@@ -1,0 +1,170 @@
+.spacer-sm {
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+.bg-primary {
+    background: #5d87ff!important;
+}
+.bg-primary {
+    background-color: #5d87ff!important;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.light-theme .mdc-list-item__primary-text, .light-theme .mat-drawer-container, .light-theme .mat-drawer, .dark-theme .mdc-list-item__primary-text, .dark-theme .mat-drawer-container, .dark-theme .mat-drawer {
+    color: #2a3547;
+}
+.mat-drawer-container {
+    background-color: #fafafa;
+    color: #000000de;
+}
+body {
+    font-family: Plus Jakarta Sans,sans-serif;
+    color: #2a3547;
+    font-size: 14px;
+    line-height: 1.334rem;
+}
+body {
+    margin: 0;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+body {
+    font-family: Plus Jakarta Sans,sans-serif;
+    color: #2a3547;
+    font-size: 14px;
+    line-height: 1.334rem;
+}
+body {
+    margin: 0;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+.section-title2 {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 700;
+}
+
+
+
+.container {
+    max-width: 1200px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin: 0 auto;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.light-theme .mdc-list-item__primary-text, .light-theme .mat-drawer-container, .light-theme .mat-drawer, .dark-theme .mdc-list-item__primary-text, .dark-theme .mat-drawer-container, .dark-theme .mat-drawer {
+    color: #2a3547;
+}
+.mat-drawer-container {
+    background-color: #fafafa;
+    color: #000000de;
+}
+body {
+    font-family: Plus Jakarta Sans,sans-serif;
+    color: #2a3547;
+    font-size: 14px;
+    line-height: 1.334rem;
+}
+body {
+    margin: 0;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+body {
+    font-family: Plus Jakarta Sans,sans-serif;
+    color: #2a3547;
+    font-size: 14px;
+    line-height: 1.334rem;
+}
+body {
+    margin: 0;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+.hstack {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.light-theme .blue_theme .mdc-button, .light-theme .purple_theme .mdc-button, .light-theme .orange_theme .mdc-button, .light-theme .green_theme .mdc-button, .light-theme .aqua_theme .mdc-button, .light-theme .cyan_theme .mdc-button, .dark-theme .mdc-button {
+    border-radius: 7px;
+}
+
+.btn-custom.sm {
+    padding: 0 34px!important;
+}
+
+.mat-mdc-unelevated-button.mat-unthemed {
+    --mdc-filled-button-container-color: #fff;
+    --mdc-filled-button-label-text-color: #000;
+}
+
+.mat-mdc-button, .mat-mdc-unelevated-button, .mat-mdc-raised-button, .mat-mdc-outlined-button {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.btn-custom {
+    height: 56px!important;
+    padding: 0 52px!important;
+    font-size: 16px;
+}
+.f-w-500 {
+    font-weight: 500!important;
+}
+
+h5 {
+    display: block;
+    font-size: 0.83em;
+    margin-block-start: 1.67em;
+    margin-block-end: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.mat-mdc-unelevated-button.mat-primary {
+    --mdc-filled-button-container-color: #5d87ff;
+    --mdc-filled-button-label-text-color: #fff;
+}

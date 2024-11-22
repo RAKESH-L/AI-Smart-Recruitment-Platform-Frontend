@@ -1,0 +1,87 @@
+<!-- 
+<div class="container-fluid g-0">
+    <app-navbar (sideNavToggled)="sideNavStatus = $event;"></app-navbar>
+
+    <main>
+        <app-sidebar [sideNavStatus]="sideNavStatus" 
+        [ngClass]="{'app-side-nav-open': sideNavStatus}" class="black-border">
+      
+            <div class="sidebar-content">
+                
+            </div>
+        </app-sidebar>
+
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
+            <p class=""><router-outlet></router-outlet></p>
+        </div>
+    </main>
+</div> -->
+
+
+
+<div class="bg-primary spacer-sm">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <h3 class="m-t-0 section-title2 text-white m-b-24"> Build Your Skills with Our AI-Powered Skill Management Application </h3>
+                <div class="hstack">
+                    <a mat-button-ripple-uninitialized="" mat-flat-button=""
+                        class="text-primary btn-custom sm bg-white f-w-500 mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-unthemed mat-mdc-button-base"
+                        routerLink="/layout/aboutus" aria-disabled="false" mat-button-is-fab="false">
+                        <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                        <span class="mdc-button__label">About us</span>
+                        <span class="mat-mdc-focus-indicator"></span>
+                        <span class="mat-mdc-button-touch-target"></span>
+                    </a>
+                    <a mat-button-ripple-uninitialized="" mat-stroked-button="" color="white"
+                        class="btn-custom sm text-white f-w-500 border-white mdc-button mdc-button--outlined mat-mdc-outlined-button mat-white mat-mdc-button-base"
+                        aria-disabled="false" mat-button-is-fab="false">
+                        <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Know more </span>
+                        <span class="mat-mdc-focus-indicator"></span>
+                        <span class="mat-mdc-button-touch-target"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right"><img src="assets/img/card/c2a.png" alt="img" width="330"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <mat-card class="mat-mdc-card mdc-card cardWithShadow c2a-card bg-size-cover"
+        style="background-image: url(&quot;/assets/images/landingpage/shape/line-bg-2.svg&quot;); margin-top: -50px;">
+        <mat-card-content class="mat-mdc-card-content p-24">
+            <div class="hstack justify-content-between align-items-center">
+                <div class="d-flex align-items-center"><img src="assets/img/icon/badge.svg" alt="badge">
+                    <div class="m-l-24" style="margin-left: 20px;">
+                        <h5 class="f-s-21 f-w-600 mat-subtitle-1 m-b-4" style="font-size: 25px;"> Achieve Skill Mastery with Confidence </h5>
+                        <span class="f-s-14">Track and Enhance Your Skills by Connecting Internal and External Accounts</span>
+                    </div>
+                </div>
+                <a mat-flat-button="" color="primary"
+                    class="btn-custom mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base"
+                    routerLink="/login" aria-disabled="false" mat-button-is-fab="false"><span
+                        class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span><span
+                        class="mdc-button__label">Login</span><span class="mat-mdc-focus-indicator"></span><span
+                        class="mat-mdc-button-touch-target"></span><span class="mat-mdc-button-ripple"></span></a>
+                <!-- <button mat-button-ripple-uninitialized="" mat-flat-button="" color="primary" class="button-spacing mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base" mat-button-is-fab="false" style="background-color: #5d87ff; border-radius: 7px;">
+                    <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                    <span class="mdc-button__label"> Login </span>
+                    <span class="mat-mdc-focus-indicator"></span>
+                    <span class="mat-mdc-button-touch-target"></span>
+                </button> -->
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<br>
+<br>
+
+<!-- centered-image.component.html -->
+<div class="d-flex justify-content-center align-items-center" >
+    <img src="/assets/img/logo/3.png" width="300" class="">
+  </div>
+  
