@@ -1,0 +1,22 @@
+.table-section tr {
+    height: 60px;
+    border-bottom: 1px solid #e5eaef; /* Add a bottom border for each row */
+}
+
+
+.table-section table {
+    width: 100%; /* Ensure each table takes full width */
+    border-spacing: 0 10px; /* Add vertical spacing of 10px between rows (adjust as needed) */
+
+}
+
+.font-light {
+    font-weight: 500; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+    text-align: left;
+}
+
+.values {
+    font-weight: 10; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+    text-align: left;
+    font-family: Plus Jakarta Sans, sans-serif;
+}

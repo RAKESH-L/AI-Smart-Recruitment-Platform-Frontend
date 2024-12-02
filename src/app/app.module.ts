@@ -30,6 +30,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ScheduleInterviewComponent } from './components/recruiter/schedule-interview/schedule-interview.component';
 import { InterviewDetailsComponent } from './components/recruiter/interview-details/interview-details.component';
 import { DatePipe } from '@angular/common'; // Import DatePipe here
+import { NgApexchartsModule } from "ng-apexcharts";
+import { JobDraftComponent } from './components/recruiter/job-draft/job-draft.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { DatePipe } from '@angular/common'; // Import DatePipe here
     CandidateLayoutComponent,
     ScheduleInterviewComponent,
     InterviewDetailsComponent,
+    JobDraftComponent,
+    ThemeToggleComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,8 +65,7 @@ import { DatePipe } from '@angular/common'; // Import DatePipe here
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    // MatDialogModule,
-    // ChartModule,
+    NgApexchartsModule,
     MatCardModule,
     MatAutocompleteModule 
   ],

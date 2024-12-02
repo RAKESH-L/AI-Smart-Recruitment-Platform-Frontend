@@ -34,6 +34,13 @@ export class SidebarComponent implements OnInit{
       roles: ['recruiter'] // Visible only to recruiters
     },
     {
+      number: '2',
+      name: 'Job Draft',
+      icon: 'bi bi-person-fill',
+      route: '/layout/jobDraft',
+      roles: ['recruiter'] // Visible only to recruiters
+    },
+    {
       number: '3',
       name: 'Job Details',    // view-job-details component
       icon: 'bi bi-person-badge',

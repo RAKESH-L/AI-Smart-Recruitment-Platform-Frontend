@@ -229,4 +229,108 @@
     color: #5d87ff;
   }
   
+
+
+
+
+
+
+
   
+/* Modal background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Prevent scrolling */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: absolute; /* Position absolute for centering */
+  top: 50%; /* Position it in the middle */
+  left: 50%; /* Position it in the middle */
+  transform: translate(-50%, -50%); /* Center vertically and horizontally */
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Can adjust as needed */
+  /* max-width: 600px;  */
+  max-height: 80%; /* Prevent overflow beyond window height */
+  border-radius: 10px; /* Rounded corners */
+  overflow-y: auto; /* Allow scrolling only if modal content exceeds max height */
+}
+
+/* Close button styling */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+.table-section tr {
+  height: 60px;
+  border-bottom: 1px solid #e5eaef; /* Add a bottom border for each row */
+}
+
+
+.table-section table {
+  width: 100%; /* Ensure each table takes full width */
+  border-spacing: 0 10px; /* Add vertical spacing of 10px between rows (adjust as needed) */
+
+}
+
+.font-light {
+  font-weight: 500; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+  text-align: left;
+}
+
+.values {
+  font-weight: 10; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+  text-align: left;
+  font-family: Plus Jakarta Sans, sans-serif;
+}
+
+
+
+
+
+
+
+
+/* Header css */
+.p-16 {
+  padding: 16px !important;
+}
+
+.rounded {
+  border-radius: 7px !important;
+}
+.bg-light-primary {
+  background-color: #ecf2ff !important;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}

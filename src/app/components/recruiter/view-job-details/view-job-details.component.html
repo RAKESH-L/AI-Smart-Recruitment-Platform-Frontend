@@ -109,16 +109,16 @@
                     <hr>
                     <mat-card-actions class="mat-mdc-card-actions text-center p-y-8"
                         style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
-                        <a mat-button class="mdc-button mat-mdc-button mat-unthemed"
-                            style="background-color: #5d87ff; color: white; border-radius: 5px; height: 35px; margin-right: 10px;"
-                            href="/apps/courses/coursesdetail/1" mat-ripple>
-                            <span class="mdc-button__label">More Details</span>
-                        </a>
-                        <a mat-button class="mdc-button mat-mdc-button mat-unthemed"
-                            style="background-color: #13deb9; color: white; border-radius: 5px; height: 35px;"
-                            href="/apps/courses/coursesdetail/2" mat-ripple>
-                            <span class="mdc-button__label">View Applicants</span>
-                        </a>
+                        <button mat-button color="primary"
+                            style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                            (click)="openJobModal()">
+                            More Details
+                        </button>
+                        <button mat-button color="primary"
+                            style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                            (click)="openApplicantModal()">
+                            View Applicants
+                        </button>
                     </mat-card-actions>
 
 
@@ -126,6 +126,177 @@
 
             </div>
 
+        </div>
+
+        <div id="JobModal" class="modal" style="display: none;">
+            <div class="modal-content" style="display: flex;"> <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <div style="background-color: #ecf2ff; border-radius: 10px;">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding: 30px;">
+                                <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                                    style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                                    Job Information</h4>
+
+                                <div class="d-flex align-items-top overflow-hidden"
+                                    style="margin-top: 20px; color: #626263;">
+                                    Job Details
+                                </div>
+                            </div>
+                            <div class="col-sm-3 text-right position-relative">
+                                <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                                    <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                                        style="margin-bottom: -75px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <span class="close-button" (click)="closeApplicantModal()">&times;</span>
+                    <br>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Job Information
+                        </h5>
+                    </div>
+                    <br>
+                    <p><strong>Job Title:</strong> Software Engineer</p>
+                    <p><strong>Job Description:</strong> </p>
+                    <p><strong>Department:</strong> IT</p>
+                    <p><strong>Location:</strong> Bangalore</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="applicantModal" class="modal" style="display: none;">
+            <div class="modal-content" style="display: flex;"> <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <div style="background-color: #ecf2ff; border-radius: 10px;">
+                        <div class="row">
+                            <div class="col-sm-9" style="padding: 30px;">
+                                <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                                    style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                                    Job Information</h4>
+
+                                <div class="d-flex align-items-top overflow-hidden"
+                                    style="margin-top: 20px; color: #626263;">
+                                    Job Details
+                                </div>
+                            </div>
+                            <div class="col-sm-3 text-right position-relative">
+                                <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                                    <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                                        style="margin-bottom: -75px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <span class="close-button" (click)="closeApplicantModal()">&times;</span>
+                    <br>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Job Information
+                        </h5>
+                    </div>
+                    <br>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <mat-card class="mat-mdc-card mdc-card shadow-none text-center"
+                            style="height: 100%; border: 1px solid #e5eaef; box-shadow: #919eab4d 0 0 2px, #919eab1f 0 12px 24px -4px; ">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="col-md-4">
+                                    <!-- <h6>Recent Applications</h6> -->
+                                    <mat-card-title class="mat-mdc-card-title"
+                                        style="text-align: left; margin-left: 20px; font-weight: 550; ">Job
+                                        Applications</mat-card-title>
+                                </div>
+                                <div class="col-md-4 text-right" style="margin-top: 10px; margin-bottom: -20px;">
+                                    <div class="form-group" style="max-width: 100%; ">
+                                        <select id="employmentType" class="form-control custom-input" [(ngModel)]="StatusValue"
+                                            (focus)="onStatusFocus()" (blur)="onStatusBlur()" style="height: 50px;">
+                                            <option value="scheduled">scheduled</option>
+                                            <option value="completed">completed</option>
+                                            <option value="cancelled">cancelled</option>
+        
+                                        </select>
+                                        <label for="customInput" [ngClass]="{'active': isStatusFocused || StatusValue}">Sort By
+                                            Status</label>
+                                        <span class="outline"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-card>
+                                <mat-card-content>
+                                    <div class="table-container">
+                                        <ng-container>
+                                            <div class="table-section">
+                                                <table role="table">
+                                                    <thead role="rowgroup">
+                                                        <tr role="row">
+                                                            <th mat-header-cell class="font-light">Applicant</th>
+                                                            <th mat-header-cell class="font-light">Job Title</th>
+                                                            <th mat-header-cell class="font-light">Status</th>
+                                                            <th mat-header-cell class="font-light">Date Applied</th>
+                                                            <th mat-header-cell class="font-light">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr role="row" mat-row class="values">
+                                                            <td mat-cell>
+                                                                <div class="applicant-info d-flex align-items-center">
+                                                                    <img src="assets/img/faces/user-1.jpg" alt="Applicant Image"
+                                                                        width="40" class="rounded-circle mr-2"
+                                                                        style="margin-right: 10px; margin-top: -5px;">
+        
+                                                                    <span class="applicant-name">Yashas B Raj</span>
+                                                                </div>
+                                                            </td>
+                                                            <td mat-cell>Software Engineer</td>
+                                                            <td mat-cell>Submitted</td>
+                                                            <td mat-cell>
+                                                                <span mat-header-cell class="text-accent">10/01/1999</span>
+                                                            </td>
+                                                            <td mat-cell>
+                                                                <button mat-button color="primary"
+                                                                    style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                                                    View
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Add more rows as needed -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </mat-card>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Drafted Jobs</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Check out the Job draft</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+            <div class="card-body">
+                <div class="row">
+
+            <!-- New Card Below Search Bar Card -->
+            <div class="col-md-4 mb-4" *ngFor="let job of filteredJobs let i = index"
+                style="font-family: Plus Jakarta Sans, sans-serif;">
+                <mat-card class="mat-mdc-card mdc-card cardWithShadow overflow-hidden"
+                    style="border-radius: 10px; border: 2px solid rgb(220, 217, 217); box-shadow: #919eab4d 0 0 2px,">
+                    <mat-card-header class="mat-mdc-card-header  d-flex justify-content-left"
+                        [style.background-color]="headerColors[i % headerColors.length]" style="height: 60px; ">
+                        <div class="mat-mdc-card-header-text" style="flex: 1;">
+                            <mat-card-title class="mat-mdc-card-title m-b-0 f-s-16"
+                                style="color: white; font-weight: bold; font-size: large;">
+                                {{ job.title }}
+                            </mat-card-title>
+                        </div>
+                        <span class="d-flex align-items-center gap-4"
+                            style="color: white; font-weight: lighter; font-size: medium;">
+                            <i-tabler name="time" class="icon-16 d-flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 6v6l4 4"></path>
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                </svg>
+                            </i-tabler>
+                            {{ job.department }}
+                        </span>
+                    </mat-card-header>
+
+                    <br>
+                    <mat-card-content class="mat-mdc-card-content text-left p-y-24">
+                        <h5 class="m-b-4 mat-subtitle-2">{{ job.client }}</h5>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="f-s-12">{{ job.experience }}</span>
+                            <span class="f-s-12">{{ job.location }}</span>
+                        </div>
+                    </mat-card-content>
+
+                    <mat-card-content class="mat-mdc-card-content text-left p-y-24">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="f-s-12">{{ job.salary_range }}</span>
+                            <span class="f-s-12">{{job.application_deadline}}</span>
+                        </div>
+                    </mat-card-content>
+
+
+                    <mat-divider role="separator" class="mat-divider mat-divider-horizontal"
+                        aria-orientation="horizontal"></mat-divider>
+                    <hr>
+                    <mat-card-actions class="mat-mdc-card-actions text-center p-y-8"
+                        style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
+                        <button mat-button color="primary"
+                            style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                            >
+                            Edit
+                        </button>
+                        <button mat-button color="primary"
+                            style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                            (click)="deleteJob(job.job_id)">
+                            Delete
+                        </button>
+                    </mat-card-actions>
+
+
+                </mat-card>
+
+            </div>
+
+        </div>
+            </div>
+        </div>
+    </div>
+</div>

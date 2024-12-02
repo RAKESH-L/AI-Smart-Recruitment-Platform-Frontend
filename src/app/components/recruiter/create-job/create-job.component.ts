@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { JobPosting } from '../../../model/Job.model';
 import { JobService } from '../../../service/job.service';
+import { OpenaiService } from '../../../service/openai.service';
+import { GenerateJD } from '../../../model/openai.model';
+import { marked } from 'marked';
 
 @Component({
   selector: 'app-create-job',
@@ -58,8 +61,10 @@ export class CreateJobComponent {
   addressValue: string = '';
   inputValue: string = ''; // Binding for the input field
   errorMessage: string = ''; // Variable to hold error message
+  
+  successMessage: string = '';
 
-  constructor(private jobService: JobService) {}
+  constructor(private jobService: JobService, private openaiService: OpenaiService) {}
 
 
   ngOnInit(): void {
@@ -87,14 +92,108 @@ export class CreateJobComponent {
       next: (response) => {
         console.log('Job posted successfully:', response);
         // You can reset the form fields or navigate to another page here
+        this.successMessage = response.message; // Update the success message
+        console.log(this.successMessage);
+        this.clearForm();
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 3000);
+        
       },
       error: (err) => {
         console.error('Error posting job:', err);
         this.errorMessage = 'There was an error posting your job, please try again.';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
+      }
+    });
+  }
+
+  draftForm() {
+    const jobData: JobPosting = {
+      title: this.TitleValue,
+      description: this.DescriptionValue,
+      department: this.DepartmentValue,
+      experience: this.ExperienceValue,
+      location: this.locationValue,
+      employment_type: this.TypeValue,
+      salary_range: this.SalaryValue,
+      status: 'drafted',
+      client: this.ClientValue,
+      application_deadline: this.DeadlineValue,
+      created_by: localStorage.getItem('username'),
+      skills: ["Python", "Flask", "MySQL"]  // This should be the array you collect from your input fields
+    };
+
+    this.jobService.submitJobPosting(jobData).subscribe({
+      next: (response) => {
+        console.log('Job posted successfully:', response);
+        // You can reset the form fields or navigate to another page here
+        this.successMessage = response.message; // Set success message
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 3000);
+      },
+      error: (err) => {
+        console.error('Error posting job:', err);
+        this.errorMessage = 'There was an error posting your job, please try again.';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
       }
     });
   }
   
+  generateJobDescription() {
+    console.log("generate");
+    const jobData: GenerateJD = {
+        job_title: this.TitleValue,
+        experience: this.ExperienceValue,
+        location: this.locationValue,
+        employment_type: this.TypeValue,
+        salary_range: this.SalaryValue,
+        company_name: "Hexaware Technologies"
+    };
+
+    this.openaiService.generateJD(jobData).subscribe({
+        next: (response) => {
+            console.log('generated', response);
+            // Setting the DescriptionValue to the received job description
+            this.DescriptionValue = response.job_description;
+        },
+        error: (err) => {
+            console.error('Error posting job:', err);
+
+            this.errorMessage = 'There was an error posting your job, please try again.';
+        }
+    });
+}
+
+// Method to convert markdown to HTML
+getFormattedDescription() {
+    return marked(this.DescriptionValue);
+}
+
+dismissError() {
+  // Method to dismiss the error message
+  this.successMessage = '';
+  this.errorMessage='';
+}
+
+clearForm() {
+  this.TitleValue = '';
+  this.DescriptionValue = '';
+  this.DepartmentValue = '';
+  this.ExperienceValue = '';
+  this.locationValue = '';
+  this.TypeValue = '';
+  this.SalaryValue = '';
+  this.DeadlineValue = '';
+  this.ClientValue = '';
+  this.PreferredQualificationsValue = '';
+  this.SkillsValue = ''; // Added to clear the 'Skills' field
+}
   onTitleFocus() {
     this.isTitleFocused = true;
   }

@@ -4,7 +4,7 @@
     left: 0;
     width: 120%;
     height: 110%;
-    /* background-image: url('/assets/img/faces/sidebar-1.jpg'); */
+    background-image: url('/assets/img/faces/sidebar-1.jpg');
     background-size: cover;
     /* filter: brightness(70%) grayscale(100%)  ; */
     background-repeat: no-repeat;

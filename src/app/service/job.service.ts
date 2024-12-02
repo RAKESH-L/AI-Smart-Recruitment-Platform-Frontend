@@ -21,4 +21,12 @@ export class JobService {
   getJobsByEmployeeId(employeeId: string): Observable<JobPosting[]> {
     return this.http.get<JobPosting[]>(`${this.apiUrl}/${employeeId}?status=open,closed,in progress`);
   }
+
+  getDraftJobsByEmployeeId(employeeId: string): Observable<JobPosting[]> {
+    return this.http.get<JobPosting[]>(`${this.apiUrl}/${employeeId}?status=drafted`);
+  }
+
+  deleteJobById(JobId: string): Observable<any> {
+    return this.http.delete<any>(`http://127.0.0.1:5000/deleteJobByJobId/${JobId}`)
+  }
 }

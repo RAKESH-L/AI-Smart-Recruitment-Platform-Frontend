@@ -251,3 +251,131 @@
 *, :after, :before {
     box-sizing: border-box;
 }
+
+
+
+
+.btn-glitter {
+  position: relative; /* Position relative to allow pseudo-element positioning */
+  overflow: hidden; /* Hide part of the child element that goes outside the button */
+  transition: all 0.3s; /* Smooth transition for effects */
+  background-color: #1c455d; /* Button background color*/
+
+}
+
+.btn-glitter::after {
+  content: ''; /* Required for pseudo-elements */
+  position: absolute;
+  top: -5px; /* Adjust to create effect at the top */
+  right: -5px; /* Adjust to create effect at the right */
+  width: 30px; /* Width of the glitter star */
+  height: 30px; /* Height of the glitter star */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="%235d87ff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.73 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>') no-repeat center center/contain; /* Adjust the star or glitter effect using an SVG */
+  opacity: 0.7; /* Transparency of the star */
+  animation: glitter 1.5s infinite alternate; /* Animation for glittering effect */
+}
+
+@keyframes glitter {
+  0% {
+      transform: scale(1) rotate(0deg);
+  }
+  100% {
+      transform: scale(1.5) rotate(360deg);
+  }
+}
+
+/* Moving border animation */
+@keyframes move-border {
+  0% {
+      transform: scale(1) translateY(0); /* Start position */
+  }
+  50% {
+      transform: scale(1.05) translateY(-2px); /* Move up slightly */
+  }
+  100% {
+      transform: scale(1) translateY(0); /* Back to start position */
+  }
+}
+/* .btn-glitter::before {
+  content: 'Generate'; 
+  color: #007bff;
+  background-color: #1c455d;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  right: 0; 
+  bottom: 0;
+  border-radius: 5px; 
+  border: 2px solid transparent; 
+  background: linear-gradient(#1c455d, #1c455d) padding-box, 
+              linear-gradient(90deg, #5d87ff, #1c455d, #5d87ff) border-box;
+  animation: move-border 2s linear infinite; 
+} */
+
+
+
+
+
+
+
+.text-area {
+  border: 1px solid rgba(0,0,0,0.1); /* Soft border */
+  padding: 10px; /* Padding for readability */
+  border-radius: 5px; /* For rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  max-height: 300px; /* Optional to limit height */
+  overflow-y: auto; /* Scroll if content exceeds the height */
+  margin-top: 5px; /* Top margin for spacing */
+}
+
+
+
+
+
+
+
+
+
+.success-message {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #e6fffa!important;
+  color: #13deb9!important;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.success-message span {
+  margin-right: 10px;
+}
+
+.success-message button {
+  background-color: transparent;
+  border: none;
+  color: #13deb9!important;
+  cursor: pointer;
+}
+
+.error-message {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #fdede8!important;
+  color: #fa896b!important;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.error-message span {
+  margin-right: 10px;
+}
+
+.error-message button {
+  background-color: transparent;
+  border: none;
+  color: #fa896b!important;
+  cursor: pointer;
+}

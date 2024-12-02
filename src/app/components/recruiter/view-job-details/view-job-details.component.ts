@@ -15,6 +15,9 @@ export class ViewJobDetailsComponent {
   islocationFocused: boolean = false;
   locationValue: string = '';
 
+  isStatusFocused: boolean = false;
+  StatusValue: string = '';
+  
   createdBy: string='';
   jobs: JobPosting[] = [];
   filteredJobs: JobPosting[] = []; 
@@ -76,6 +79,25 @@ export class ViewJobDetailsComponent {
     });
   }
 
+  openJobModal() {
+    
+
+    document.getElementById('JobModal')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
+  closeApplicantModal() {
+    document.getElementById('JobModal')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
+    document.getElementById('applicantModal')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
+  }
+
+  openApplicantModal() {
+    
+    document.getElementById('applicantModal')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
+  
   onTypeFocus() {
     this.isTypeFocused = true;
     
@@ -95,6 +117,17 @@ export class ViewJobDetailsComponent {
   onlocationBlur() {
     if (!this.locationValue) {
       this.islocationFocused = false;
+    }
+  }
+
+  onStatusFocus() {
+    this.isStatusFocused = true;
+
+  }
+
+  onStatusBlur() {
+    if (!this.StatusValue) {
+      this.isStatusFocused = false;
     }
   }
 }
