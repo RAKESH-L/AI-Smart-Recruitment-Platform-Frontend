@@ -11,6 +11,9 @@ import { CandidateLayoutComponent } from './components/candidate/candidate-layou
 import { ScheduleInterviewComponent } from './components/recruiter/schedule-interview/schedule-interview.component';
 import { InterviewDetailsComponent } from './components/recruiter/interview-details/interview-details.component';
 import { JobDraftComponent } from './components/recruiter/job-draft/job-draft.component';
+import { ApplyJobComponent } from './components/candidate/apply-job/apply-job.component';
+import { AppliedJobsComponent } from './components/candidate/applied-jobs/applied-jobs.component';
+import { UserProfileComponent } from './components/recruiter/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -21,6 +24,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path:'', component: HomeComponent },
+      { path:'userProfile', component: UserProfileComponent },
       { path:'createJob', component: CreateJobComponent},
       { path: 'viewJobDetails', component: ViewJobDetailsComponent},
       { path: 'jobApplications', component: JobApplicationsComponent},
@@ -36,6 +40,8 @@ const routes: Routes = [
     component: CandidateLayoutComponent,
     children: [
       { path:'', component: HomeComponent },
+      { path:'applyJob', component: ApplyJobComponent },
+      { path:'appliedJobs', component: AppliedJobsComponent },
     ]
   }
 ];

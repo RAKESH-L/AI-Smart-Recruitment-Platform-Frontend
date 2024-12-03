@@ -237,12 +237,21 @@
                                             <div class="form-group" style="margin-bottom: 30px;">
                                                 <label>Job Description</label>
 
-                                                <!-- New button next to the Job Description label -->
-                                                <button (click)="generateJobDescription()"
-                                                    class="btn btn-info btn-glitter"
-                                                    style="color: #ccd3e6; margin-left: 150px; background-color: #1c455d!important; border: 2px solid #5d87ff;">
-                                                    <i class="bi bi-robot" style="margin-right: 10px;"></i>Generate
-                                                </button>
+                                                <div class="button-container" style="margin-left: 150px;">
+                                                    <div class="outside-up-stars">
+                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.2rem;" class="star-r">
+                                                    </div>
+                                                    <button (click)="generateJobDescription()" class="ask-ai-button">
+                                                      <span class="star left-star">
+                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.5rem;">
+                                                      </span>
+                                                      <span class="text">Ask AI</span>
+                                                      <span class="star right-star">&#10022;</span>
+                                                    </button>
+                                                    <div class="outside-stars">
+                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.5rem;" class="star-l">
+                                                    </div>
+                                                  </div>
 
 
                                                 <span class="outline"></span>
@@ -255,7 +264,7 @@
                                                     (focus)="onDescriptionFocus()" (blur)="onDescriptionBlur()"
                                                     [placeholder]="isDescriptionFocused ? '' : ''"
                                                     [(ngModel)]="DescriptionValue" rows="5"
-                                                    style="resize: vertical;"></textarea>
+                                                    style="resize: vertical; height: 500px;"></textarea>
                                                 <span class="outline"></span>
                                             </div>
                                         </div>

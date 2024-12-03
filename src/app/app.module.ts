@@ -33,6 +33,9 @@ import { DatePipe } from '@angular/common'; // Import DatePipe here
 import { NgApexchartsModule } from "ng-apexcharts";
 import { JobDraftComponent } from './components/recruiter/job-draft/job-draft.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { ApplyJobComponent } from './components/candidate/apply-job/apply-job.component';
+import { AppliedJobsComponent } from './components/candidate/applied-jobs/applied-jobs.component';
+import { UserProfileComponent } from './components/recruiter/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
     InterviewDetailsComponent,
     JobDraftComponent,
     ThemeToggleComponent,
+    ApplyJobComponent,
+    AppliedJobsComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -111,12 +111,12 @@
                         style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
                         <button mat-button color="primary"
                             style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                            (click)="openJobModal()">
+                            (click)="openJobModal(job)">
                             More Details
                         </button>
                         <button mat-button color="primary"
                             style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                            (click)="openApplicantModal()">
+                            (click)="openApplicantModal(job)">
                             View Applicants
                         </button>
                     </mat-card-actions>
@@ -170,11 +170,18 @@
                         </h5>
                     </div>
                     <br>
-                    <p><strong>Job Title:</strong> Software Engineer</p>
-                    <p><strong>Job Description:</strong> </p>
-                    <p><strong>Department:</strong> IT</p>
-                    <p><strong>Location:</strong> Bangalore</p>
-
+                    <p><strong>Job Title:</strong> {{selectedJob?.title}}</p>
+                    <p><strong>Job Description:</strong>{{selectedJob?.description}} </p>
+                    <p><strong>Department:</strong> {{selectedJob?.department}}</p>
+                    <p><strong>Location:</strong> {{selectedJob?.location}}</p>
+                    <p><strong>Experience:</strong> {{selectedJob?.experience}}</p>
+                    <p><strong>Employement Type:</strong> {{selectedJob?.employment_type}}</p>
+                    <p><strong>Salary Range:</strong> {{selectedJob?.salary_range}}</p>
+                    <p><strong>Status:</strong> {{selectedJob?.status}}</p>
+                    <p><strong>Client:</strong> {{selectedJob?.client}}</p>
+                    <p><strong>Application Deadline:</strong> {{selectedJob?.application_deadline}}</p>
+                    <p><strong>Created BY:</strong> {{selectedJob?.created_by}}</p>
+                    <p><strong>Skills:</strong> {{selectedJob?.skills}}</p>
                 </div>
             </div>
         </div>
@@ -261,7 +268,7 @@
                                                             <th mat-header-cell class="font-light">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody role="rowgroup">
+                                                    <tbody role="rowgroup" *ngFor="let application of applications; let i = index">
                                                         <tr role="row" mat-row class="values">
                                                             <td mat-cell>
                                                                 <div class="applicant-info d-flex align-items-center">
@@ -269,13 +276,13 @@
                                                                         width="40" class="rounded-circle mr-2"
                                                                         style="margin-right: 10px; margin-top: -5px;">
         
-                                                                    <span class="applicant-name">Yashas B Raj</span>
+                                                                    <span class="applicant-name">{{application.first_name}}</span>
                                                                 </div>
                                                             </td>
-                                                            <td mat-cell>Software Engineer</td>
-                                                            <td mat-cell>Submitted</td>
+                                                            <td mat-cell>{{application.job_title}}</td>
+                                                            <td mat-cell>{{application.application_status}}</td>
                                                             <td mat-cell>
-                                                                <span mat-header-cell class="text-accent">10/01/1999</span>
+                                                                <span mat-header-cell class="text-accent">{{application.submitted_at}}</span>
                                                             </td>
                                                             <td mat-cell>
                                                                 <button mat-button color="primary"

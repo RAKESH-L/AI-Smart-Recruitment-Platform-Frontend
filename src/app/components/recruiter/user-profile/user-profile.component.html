@@ -1,0 +1,242 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Profile Information</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Find comprehensive information on the job openings you have made available</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+
+        <!-- card.component.html -->
+        <div class="card">
+            <!-- <div class="card-header">
+                <button class="custom-button" [class.active]="displayAccount" (click)="showAccount()">
+            <i class="bi bi-broadcast-pin"></i> <span class="button-label">Account</span>
+          </button>
+          <button class="custom-button" [class.active]="displaySettings" (click)="showSettings()">
+            <i class="bi bi-calendar2-event"></i> <span class="button-label">Settings</span>
+          </button>
+            </div> -->
+
+
+
+            <div class="card-body">
+                <div>
+                    <!-- <h2>Account Section</h2> -->
+                    <form>
+                        <div class="p-16 bg-light-primary rounded">
+                            <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                        <path d="M12 9h.01"></path>
+                                        <path d="M11 12h1v4h1"></path>
+                                    </svg>
+
+
+                                </i-tabler>User Details
+                            </h5>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <div>
+                                                <mat-card-title class="mat-mdc-card-title"
+                                                    style="text-align: left; margin-left: 20px; font-weight: 550; font-size: larger;">Change
+                                                    Profile</mat-card-title>
+                                                <!-- <br> -->
+                                                <div class="d-flex align-items-top overflow-hidden"
+                                                    style="margin-top: 10px; color: #626263; margin-left: 20px;">
+                                                    Change your profile picture from here</div>
+                                            </div>
+
+                                            <div class="text-center m-t-24">
+                                                <img src="/assets/img/faces/user-1.jpg" width="120"
+                                                    class="rounded-circle"
+                                                    style="margin-bottom: 30px; margin-top: 30px;">
+                                                <ng-template #defaultImage>
+                                                    <img src="/assets/img/faces/user-1.jpg" width="120"
+                                                        class="rounded-circle"
+                                                        style="margin-bottom: 30px; margin-top: 30px;">
+                                                </ng-template>
+
+                                                <div class="m-t-24" style="margin-bottom: 20px;">
+                                                    <button mat-button color="primary"
+                                                        style="background-color: #44b7f7; height: 35px; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                                        Upload
+                                                    </button>
+                                                    <button mat-button-ripple-uninitialized="" mat-stroked-button=""
+                                                        color="warn"
+                                                        class="button-spacing mdc-button mdc-button--outlined mat-mdc-outlined-button mat-warn mat-mdc-button-base"
+                                                        mat-button-is-fab="false" style="border-radius: 7px;">
+                                                        <span
+                                                            class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                                                        <span class="mdc-button__label">Reset</span>
+                                                        <span class="mat-mdc-focus-indicator"></span>
+                                                        <span class="mat-mdc-button-touch-target"></span>
+                                                    </button>
+                                                </div>
+                                                <span class="f-s-14 m-t-24 d-block">Allowed JPG, GIF or PNG. Max size of
+                                                    800K</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <div class="mat-mdc-card-title">
+                                                <mat-card-title class="mat-mdc-card-title"
+                                                    style="text-align: left; margin-left: 20px; font-weight: 550; font-size: larger;">Personal
+                                                    Details</mat-card-title>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6" style="margin-top: 5px;">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="firstName"
+                                                            name="firstName" #customFirstName
+                                                            (focus)="onInputFocus('firstName')"
+                                                            (blur)="onInputBlur('firstName')" 
+                                                            [(ngModel)]="user.employee_id" disabled required />
+                                                        <label for="firstName"
+                                                            [ngClass]="{'active': isInputFocused['firstName'] || user.employee_id}">Employee
+                                                            ID</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <!-- <div class="form-group" style="margin-top: 5px;">
+                              <label for="lastName">Last Name</label>
+                              <input type="text" id="lastName" class="form-control highlight-blue highlight-on-hover">
+                            </div> -->
+                                                    <div class="form-group" style="margin-top: 5px;">
+                                                        <input type="text" class="form-control" id="lastName"
+                                                            name="lastName" #customLastName
+                                                            [(ngModel)]="user.full_name" (focus)="onInputFocus('lastName')"
+                                                            (blur)="onInputBlur('lastName')" 
+                                                            disabled required />
+                                                        <label for="lastName"
+                                                            [ngClass]="{'active': isInputFocused['lastName'] ||  user?.full_name}">Full
+                                                            Name</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6" style="margin-top: 20px;">
+                                                    <!-- Location -->
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="location"
+                                                            name="location" #customLocation
+                                                            (focus)="onInputFocus('location')"
+                                                            (blur)="onInputBlur('location')" 
+                                                            [(ngModel)]="user.email" disabled required />
+                                                        <label for="location"
+                                                            [ngClass]="{'active': isInputFocused['location'] || user.email}">Employee
+                                                            Mail</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Currency -->
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="currency"
+                                                            name="currency" #customCurrency
+                                                            (focus)="onInputFocus('currency')"
+                                                            (blur)="onInputBlur('currency')" 
+                                                            [(ngModel)]="user.phone_number" disabled required />
+                                                        <label for="currency"
+                                                            [ngClass]="{'active': isInputFocused['currency'] || user.phone_number}">Mobile
+                                                            Number
+                                                        </label>
+                                                        <span class="outline"></span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6" style="margin-top: 20px;">
+                                                    <!-- Email -->
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            #customEmail (focus)="onInputFocus('email')"
+                                                            (blur)="onInputBlur('email')" disabled required />
+                                                        <label for="email"
+                                                            [ngClass]="{'active': isInputFocused['email'] || 'HR'}">Vertical</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                                            #customPhone (focus)="onInputFocus('phone')"
+                                                            (blur)="onInputBlur('phone')" 
+                                                            [(ngModel)]="user.role" disabled required />
+                                                        <label for="phone"
+                                                            [ngClass]="{'active': isInputFocused['phone'] || user.role}">Role</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="margin-top: 20px;">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" id="address" name="address"
+                                                            rows="3" #customAddress (focus)="onInputFocus('address')"
+                                                            (blur)="onInputBlur('address')" [(ngModel)]="address"
+                                                            required></textarea>
+                                                        <label for="address"
+                                                            [ngClass]="{'active': isInputFocused['address'] || address}">Address
+                                                            *</label>
+                                                        <span class="outline"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-10 text-right">
+                                <button mat-button color="primary"
+                                    style="background-color: #44b7f7; height: 35px; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                    Save
+                                </button>
+                                <button mat-button-ripple-uninitialized="" mat-stroked-button="" color="warn"
+                                    class="button-spacing mdc-button mdc-button--outlined mat-mdc-outlined-button mat-warn mat-mdc-button-base"
+                                    mat-button-is-fab="false" style="border-radius: 7px;">
+                                    <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                                    <span class="mdc-button__label">Cancel</span>
+                                    <span class="mat-mdc-focus-indicator"></span>
+                                    <span class="mat-mdc-button-touch-target"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Account section content goes here -->
+                </div>
+
+            </div>
+        </div>

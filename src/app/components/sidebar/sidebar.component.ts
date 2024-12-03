@@ -24,42 +24,42 @@ export class SidebarComponent implements OnInit{
       name: 'Dashboard',
       icon: 'bi bi-kanban-fill',
       route: '/layout/',
-      roles: ['recruiter', 'interviewer', 'admin'] // Can be seen by all roles
+      roles: ['recruiter', 'interviewer', 'admin', 'candidate'] // Can be seen by all roles
+    },
+    {
+      number: '2',
+      name: 'User Profile',
+      icon: 'bi bi-person-fill',
+      route: '/layout/userProfile',
+      roles: ['recruiter'] 
     },
     {
       number: '2',
       name: 'Job Opening',
       icon: 'bi bi-person-fill',
       route: '/layout/createJob',
-      roles: ['recruiter'] // Visible only to recruiters
+      roles: ['recruiter'] 
     },
     {
       number: '2',
       name: 'Job Draft',
       icon: 'bi bi-person-fill',
       route: '/layout/jobDraft',
-      roles: ['recruiter'] // Visible only to recruiters
+      roles: ['recruiter'] 
     },
     {
       number: '3',
-      name: 'Job Details',    // view-job-details component
+      name: 'Job Details',    
       icon: 'bi bi-person-badge',
       route: '/layout/viewJobDetails',
-      roles: ['recruiter'] // Visible only to recruiters
+      roles: ['recruiter'] 
     },
     {
       number: '4',
       name: 'Job Applications',
       icon: 'bi bi-person-badge-fill',
       route: '/layout/jobApplications',
-      roles: ['recruiter'] // Visible only to interviewers
-    },
-    {
-      number: '5',
-      name: 'Generate Skillset Rem',
-      icon: 'bi bi-file-earmark-break-fill',
-      route: '/layout/trainskillset',
-      roles: ['candidate'] // Visible only to admins
+      roles: ['recruiter'] 
     },
     
     {
@@ -67,15 +67,31 @@ export class SidebarComponent implements OnInit{
       name: 'Interviews',
       icon: 'bi bi-speedometer',
       route: '/layout/scheduleInterview',
-      roles: ['recruiter'] // Visible only to admins
+      roles: ['recruiter'] 
     },
     {
       number: '6',
       name: 'Interview Details',
       icon: 'bi bi-award-fill',
       route: '/layout/interviewDetails',
-      roles: ['recruiter'] // Visible only to admins
-    }
+      roles: ['recruiter'] 
+    },
+
+    {
+      number: '5',
+      name: 'Apply Job',
+      icon: 'bi bi-file-earmark-break-fill',
+      route: '/candidateLayout/applyJob',
+      roles: ['candidate'] 
+    },
+
+    {
+      number: '5',
+      name: 'Applied Jobs',
+      icon: 'bi bi-file-earmark-break-fill',
+      route: '/candidateLayout/appliedJobs',
+      roles: ['candidate'] 
+    },
   ];
 
   filteredList: any[] = [];
@@ -97,5 +113,6 @@ export class SidebarComponent implements OnInit{
     this.selectedItem = item;
     this.router.navigate([item.route]);
   }
+  
   
 }

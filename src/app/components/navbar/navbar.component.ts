@@ -76,4 +76,9 @@ export class NavbarComponent implements OnInit {
     this.menuStatus = !this.menuStatus;
     this.sideNavToggled.emit(this.menuStatus);
   }
+
+  openSettings() {
+    console.log('Settings icon clicked!');
+    // Logic for opening settings or performing any action
+  }
 }

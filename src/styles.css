@@ -21,7 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --text-color: black; /* Light text color */
     --input-bg: white; /* Input background */
     --input-text-color: black; /* Input text color */
-    --card-bg: #f8f9fa; /* Light card background */
+    --card-bg: white; /* Light card background */
     --card-border: #dee2e6; /* Card border color */
     --primary-color: #007bff; /* Bootstrap primary color */
 }

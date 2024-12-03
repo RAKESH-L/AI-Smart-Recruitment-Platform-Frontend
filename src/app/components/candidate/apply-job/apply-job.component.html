@@ -1,0 +1,305 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 10px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Apply for job </h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Search and apply for Job Openings</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <br>
+        <br> -->
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="stepper">
+                            <li [ngClass]="{ 'active': currentStep === 1 }" (click)="changeStep(1)">
+                                <div class="row">
+
+                                    <div class="col-md-12"
+                                        style="font-family: Plus Jakarta Sans, sans-serif; font-size: large;">
+                                        <span class="step-name">Apply for job </span>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+                        <div *ngIf="currentStep === 1">
+
+                            <!-- <div class="p-16 bg-light-primary rounded">
+                                <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                    style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                            <path d="M12 9h.01"></path>
+                                            <path d="M11 12h1v4h1"></path>
+                                        </svg>
+   
+   
+                                    </i-tabler>Job Role Description  </h5>
+                            </div> -->
+                            <br>
+
+                            <!-- <div class="row">
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group" style="margin-bottom: 30px;">
+                                    <label>Job Description</label>
+                           
+                                    <button  class="btn btn-info btn-glitter" style="color: #ccd3e6; margin-left: 150px; background-color: #1c455d!important; border: 2px solid #5d87ff;">
+                                        <i class="bi bi-robot" style="margin-right: 10px;"></i>Generate
+                                    </button>
+                                   
+                                   
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group">
+                                    <textarea class="form-control text-area" id="customInput" #customInput
+                                        (focus)="onDescriptionFocus()" (blur)="onDescriptionBlur()"
+                                        [placeholder]="isDescriptionFocused ? '' : ''"
+                                        [(ngModel)]="DescriptionValue" rows="5"
+                                        style="resize: vertical;"></textarea>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                         
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group" style="margin-bottom: 30px;">
+                                    <label>Responsibilities</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group">
+                                    <textarea class="form-control text-area" id="customInput" #customInput
+                                        (focus)="onResponsibilitiesFocus()" (blur)="onResponsibilitiesBlur()"
+                                        [placeholder]="isResponsibilitiesFocused ? '' : ''"
+                                        [(ngModel)]="ResponsibilitiesValue" rows="5"
+                                        style="resize: vertical;"></textarea>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+ 
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group" style="margin-bottom: 30px;">
+                                    <label>Required Skills</label>
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-top: -10px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control custom-input" id="customInput"
+                                        #customInput (focus)="onSkillsFocus()" (blur)="onSkillsBlur()"
+                                        [placeholder]="isSkillsFocused ? '' : ''" [(ngModel)]="SkillsValue" />
+                                    <span class="outline"></span>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+
+
+                            <div class="step-content">
+                                <div *ngIf="currentStep === 1">
+
+                                    <div class="p-16 bg-light-primary rounded">
+                                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 1px; font-size: large;">
+                                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                                _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 9h.01"></path>
+                                                    <path d="M11 12h1v4h1"></path>
+                                                </svg>
+
+
+                                            </i-tabler>Job Opening Information
+                                        </h5>
+                                    </div>
+                                    <br>
+
+                                    <!-- the below commented is jobid and candidate id -->
+
+                                    <!-- <div class="row">
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onJobFocus()" (blur)="onJobBlur()"
+                                                [placeholder]="isJobIDFocused ? '' : ''" [(ngModel)]="JobIDValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isJobIDFocused || JobIDValue}">job ID</label>
+                                            <span class="outline"></span>
+                                        </div>
+ 
+                                    </div>
+ 
+                                    <div class="col-md-6">
+ 
+                                        <div class="form-group" style="margin-top: 5px;">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onCandidateFocus()" (blur)="onCandidateBlur()"
+                                                [placeholder]="isCandidateIDFocused ? ' ' : ''"
+                                                [(ngModel)]="CandidateIDValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isCandidateIDFocused || CandidateIDValue}">Candidate ID
+                                                </label>
+                                            <span class="outline"></span>
+                                        </div>
+ 
+ 
+                                    </div> -->
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onFNameFocus()" (blur)="onFNameBlur()"
+                                                [placeholder]="isFNameFocused ? '' : ''" [(ngModel)]="FNameValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isFNameFocused || FNameValue}">First Name</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onlNameFocus()" (blur)="onlNameBlur()"
+                                                [placeholder]="isLNameFocused ? '' : ''" [(ngModel)]="LNameValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isLNameFocused || LNameValue}">last Name</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onEmailFocus()" (blur)="onEmailBlur()"
+                                                [placeholder]="isEmailFocused ? '' : ''" [(ngModel)]="EmailValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isEmailFocused || EmailValue}">Email</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 5px;">
+                                            <input type="phone" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onPhoneFocus()" (blur)="onPhoneBlur()"
+                                                [placeholder]="isPhoneFocused ? '' : ''" [(ngModel)]="PhoneValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isPhoneFocused || PhoneValue}">Phone
+                                                Number</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onCurrentCTCFocus()" (blur)="onCurrentCTCBlur()"
+                                                [placeholder]="isCurrentCTCFocused ? '' : ''"
+                                                [(ngModel)]="CurrentCTCValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isCurrentCTCFocused || CurrentCTCValue}">Current
+                                                CTC</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 5px;">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onExpectedCTCFocus()" (blur)="onExpectedCTCBlur()"
+                                                [placeholder]="isExpectedCTCFocus ? '' : ''"
+                                                [(ngModel)]="ExpectedCTCValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isExpectedCTCFocus || ExpectedCTCValue}">Expected
+                                                CTC
+                                            </label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onSkillKnownFocus()" (blur)="onSkillKnownBlur()"
+                                                [placeholder]="isSkillKnownFocused ? '' : ''"
+                                                [(ngModel)]="SkillKnownValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isSkillKnownFocused || SkillKnownValue}">Skills</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 5px;">
+                                            <input type="file" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onResumeFocus()" (blur)="onResumeBlur()"
+                                                [placeholder]="isResumeFocused ? '' : ''" [(ngModel)]="ResumeValue"
+                                                (change)="onFileSelected($event)" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isResumeFocused || ResumeValue}">
+                                                Resume</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+
+                            <div class="text-center">                           
+                                <button mat-button color="primary"
+                                    style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                    (click)="submitData()">
+                                    Submit
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

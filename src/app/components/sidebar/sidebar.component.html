@@ -1,5 +1,28 @@
 <div class="side-nav-content">
+  <div class="d-flex align-items-center justify-content-between">
+    <app-branding>
+        <div class="branding">
+            <a href="/">
+              <img src="./assets/img/logo/dark-logo.svg" alt="Company Logo" class="align-middle m-2">
+                
+              <!-- <img src="./assets/img/logo/Blue-Logo.jpg" alt="Company Logo" class="align-middle m-2" style="width: 200px;"> -->
+            </a>
+        </div>
+    </app-branding>
+    
+    <a href="javascript:void(0)" class="d-flex justify-content-center align-items-center icon-40 mat-body-1" style="">
+        <i-tabler name="x" class="icon-20 d-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M18 6l-12 12"></path>
+                <path d="M6 6l12 12"></path>
+            </svg>
+        </i-tabler>
+    </a>
+</div>
+<br>
     <div class="sidebar-background"></div>
+    
     <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
       <li class="nav-list-item" *ngFor="let item of filteredList" (click)="navigateToPage(item)" [routerLink]="item.route" [class.selected]="selectedItem === item">
         <i  [class]="item.icon"></i>
