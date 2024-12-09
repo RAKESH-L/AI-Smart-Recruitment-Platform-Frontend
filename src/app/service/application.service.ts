@@ -32,6 +32,11 @@ export class ApplicationService {
     const url = `${this.baseUrl}/getApplicationsByjobId/${jobId}`;
     return this.http.get<Application[]>(url);
   }
+
+  getApplicationsByCreatedBy(employeeId: string): Observable<Application[]> {
+    const url = `${this.baseUrl}/applicationsBycreatedBy/${employeeId}`;
+    return this.http.get<Application[]>(url);
+  }
 }
 
 

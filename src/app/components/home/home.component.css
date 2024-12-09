@@ -312,7 +312,7 @@
 
 .table-section tr {
     height: 60px;
-    border-bottom: 1px solid #e5eaef; /* Add a bottom border for each row */
+    border-bottom: 1px solid #e5eaef; 
 }
 
 
@@ -391,6 +391,232 @@
 *, :after, :before {
     box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Pagination */
+.mat-mdc-paginator-range-actions {
+  background-color: #ffffff; /* Optional background color */
+  margin-top: -20px;
+  /* padding: 10px;  */
+  /* border-top: 1px solid #e5eaef;  */
+}
+
+
+
+
+
+
+
+
+
+/* Activity log css */
+
+/* General Style */
+/* @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"); */
+
+/* Base styles */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Theme Select */
+.theme-select {
+    width: 125px;
+    height: 36px;
+}
+
+.theme-select .mat-form-field-infix {
+    padding: 6px 0 1px !important;
+}
+
+.theme-select .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+.theme-select .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+    border-top-left-radius: 7px; /* Replace $border-radius */
+    border-bottom-left-radius: 7px; /* Replace $border-radius */
+    border-color: #e5eaef; /* Replace $borderColor */
+}
+
+.theme-select .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-top-right-radius: 7px; /* Replace $border-radius */
+    border-bottom-right-radius: 7px; /* Replace $border-radius */
+    border-color: #e5eaef; /* Replace $borderColor */
+}
+
+.theme-select .mat-mdc-form-field-flex {
+    height: 36px;
+    align-items: flex-start;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+}
+
+.timeline .timeline-item {
+    position: relative;
+    height: 70px;
+}
+
+.timeline .timeline-item .time {
+    padding: 6px 16px 6px 0;
+    min-width: 90px;
+    flex-shrink: 0;
+}
+
+.timeline .timeline-item .desc {
+    /* padding: 6px 16px; */
+    margin-left: 20px;
+    align-items: flex-start;
+}
+
+.timeline .timeline-item .timline-border {
+    width: 1px;
+    height: 100%;
+    background-color: #e5eaef; /* Replace $borderColor */
+    flex-shrink: 0;
+}
+
+.timeline .timeline-item:last-child {
+    height: 55px;
+}
+
+.timeline .timeline-item .point {
+    flex-direction: column;
+}
+
+.timeline .timeline-item .point .timeline-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    background-color: transparent;
+    flex-shrink: 0;
+}
+
+.timeline .timeline-item .point .timeline-badge.border-primary {
+    border: 2px solid #5d87ff  /* Replace $primary */
+}
+
+.timeline .timeline-item .point .timeline-badge.border-accent {
+    border: 2px solid #49beff  /* Replace $accent */
+}
+
+.timeline .timeline-item .point .timeline-badge.border-success {
+    border: 2px solid #13deb9; /* Replace $success */
+}
+
+.timeline .timeline-item .point .timeline-badge.border-warning {
+    border: 2px solid #ffae1f; /* Replace $warning */
+}
+
+.timeline .timeline-item .point .timeline-badge.border-error {
+    border: 2px solid #fa896b; /* Replace $error */
+}
+
+.timeline .timeline-item .timeline-border {
+    width: 1px;
+    height: 100%;
+    background-color: #e5eaef; /* Replace $borderColor */
+    flex-shrink: 0;
+}
+
+.timeline .timeline-item:last-child .timeline-border {
+    display: none !important;
+}
+
+/* User Category */
+.user-category {
+    margin-top: -45px;
+    z-index: 1;
+    position: relative;
+}
+
+/* Card Overlay */
+.card-overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 242px;
+}
+
+/* Text Decoration */
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+/* Cart Button */
+.cart-btn {
+    position: absolute !important;
+    right: 16px;
+    top: -21px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Modal background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Prevent scrolling */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: absolute; /* Position absolute for centering */
+  top: 50%; /* Position it in the middle */
+  left: 50%; /* Position it in the middle */
+  transform: translate(-50%, -50%); /* Center vertically and horizontally */
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Can adjust as needed */
+  /* max-width: 600px;  */
+  max-height: 80%; /* Prevent overflow beyond window height */
+  border-radius: 10px; /* Rounded corners */
+  overflow-y: auto; /* Allow scrolling only if modal content exceeds max height */
+}
+
+/* Close button styling */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
 
 
 

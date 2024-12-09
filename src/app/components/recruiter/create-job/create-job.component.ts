@@ -161,6 +161,8 @@ export class CreateJobComponent {
             console.log('generated', response);
             // Setting the DescriptionValue to the received job description
             this.DescriptionValue = response.job_description;
+            console.log(this.DescriptionValue);
+            
         },
         error: (err) => {
             console.error('Error posting job:', err);

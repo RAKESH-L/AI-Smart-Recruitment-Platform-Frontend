@@ -36,6 +36,7 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 import { ApplyJobComponent } from './components/candidate/apply-job/apply-job.component';
 import { AppliedJobsComponent } from './components/candidate/applied-jobs/applied-jobs.component';
 import { UserProfileComponent } from './components/recruiter/user-profile/user-profile.component';
+import { DemoComponent } from './components/demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,8 @@ import { UserProfileComponent } from './components/recruiter/user-profile/user-p
     ApplyJobComponent,
     AppliedJobsComponent,
     UserProfileComponent,
+    DemoComponent,
+    
   ],
   imports: [
     BrowserModule,

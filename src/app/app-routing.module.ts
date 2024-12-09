@@ -14,6 +14,7 @@ import { JobDraftComponent } from './components/recruiter/job-draft/job-draft.co
 import { ApplyJobComponent } from './components/candidate/apply-job/apply-job.component';
 import { AppliedJobsComponent } from './components/candidate/applied-jobs/applied-jobs.component';
 import { UserProfileComponent } from './components/recruiter/user-profile/user-profile.component';
+import { DemoComponent } from './components/demo/demo.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'scheduleInterview', component: ScheduleInterviewComponent},
       { path: 'interviewDetails', component: InterviewDetailsComponent},
       { path: 'jobDraft', component: JobDraftComponent},
+      { path: 'demo', component: DemoComponent},
 
       // Add more child routes as needed
     ]

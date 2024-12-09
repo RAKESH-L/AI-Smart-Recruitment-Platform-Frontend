@@ -1,0 +1,18 @@
+<main>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div
+          class="swiper-slide"
+          *ngFor="let slide of slides; let i = index"
+          [ngClass]="slide.class"
+          (click)="onSlideClick($event)">
+          <div>
+            <h2>{{ slide.title }}</h2>
+            <p>{{ slide.description }}</p>
+            <!-- <a [href]="slide.link" target="_blank">{{ slide.linkText }}</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </main>

@@ -6,6 +6,14 @@ import {
   ApexChart
 } from "ng-apexcharts";
 
+interface stats {
+  id: number;
+  time: string;
+  color: string;
+  title?: string;
+  subtext?: string;
+  link?: string;
+}
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -52,6 +60,12 @@ import {
   ApexTitleSubtitle,
   ApexFill
 } from "ng-apexcharts";
+import { JobService } from '../../service/job.service';
+import { ApplicationService } from '../../service/application.service';
+import { JobPosting } from '../../model/Job.model';
+import { Application } from '../../model/application.model';
+import { JobLog } from '../../model/joblog.model';
+import { DatePipe } from '@angular/common';
 
 export type ChartOptions3 = {
   series: ApexAxisChartSeries;
@@ -71,7 +85,69 @@ export type ChartOptions3 = {
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  stats: stats[] = [
+    {
+      id: 1,
+      time: '09.30 am',
+      color: 'primary',
+      title: 'Java Developer',
+      subtext: 'Created',
+    },
+    {
+      id: 2,
+      time: '10.30 am',
+      color: 'accent',
+      title: 'Java Developer',
+      subtext: 'Updated',
+      // link: '#ML-3467',
+    },
+    {
+      id: 3,
+      time: '12.30 pm',
+      color: 'success',
+      title: 'Python Developer',
+      subtext: 'fetched',
 
+    },
+    {
+      id: 4,
+      time: '12.30 pm',
+      color: 'warning',
+      title: 'HR Manger',
+      subtext: 'Updated',
+      // link: '#ML-3467',
+    },
+    {
+      id: 5,
+      time: '12.30 pm',
+      color: 'error',
+      title: 'Software Engineer',
+      subtext: 'Deleted',
+      // link: '#ML-3467',
+    },
+    {
+      id: 6,
+      time: '12.30 pm',
+      color: 'success',
+      title: 'Software Engineer',
+      subtext: 'Created',
+    },
+  ];
+
+  createdBy: string = '';
+  jobs: JobPosting[] = [];
+  selectedJob: JobPosting;
+  filteredJobs: JobPosting[] = [];
+  searchQuery: string = '';
+  jobId: string = '';
+  applications: Application[] = [];
+  recentApplications: Application[] = [];
+  filteredApplication: Application[] = [];
+  errorMessage: string = '';
+  jobLogs: JobLog[] = [];
+
+  currentPage: number = 0; // To track the current page
+  itemsPerPage: number = 3; // Number of items per page
 
   isStatusFocused: boolean = false;
   StatusValue: string = '';
@@ -85,7 +161,8 @@ export class HomeComponent {
 
 
   public colors: string[] = ['#008FFB', '#00E396', '#ffae1f', '#FF4560'];
-  constructor() {
+  constructor(private jobService: JobService, private applicationService: ApplicationService, private datePipe: DatePipe) {
+
     this.chartOptions = {
       series: [44, 55, 67, 83],
       chart: {
@@ -104,7 +181,7 @@ export class HomeComponent {
             total: {
               show: true,
               label: "Total Applications",
-              formatter: function(w) {
+              formatter: function (w) {
                 return "249";
               }
             }
@@ -122,20 +199,24 @@ export class HomeComponent {
           data: [10, 41, 30, 5, 49, 62, 40, 91, 14]
         }
       ],
-    
+
       chart: {
         height: 250,
-        type: "area"
+        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        type: "area",
+        sparkline: {
+          enabled: false,
       },
-    
+      },
+
       dataLabels: {
         enabled: false
       },
-    
+
       stroke: {
         curve: "smooth"
       },
-    
+
       xaxis: {
         categories: [
           "Jan",
@@ -152,33 +233,33 @@ export class HomeComponent {
         labels: {
           show: true // This enables x-axis labels
         }
-        
+
       },
-    
+
       yaxis: {
         // Remove background grid lines
         show: false // Set to false to remove the y-axis grid lines
       },
-    
+
       grid: {
         show: false // Set to false to remove the entire grid
       },
-    
+
       tooltip: {
         x: {
           format: "dd/MM/yy HH:mm"
         }
       }
     };
-    
+
 
     this.chartOptions2 = {
       series: [44, 55, 23],
       chart: {
-        height:250,
+        height: 250,
         type: "donut"
       },
-      labels: ["LinkedIn", "Indeed", "Naukari", ],
+      labels: ["LinkedIn", "Indeed", "Naukari",],
       responsive: [
         {
           breakpoint: 480,
@@ -193,28 +274,193 @@ export class HomeComponent {
         }
       ]
     };
-  
+  }
+  //Constructor end
 
-  
+  ngOnInit(): void {
+    this.createdBy = localStorage.getItem('username');
+    this.fetchJobPostings();
+    // this.getJobLogsByEmployeeId();
+  }
+
+  fetchJobPostings(): void {
+    const createdBy = localStorage.getItem('username');
+    this.jobService.getJobsByEmployeeId(createdBy).subscribe(data => {
+      this.jobs = data;
+      this.updateFilteredJobs();
+      this.getJobLogsByEmployeeId();
+      this.openApplicantByCreatedById();
+    }, error => {
+      console.error('Error fetching job postings:', error);
+    });
+    // this.getJobLogsByEmployeeId();
+    // this.jobService.getJobLogsByEmployeeId(createdBy).subscribe(data =>{
+    //   this.jobLogs = data;
+    //   console.log(this.jobLogs);
+
+    // },error => {
+    //   console.error('Error fetching job Logs:', error);
+    // })
+  }
+
+  private updateFilteredJobs() {
+    this.filteredJobs = this.jobs.slice(this.currentPage * this.itemsPerPage, (this.currentPage + 1) * this.itemsPerPage)
+      .map(job => ({
+        ...job,
+        application_deadline: this.formatDate(job.application_deadline)
+      }));
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
+
+  nextPage() {
+    if ((this.currentPage + 1) * this.itemsPerPage < this.jobs.length) {
+      this.currentPage++;
+      this.updateFilteredJobs();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.updateFilteredJobs();
+    }
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.jobs.length / this.itemsPerPage);
+  }
+
+  getCurrentJobRange(): string {
+    const start = this.currentPage * this.itemsPerPage + 1; // Page index starts from 1
+    const end = Math.min((this.currentPage + 1) * this.itemsPerPage, this.jobs.length);
+    return `${start} – ${end} of ${this.jobs.length}`;
+  }
+
+  getJobLogsByEmployeeId(): void {
+    const createdBy = localStorage.getItem('username');
+
+    console.log("Fetching job logs for user:", createdBy);
+
+    this.jobService.getJobLogsByEmployeeId(createdBy).subscribe(data => {
+        console.log("Fetched job logs:", data);
+        
+        // Sort the logs by timestamp in descending order (most recent first)
+        const sortedLogs = data.sort((a: JobLog, b: JobLog) => {
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+        });
+
+        // Take the 5 most recent job logs
+        const recentLogs = sortedLogs.slice(0, 5);
+
+        // Map to the desired stats format
+        this.stats = recentLogs.map((log: JobLog, index: number) => {
+            const date = new Date(log.timestamp);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const year = date.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`; // Format date as dd/mm/yyyy
+
+            return {
+                id: index + 1,
+                time: formattedDate, // Use formatted date here
+                color: this.getColorByAction(log.action),
+                title: log.job_title,
+                subtext: log.action
+            };
+        });
+
+        console.log("Transformed stats with recent logs:", this.stats);
+    }, error => {
+        console.error('Error fetching job logs:', error);
+    });
+}
+
+
+  // Helper function to determine color based on action
+  getColorByAction(action: string): string {
+    switch (action) {
+      case 'created':
+        return 'success';
+      case 'updated':
+        return 'accent';
+      case 'fetched':
+        return 'primary';
+      case 'deleted':
+        return 'error';
+      default:
+        return 'warning'; // Default case for unknown actions
+    }
+  }
+  trackByFn(index: number, item: any): number {
+    return item.id; // or return a unique identifier from the item
+  }
+
+  openApplicantModal(job: any) {
+
+    this.jobId = job.job_id
+    this.applicationService.getApplicationsByJobId(this.jobId).subscribe({
+      next: (data) => {
+          this.applications = data;
+          console.log("appliaction", this.applications);
+
+      },
+      error: (error) => {
+          this.errorMessage = 'Failed to load applications';
+          console.error(error);
+      }
+  });
+    document.getElementById('applicantModal')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
+
+  closeApplicantModal() {
+    this.applications = [];
+    
+    document.getElementById('applicantModal')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
+  }
+
+  openApplicantByCreatedById() {
+
+    const createdBy = localStorage.getItem('username');
+    this.applicationService.getApplicationsByCreatedBy(createdBy).subscribe({
+      next: (data) => {
+          this.recentApplications = data;
+          this.updateFilteredApplication()
+          console.log("appliaction", this.applications);
+
+      },
+      error: (error) => {
+          this.errorMessage = 'Failed to load applications';
+          console.error(error);
+      }
+  });
     
   }
 
-  // public generateData(baseval, count, yrange) {
-  //   var i = 0;
-  //   var series = [];
-  //   while (i < count) {
-  //     var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
-  //     var y =
-  //       Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-  //     var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
+  private updateFilteredApplication() {
+    this.filteredApplication = this.recentApplications.slice(this.currentPage * this.itemsPerPage, (this.currentPage + 1) * this.itemsPerPage)
+      .map(app => ({
+        ...app,
+        application_deadline: this.formatDate(app.submitted_at)
+      }));
+  }
 
-  //     series.push([x, y, z]);
-  //     baseval += 86400000;
-  //     i++;
-  //   }
-  //   return series;
-  // }
-
+  getCurrentApplicationRange(): string {
+    const start = this.currentPage * this.itemsPerPage + 1; // Page index starts from 1
+    const end = Math.min((this.currentPage + 1) * this.itemsPerPage, this.recentApplications.length);
+    return `${start} – ${end} of ${this.recentApplications.length}`;
+  }
   onStatusFocus() {
     this.isStatusFocused = true;
 

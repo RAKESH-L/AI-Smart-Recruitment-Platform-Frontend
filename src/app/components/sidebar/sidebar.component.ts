@@ -76,6 +76,13 @@ export class SidebarComponent implements OnInit{
       route: '/layout/interviewDetails',
       roles: ['recruiter'] 
     },
+    {
+      number: '6',
+      name: 'Demo',
+      icon: 'bi bi-award-fill',
+      route: '/layout/demo',
+      roles: ['recruiter'] 
+    },
 
     {
       number: '5',

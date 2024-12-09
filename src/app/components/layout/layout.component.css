@@ -16,6 +16,7 @@ app-navbar {
 
 .navbar-shrink {
     margin-left: 250px; /* Adjust to the width of the expanded sidebar */
+    /* width: 83%; */
 }
 
 main {
