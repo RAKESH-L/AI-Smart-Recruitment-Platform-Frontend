@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { JobService } from '../../../service/job.service';
 import { OpenaiService } from '../../../service/openai.service';
 import { marked } from 'marked';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobPosting } from '../../../model/Job.model';
+import { ApplicationService } from '../../../service/application.service';
 
 @Component({
   selector: 'app-apply-job',
@@ -17,7 +20,7 @@ export class ApplyJobComponent {
   isInputFocused: boolean = false;
 
   isJobIDFocused: boolean = false;
-JobIDValue: string = '';
+  JobIDValue: string = '';
 
   isFNameFocused: boolean = false;
   FNameValue: string = '';
@@ -33,6 +36,9 @@ JobIDValue: string = '';
 
   isSkillKnownFocused: boolean = false;
   SkillKnownValue: string = '';
+
+  isExperienceFocused: boolean = false;
+  ExperienceValue: string = '';
 
   isSkillsFocused: boolean = false;
   SkillsValue: string = '';
@@ -50,7 +56,7 @@ JobIDValue: string = '';
   PhoneValue: string = '';
 
   isResumeFocused: boolean = false;
-  ResumeValue: string = '';
+  ResumeValue: File | null = null;
 
   isExpectedCTCFocus: boolean = false;
   ExpectedCTCValue: string = '';
@@ -60,19 +66,61 @@ JobIDValue: string = '';
   addressValue: string = '';
   inputValue: string = ''; // Binding for the input field
   errorMessage: string = ''; // Variable to hold error message
-  
+  jobs: JobPosting;
+  selectedJob: JobPosting;
+  filteredJobs: JobPosting[] = [];
+  application_deadline: string;
+  ResumeFile: File | null = null; // To hold the file input
 
-  constructor(private jobService: JobService, private openaiService: OpenaiService) {}
+  applicationMessage: string = '';
+  isErrorMessage: boolean = false;
+  isSuccessMessage: boolean = false;
+
+  constructor(private jobService: JobService, private openaiService: OpenaiService, private router: Router, private route: ActivatedRoute,
+    private applicationService: ApplicationService) { }
 
 
   ngOnInit(): void {
     const employeeId = localStorage.getItem('username');
     console.log(employeeId);
+    const jobId = localStorage.getItem('jobId');
+
+    console.log('Job from navigation:', jobId); // This should show the job details if passed correctly
+    this.fetchJobPostings()
   }
 
-getFormattedDescription() {
+  fetchJobPostings(): void {
+    const jobId = localStorage.getItem('jobId');
+    this.jobService.getJobByJobId(jobId).subscribe(data => {
+      this.jobs = data; // Store the received data
+      this.application_deadline = this.formatDate(this.jobs.application_deadline)
+
+      console.log(this.jobs); // Log the jobs for debug purposes
+
+    }, error => {
+      console.error('Error fetching job postings:', error);
+    });
+  }
+
+  private formatDate(dateString: string): string {
+    // Use substring or split to extract just the date part, if applicable
+    const datePart = dateString.split('T')[0]; // Just get the date part before 'T'
+
+    const date = new Date(datePart); // Now create a Date object
+
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    };
+
+    return date.toLocaleDateString('en-US', options);
+  }
+
+  getFormattedDescription() {
     return marked(this.DescriptionValue);
-}
+  }
   onJobFocus() {
     this.isJobIDFocused = true;
   }
@@ -85,7 +133,7 @@ getFormattedDescription() {
 
   onFNameFocus() {
     this.isFNameFocused = true;
-    
+
   }
 
   onFNameBlur() {
@@ -96,7 +144,7 @@ getFormattedDescription() {
 
   onlNameFocus() {
     this.isLNameFocused = true;
-    
+
   }
 
   onlNameBlur() {
@@ -107,7 +155,7 @@ getFormattedDescription() {
 
   onEmailFocus() {
     this.isEmailFocused = true;
-    
+
   }
 
   onEmailBlur() {
@@ -118,7 +166,7 @@ getFormattedDescription() {
 
   onCurrentCTCFocus() {
     this.isCurrentCTCFocused = true;
-    
+
   }
 
   onCurrentCTCBlur() {
@@ -129,7 +177,7 @@ getFormattedDescription() {
 
   onSkillKnownFocus() {
     this.isSkillKnownFocused = true;
-    
+
   }
 
   onSkillKnownBlur() {
@@ -140,7 +188,7 @@ getFormattedDescription() {
 
   onSkillsFocus() {
     this.isSkillsFocused = true;
-    
+
   }
 
   onSkillsBlur() {
@@ -149,9 +197,19 @@ getFormattedDescription() {
     }
   }
 
+  onExperienceFocus() {
+    this.isExperienceFocused = true;
+  }
+
+  onExperienceBlur() {
+    if (!this.ExperienceValue) {
+      this.isExperienceFocused = false;
+    }
+  }
+
   onDescriptionFocus() {
     this.isDescriptionFocused = true;
-    
+
   }
 
   onDescriptionBlur() {
@@ -162,7 +220,7 @@ getFormattedDescription() {
 
   onResponsibilitiesFocus() {
     this.isResponsibilitiesFocused = true;
-    
+
   }
 
   onResponsibilitiesBlur() {
@@ -173,7 +231,7 @@ getFormattedDescription() {
 
   onCandidateFocus() {
     this.isCandidateIDFocused = true;
-    
+
   }
 
   onCandidateBlur() {
@@ -185,7 +243,7 @@ getFormattedDescription() {
 
   onPhoneFocus() {
     this.isPhoneFocused = true;
-    
+
   }
 
   onPhoneBlur() {
@@ -206,7 +264,7 @@ getFormattedDescription() {
 
   onExpectedCTCFocus() {
     this.isExpectedCTCFocus = true;
-    
+
   }
 
   onExpectedCTCBlur() {
@@ -227,14 +285,7 @@ getFormattedDescription() {
     }
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      this.ResumeValue = input.files[0].name; // Store file name or process file
-      console.log('Selected file:', input.files[0]);
-    }
-  }
-  
+
   nextStep() {
     if (this.currentStep < 3) {
       this.currentStep++;
@@ -246,10 +297,10 @@ getFormattedDescription() {
       this.currentStep--;
     }
 
-  
+
   }
 
-  formSubmit(){
+  formSubmit() {
     if (this.currentStep > 2) {
       this.currentStep--;
     }
@@ -269,19 +320,87 @@ getFormattedDescription() {
     this.displaySettings = true;
   }
 
-  submitData(){
-    const formData = {
-      JobID: this.JobIDValue,
-      FirstName: this.FNameValue,
-      LastName: this.LNameValue,
-      Email: this.EmailValue,
-      CurrentCTC: this.CurrentCTCValue,
-      Skills: this.SkillKnownValue,
-      CandidateID: this.CandidateIDValue,
-      Phone: this.PhoneValue,
-      Resume: this.ResumeValue,
-      ExpectedCTC: this.ExpectedCTCValue,
-    };
-    console.log('', formData);
+  submitData(jobs: any) {
+    const CandidateID = localStorage.getItem('username');
+    const formData = new FormData();
+
+    formData.append('job_id', jobs.job_id);
+
+    if (this.FNameValue) {
+      formData.append('first_name', this.FNameValue);
+    }
+    if (this.LNameValue) {
+      formData.append('last_name', this.LNameValue);
+    }
+    if (this.EmailValue) {
+      formData.append('email', this.EmailValue);
+    }
+    if (this.PhoneValue) {
+      formData.append('phone_number', this.PhoneValue);
+    }
+    if (this.ExperienceValue) {
+      formData.append('experience', this.ExperienceValue);
+    }
+    if (this.CurrentCTCValue) {
+      formData.append('current_ctc', this.CurrentCTCValue);
+    }
+    if (this.ExpectedCTCValue) {
+      formData.append('expected_ctc', this.ExpectedCTCValue);
+    }
+    if (this.SkillKnownValue) {
+      formData.append('skills', this.SkillKnownValue);
+    }
+
+    formData.append('candidate_id', CandidateID);
+
+    if (this.ResumeValue) {
+      formData.append('resume', this.ResumeValue);
+    } else {
+      console.error('No resume file provided.'); // Optional log if needed
+    }
+
+    formData.forEach((value, key) => {
+      console.log(key + ':', value);
+    });
+
+    this.applicationService.postApplication(formData).subscribe(
+      (response) => {
+        console.log('Response from server:', response);
+        this.applicationMessage = response.message; // Get success message from the response
+        this.isErrorMessage = false; // It's not an error message
+        setTimeout(() => {
+          this.applicationMessage = '';
+        }, 3000);
+      },
+      (error) => {
+        console.error('Error submitting application:', error);
+        this.applicationMessage = error.error.message; // Get error message from the error response
+        this.isErrorMessage = true; // This is an error message
+        setTimeout(() => {
+          this.applicationMessage = '';
+        }, 3000);
+      }
+    );
+
+
+  }
+  //   onFileChange(event: Event) {
+  //     const input = event.target as HTMLInputElement; // Cast target to HTMLInputElement
+  //     if (input.files && input.files.length > 0) {
+  //         this.ResumeFile = input.files[0]; // Get the first selected file
+  //     } else {
+  //         this.ResumeFile = null; // Reset if no file is chosen
+  //     }
+  // }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.ResumeValue = file;
+    }
+  }
+  dismissError() {
+    // Method to dismiss the error message
+    this.applicationMessage = '';
   }
 }

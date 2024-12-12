@@ -52,14 +52,27 @@
 
   <div class="profile-logo ">
     
-    <button mat-icon-button="" class="" data-bs-toggle="dropdown">
-      <i class="bi bi-bell-fill"></i>
+    <button mat-icon-button="" class="" data-bs-toggle="dropdown" (click)="toggleNotifications()">
+      <i class="bi bi-bell-fill" ></i>
     </button>
-    <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end">
+    <div *ngIf="isNotificationOpen" class="notification-panel">
+
+      <ul>
+        <li *ngFor="let notification of notifications">
+          <img src="../../assets/img/faces/user-1.jpg" alt="Profile" />
+          <div>
+            <h4>{{ notification.title }}</h4>
+            <p>{{ notification.message }}</p>
+          </div><hr>
+        </li>
+      </ul>
+      <button class="view-all">See all notifications</button>
+    </div>
+    <!-- <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end">
       <li><a href="#" class="dropdown-item">Generate Skillset</a></li>
       <li><a href="#" class="dropdown-item">Update Your Jira Board</a></li>
       <li><a href="#" class="dropdown-item">Enhance your skill like Poornesh</a></li>
-    </ul>
+    </ul> -->
   </div>
 
   <div class="profile-logo dropdown" (click)="toggleProfileDropdown()">
@@ -160,14 +173,9 @@
         </div>
       </a>
 
-      <a mat-stroked-button="" color="primary"
-        class="w-100 mdc-button mdc-button--outlined mat-mdc-outlined-button mat-primary mat-mdc-button-base custom-button-size"
-        (click)="logout()" aria-disabled="false" mat-button-is-fab="false">
-        <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
-        <span class="mdc-button__label">Logout</span><span class="mat-mdc-focus-indicator"></span>
-        <span class="mat-mdc-button-touch-target"></span>
-        <span class="mat-mdc-button-ripple"></span>
-      </a>
+      
+      <button class="view-all" (click)="logout()">Logout</button>
+
 
     </div>
 

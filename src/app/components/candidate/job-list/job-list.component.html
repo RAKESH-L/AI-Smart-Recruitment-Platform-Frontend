@@ -1,0 +1,90 @@
+<div class="app-job-search">
+  <!-- <app-job-search></app-job-search> -->
+</div>
+
+<div class="job-list-container mt-5">
+  <div *ngFor="let job of jobs" class="job-card">
+    <div class="job-details">
+      <h3>{{ job.title }}</h3>
+      <p>
+        {{ job.location }}&nbsp; •
+        <span class="posting-date">APPLICATION DEADLINE </span>{{ job.application_deadline }}&nbsp;&nbsp; •
+        <span class="apply-info">
+          <i class="fa-solid fa-clock"></i> BE THE FIRST TO APPLY
+        </span>
+      </p>
+    </div>
+    <div class="job-actions">
+      <button class="star-button">
+        <i class="fa-regular fa-star"></i>
+      </button>
+      <button class="arrow-button" (click)="openModal(job)">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- <button class="close-btn">CLOSE</button> -->
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <div class="modal-header">
+      <i class="fa-solid fa-share-nodes"></i>
+      <i class="fa-regular fa-star"></i>
+      <button (click)="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <h1 class="job-description-title"
+        style="text-align: center; font-size: 39px; line-height: 3.231rem; word-break: break-word; ">
+        {{selectedJob?.title}}</h1>
+      <p style="text-align:center; margin-top: 9px; margin-bottom: 20px;"><i
+          class="fa-solid fa-location-dot"></i>&nbsp;{{selectedJob.location}}</p>
+      <hr style="width: 3em;margin: auto;">
+      <div class="job-description-head mt-2 mb-5 ">
+        <h1 class="text-center mt-2 mb-3" style="font-size: 26px; line-height: 3.231rem; color: GREY;">JOB DESCRIPTION
+        </h1>
+        <p>{{selectedJob.description}} </p>
+      </div>
+      <h1 class="text-center mt-5 mb-3" style="font-size: 26px; line-height: 3.231rem; color: GREY;">REQUIRED SKILLS
+      </h1>
+      <div class="skills-container text-center">
+        <span *ngFor="let skill of skillsArray " class="chip ">
+          {{ skill }}
+        </span>
+      </div>
+      <div class="apply-job-button text-center mt-5">
+        <a (click)="applyNow(selectedJob)">APPLY NOW</a>
+      </div>
+      <div class="job-info">
+        <h1 class="text-center mt-5 mb-3" style="font-size: 26px; line-height: 3.231rem; color: GREY;">JOB INFO</h1>
+        <div class="job-details">
+          <div class="row">
+            <span class="label">Job Identification</span>
+            <span class="value">{{selectedJob.job_id}}</span>
+          </div>
+          <div class="row">
+            <span class="label">Posting Date</span>
+            <span class="value">{{selectedJob?.created_at}}</span>
+          </div>
+          <div class="row">
+            <span class="label">Job Schedule</span>
+            <span class="value">{{selectedJob.employment_type}}</span>
+          </div>
+          <div class="row">
+            <span class="label">Locations</span>
+            <span class="value">
+              <i class="fa-solid fa-location-dot"> &nbsp; </i>{{selectedJob.location}} India
+            </span>
+          </div>
+          <div class="row">
+            <span class="label">Experience (In Years)</span>
+            <span class="value">{{selectedJob.experience}}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

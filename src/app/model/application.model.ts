@@ -16,6 +16,8 @@ export interface Application {
     job_status: string;              // New field
     job_title: string;               // New field
     last_name: string;
+    nlp_score: string;
+    openai_score: string;
     phone_number: string;
     resume: string;
     submitted_at: string;

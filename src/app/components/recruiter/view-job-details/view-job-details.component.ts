@@ -98,7 +98,7 @@ export class ViewJobDetailsComponent {
       client: job1.client,
       application_deadline: job1.application_deadline,
       created_by: localStorage.getItem('username') || '',
-      skills: ["Python", "Flask", "MySQL"] // This should be the array you collect from your input fields
+      skills: job1.skills // This should be the array you collect from your input fields
     } as JobPosting; // Use a type assertion to cast as JobPosting
 
     document.getElementById('JobModal')!.style.display = 'block'; // Show modal

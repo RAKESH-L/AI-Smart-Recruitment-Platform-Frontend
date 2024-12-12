@@ -21,6 +21,7 @@
         </div>
         <!-- <br>
         <br> -->
+        <!-- <h1>{{jobs.title}}</h1> -->
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card">
@@ -39,7 +40,54 @@
 
                         </ul>
                         <div *ngIf="currentStep === 1">
+                            <div class="p-16 bg-light-primary rounded">
+                                <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                    style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 1px; font-size: large;">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                        _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                            <path d="M12 9h.01"></path>
+                                            <path d="M11 12h1v4h1"></path>
+                                        </svg>
 
+
+                                    </i-tabler>Job Opening Information
+                                </h5>
+                            </div>
+                            <div class="job-info">
+                                <!-- <h1 class="text-center mt-5 mb-3" style="font-size: 26px; line-height: 3.231rem; color: GREY;">JOB INFO</h1> -->
+                                <div class="job-details">
+                                  <div class="row">
+                                    <span class="label">Job Identification</span>
+                                    <span class="value">{{jobs?.job_id}}</span>
+                                  </div>
+                                  <div class="row">
+                                    <span class="label">Job Title</span>
+                                    <span class="value">{{jobs?.title}}</span>
+                                  </div>
+                                  <div class="row">
+                                    <span class="label">Posting Date</span>
+                                    <span class="value">{{jobs?.created_at}}</span>
+                                  </div>
+                                  <div class="row">
+                                    <span class="label">Salary</span>
+                                    <span class="value">{{jobs?.salary_range}}</span>
+                                  </div>
+                                  <div class="row">
+                                    <span class="label">Locations</span>
+                                    <span class="value">
+                                      <i class="fa-solid fa-location-dot"> &nbsp; </i>{{jobs?.location}} India
+                                    </span>
+                                  </div>
+                                  <div class="row">
+                                    <span class="label">Experience (In Years)</span>
+                                    <span class="value">{{jobs?.experience}}</span>
+                                  </div>
+                        
+                                </div>
+                              </div>
                             <!-- <div class="p-16 bg-light-primary rounded">
                                 <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
                                     style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
@@ -134,7 +182,7 @@
                                                 </svg>
 
 
-                                            </i-tabler>Job Opening Information
+                                            </i-tabler>Candidate Details
                                         </h5>
                                     </div>
                                     <br>
@@ -257,11 +305,11 @@
                                     <div class="col-md-6" style="margin-top: -10px;">
                                         <div class="form-group">
                                             <input type="text" class="form-control custom-input" id="customInput"
-                                                #customInput (focus)="onSkillKnownFocus()" (blur)="onSkillKnownBlur()"
-                                                [placeholder]="isSkillKnownFocused ? '' : ''"
-                                                [(ngModel)]="SkillKnownValue" />
+                                                #customInput (focus)="onExperienceFocus()" (blur)="onExperienceBlur()"
+                                                [placeholder]="isExperienceFocused ? '' : ''"
+                                                [(ngModel)]="ExperienceValue" />
                                             <label for="customInput"
-                                                [ngClass]="{'active': isSkillKnownFocused || SkillKnownValue}">Skills</label>
+                                                [ngClass]="{'active': isExperienceFocused || ExperienceValue}">Experience</label>
                                             <span class="outline"></span>
                                         </div>
                                     </div>
@@ -269,6 +317,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group" style="margin-top: 5px;">
                                             <input type="file" class="form-control custom-input" id="customInput"
+                                            (change)="onFileSelected($event)"
                                                 #customInput (focus)="onResumeFocus()" (blur)="onResumeBlur()"
                                                 [placeholder]="isResumeFocused ? '' : ''" [(ngModel)]="ResumeValue"
                                                 (change)="onFileSelected($event)" />
@@ -280,6 +329,22 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control custom-input" id="customInput"
+                                                #customInput (focus)="onSkillKnownFocus()" (blur)="onSkillKnownBlur()"
+                                                [placeholder]="isSkillKnownFocused ? '' : ''"
+                                                [(ngModel)]="SkillKnownValue" />
+                                            <label for="customInput"
+                                                [ngClass]="{'active': isSkillKnownFocused || SkillKnownValue}">Skills</label>
+                                            <span class="outline"></span>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
 
 
 
@@ -289,7 +354,7 @@
                             <div class="text-center">                           
                                 <button mat-button color="primary"
                                     style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                                    (click)="submitData()">
+                                    (click)="submitData(jobs)">
                                     Submit
                                 </button>
                             </div>
@@ -302,4 +367,10 @@
                 </div>
             </div>
         </div>
+        <div  *ngIf="applicationMessage" class="alert" [ngClass]="{'success-message': !isErrorMessage, 'error-message': isErrorMessage}">
+            
+            <span>{{ applicationMessage }}</span>
+            <button (click)="dismissError()">X</button>
+        </div>
+        
     </div>

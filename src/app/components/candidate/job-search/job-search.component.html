@@ -1,0 +1,57 @@
+<div class="search-container ">
+    <div class="search-field">
+      <label for="jobSearch" class="name-label">FIND JOBS</label>
+      <input
+        type="text"
+        id="jobSearch"
+        placeholder="Job title, skill, keyword"
+        [(ngModel)]="jobQuery"
+        (focus)="closeOtherDropdowns('job')"
+        (input)="filterJobResults()"
+      />
+      <div
+        *ngIf="filteredJobResults.length > 0 && showJobDropdown"
+        class="dropdown"
+      >
+        <ul>
+          <li
+            *ngFor="let result of filteredJobResults"
+            (click)="selectJob(result)"
+          >
+            {{ result }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="search-field">
+      <label for="locationSearch" class="name-label">NEAR LOCATION</label>
+      <input
+        type="text"
+        id="locationSearch"
+        placeholder="City, state, country"
+        [(ngModel)]="locationQuery"
+        (focus)="closeOtherDropdowns('location')"
+        (input)="filterLocationResults()"
+      />
+      <div
+        *ngIf="filteredLocationResults.length > 0 && showLocationDropdown"
+        class="dropdown"
+      >
+        <ul>
+          <li
+            *ngFor="let result of filteredLocationResults"
+            (click)="selectLocation(result)"
+          >
+            {{ result }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="button-container">
+      <button class="outlined-button" (click)="redirectToResults()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </div>
+  

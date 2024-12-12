@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Application } from '../model/application.model';
 import { Observable } from 'rxjs';
@@ -36,6 +36,12 @@ export class ApplicationService {
   getApplicationsByCreatedBy(employeeId: string): Observable<Application[]> {
     const url = `${this.baseUrl}/applicationsBycreatedBy/${employeeId}`;
     return this.http.get<Application[]>(url);
+  }
+
+  postApplication(formData: FormData): Observable<any> {
+    const apiUrl = 'http://127.0.0.1:5000/postApplication'; // Your backend endpoint
+
+    return this.http.post<any>(apiUrl, formData);
   }
 }
 

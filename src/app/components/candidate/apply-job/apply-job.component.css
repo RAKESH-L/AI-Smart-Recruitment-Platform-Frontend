@@ -327,3 +327,109 @@
   overflow-y: auto; /* Scroll if content exceeds the height */
   margin-top: 5px; /* Top margin for spacing */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.job-info {
+  font-family: Arial, sans-serif;
+  max-width: 100;
+  /* margin: 20px auto; */
+  /* border: 1px solid #ddd; */
+  padding: 20px;
+  border-radius: 8px;
+  /* background-color: #f9f9f9; */
+}
+
+.job-info h2 {
+  text-align: right;
+  color: #5a5a5a;
+  font-weight: normal;
+}
+
+.job-details .row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.job-details .label {
+  font-weight: bold;
+  color: #555;
+  flex: 1;
+}
+
+.job-details .value {
+  flex: 1;
+  color: #777;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.success-message {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #e6fffa!important;
+  color: #13deb9!important;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.success-message span {
+  margin-right: 10px;
+}
+
+.success-message button {
+  background-color: transparent;
+  border: none;
+  color: #13deb9!important;
+  cursor: pointer;
+}
+
+.error-message {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #fdede8!important;
+  color: #fa896b!important;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.error-message span {
+  margin-right: 10px;
+}
+
+.error-message button {
+  background-color: transparent;
+  border: none;
+  color: #fa896b!important;
+  cursor: pointer;
+}

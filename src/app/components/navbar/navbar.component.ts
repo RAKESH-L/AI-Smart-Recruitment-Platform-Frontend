@@ -20,6 +20,37 @@ export class NavbarComponent implements OnInit {
   isProfileDropdownOpen = false;
   employeeData: Employee;
   linkedInData: LinkedIn;
+
+  isNotificationOpen = false;
+  notifications = [
+    {
+      image: '../assets/img/faces/user-1.png',
+      title: 'Roman Joined the Team!',
+      message: 'Congratulate him'
+    },
+    {
+      image: 'assets/profile2.png',
+      title: 'New message received',
+      message: 'Salma sent you a new message'
+    },
+    {
+      image: 'assets/profile3.png',
+      title: 'New Payment received',
+      message: 'Check your earnings'
+    },
+    {
+      image: 'assets/profile4.png',
+      title: 'Jolly completed tasks',
+      message: 'Assign her new tasks'
+    },
+    {
+      image: 'assets/profile5.png',
+      title: 'Roman Joined the Team!',
+      message: 'Congratulate him'
+    }
+  ];
+
+
   
   constructor(private authService: AuthService, private userService: EmployeeService, private linkedinservice: LinkedinService) {}
 
@@ -27,6 +58,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.fetchEmployeeDetails();
     // this.fetchLinkedInDetails();
+  }
+  toggleNotifications() {
+    this.isNotificationOpen = !this.isNotificationOpen;
   }
 
   fetchEmployeeDetails(): void {

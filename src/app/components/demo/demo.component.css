@@ -1,5 +1,5 @@
  
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
+  /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap"); */
  
   * {
     margin: 0;
@@ -162,19 +162,19 @@
    
   .swiper-slide--one {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-  /* url(../../assets/img/faces/marc.jpg)       */
+  url(/assets/img/faces/marc.jpg)      
   no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--two {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    /* url(../../assets/img/faces/marc.jpg)     */
+    url(/assets/img/faces/marc.jpg)    
     no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--three {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    /* url(../../assets/img/faces/marc.jpg)        */
+    url(/assets/img/faces/marc.jpg)       
     no-repeat 50% 50% / cover;
   }
    

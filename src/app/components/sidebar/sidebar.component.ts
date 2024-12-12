@@ -24,7 +24,14 @@ export class SidebarComponent implements OnInit{
       name: 'Dashboard',
       icon: 'bi bi-kanban-fill',
       route: '/layout/',
-      roles: ['recruiter', 'interviewer', 'admin', 'candidate'] // Can be seen by all roles
+      roles: ['recruiter', 'interviewer', 'admin', ] // Can be seen by all roles
+    },
+    {
+      number: '1',
+      name: 'Dashboard',
+      icon: 'bi bi-kanban-fill',
+      route: '/candidateLayout/',
+      roles: ['candidate'] // Can be seen by all roles
     },
     {
       number: '2',
@@ -83,7 +90,13 @@ export class SidebarComponent implements OnInit{
       route: '/layout/demo',
       roles: ['recruiter'] 
     },
-
+    {
+      number: '5',
+      name: 'Profile',
+      icon: 'bi bi-file-earmark-break-fill',
+      route: '/candidateLayout/candidateProfile',
+      roles: ['candidate'] 
+    },
     {
       number: '5',
       name: 'Apply Job',
@@ -99,6 +112,7 @@ export class SidebarComponent implements OnInit{
       route: '/candidateLayout/appliedJobs',
       roles: ['candidate'] 
     },
+    
   ];
 
   filteredList: any[] = [];

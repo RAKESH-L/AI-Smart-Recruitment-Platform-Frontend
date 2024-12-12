@@ -14,4 +14,6 @@ export interface JobPosting {
     application_deadline?: string;
     created_by?: string;                // User who created the job post (e.g., "2000080631")
     skills?: string[];                  // List of required skills
+    skillArray?:string;
+    created_at?: string;
 }

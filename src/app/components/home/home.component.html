@@ -251,8 +251,25 @@
                 <mat-card class="mat-mdc-card mdc-card shadow-none text-center"
                     style="height: 100%; border: 1px solid #e5eaef; box-shadow: #919eab4d 0 0 2px, #919eab1f 0 12px 24px -4px;">
                     <mat-card-content>
-                        <h5 class="f-w-600">Card Title 3</h5>
-                        
+                        <!-- <h5 class="f-w-600">Card Title 3</h5> -->
+                        <main>
+                            <div class="swiper">
+                              <div class="swiper-wrapper">
+                                <div
+                                  class="swiper-slide"
+                                  *ngFor="let slide of slides; let i = index"
+                                  [ngClass]="slide.class"
+                                  (click)="onSlideClick($event)">
+                                  <div>
+                                    <h2>{{ slide.title }}</h2>
+                                    <p>{{ slide.description }}</p>
+                                    <!-- <a [href]="slide.link" target="_blank">{{ slide.linkText }}</a> -->
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="swiper-pagination"></div>
+                            </div>
+                          </main>
 
                     </mat-card-content>
                 </mat-card>
@@ -467,7 +484,8 @@
                                                             <th mat-header-cell class="font-light">Job Title</th>
                                                             <th mat-header-cell class="font-light">Status</th>
                                                             <th mat-header-cell class="font-light">Date Applied</th>
-                                                            <!-- <th mat-header-cell class="font-light">Actions</th> -->
+                                                            <th mat-header-cell class="font-light">GPT Score</th>
+                                                            <th mat-header-cell class="font-light">NLP Score</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody role="rowgroup" *ngFor="let application of applications; let i = index">
@@ -486,6 +504,8 @@
                                                             <td mat-cell>
                                                                 <span mat-header-cell class="text-accent">{{application.submitted_at}}</span>
                                                             </td>
+                                                            <td mat-cell>{{application.openai_score}}</td>
+                                                            <td mat-cell>{{application.nlp_score}}</td>
                                                             <!-- <td mat-cell>
                                                                 <button mat-button color="primary"
                                                                     style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">

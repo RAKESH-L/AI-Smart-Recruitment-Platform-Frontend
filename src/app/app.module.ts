@@ -37,6 +37,10 @@ import { ApplyJobComponent } from './components/candidate/apply-job/apply-job.co
 import { AppliedJobsComponent } from './components/candidate/applied-jobs/applied-jobs.component';
 import { UserProfileComponent } from './components/recruiter/user-profile/user-profile.component';
 import { DemoComponent } from './components/demo/demo.component';
+import { DashboardComponent } from './components/candidate/dashboard/dashboard.component';
+import { JobListComponent } from './components/candidate/job-list/job-list.component';
+import { JobSearchComponent } from './components/candidate/job-search/job-search.component';
+import { CandidateProfileComponent } from './components/candidate/candidate-profile/candidate-profile.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,10 @@ import { DemoComponent } from './components/demo/demo.component';
     AppliedJobsComponent,
     UserProfileComponent,
     DemoComponent,
+    DashboardComponent,
+    JobListComponent,
+    JobSearchComponent,
+    CandidateProfileComponent,
     
   ],
   imports: [
