@@ -43,6 +43,13 @@ export class ApplicationService {
 
     return this.http.post<any>(apiUrl, formData);
   }
+
+  updateApplicationStatus(applicationId: number, status: string) {
+    const url = `${this.baseUrl}/updateStatusByApplicationId/${applicationId}/status`;
+    const body = { status };
+
+    return this.http.put(url, body); // Assuming PUT method is needed
+  }
 }
 
 

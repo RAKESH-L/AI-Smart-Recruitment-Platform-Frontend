@@ -125,7 +125,7 @@ scheduleInterview() {
         owner_id: this.createdBy,
         schedule_date: this.DateValue +' '+this.TimeValue+':00',
         status: 'scheduled',
-        feedback: 'yet to give',
+        feedback: null,
         interviewMode: this.InterviewModeValue,
         interviewLocation: this.InterviewLocationValue
       }

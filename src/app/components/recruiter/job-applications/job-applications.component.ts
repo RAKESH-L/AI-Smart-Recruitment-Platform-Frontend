@@ -94,6 +94,34 @@ export class JobApplicationsComponent implements OnInit{
       });
   }
 
+  moveToNextStage(applicationId: number) {
+    this.applicationService.updateApplicationStatus(applicationId, 'shortlisted').subscribe({
+      next: (data) => {
+        console.log('Status updated successfully', data);
+        // Optionally, reload or update the applications list here if needed
+        this.loadApplications(this.jobValue, this.statusValue, ); 
+
+      },
+      error: (error) => {
+        console.error('Failed to update status', error);
+      }
+    });
+  }
+
+  reject(applicationId: number) {
+    this.applicationService.updateApplicationStatus(applicationId, 'rejected').subscribe({
+      next: (data) => {
+        console.log('Status updated successfully', data);
+        // Optionally, reload or update the applications list here if needed
+        this.loadApplications(this.jobValue, this.statusValue, ); 
+
+      },
+      error: (error) => {
+        console.error('Failed to update status', error);
+      }
+    });
+  }
+
   onJobChange(event: Event) {
     console.log("yes", event);
     

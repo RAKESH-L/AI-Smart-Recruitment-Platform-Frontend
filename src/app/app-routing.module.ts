@@ -19,6 +19,9 @@ import { DashboardComponent } from './components/candidate/dashboard/dashboard.c
 import { JobListComponent } from './components/candidate/job-list/job-list.component';
 import { JobSearchComponent } from './components/candidate/job-search/job-search.component';
 import { CandidateProfileComponent } from './components/candidate/candidate-profile/candidate-profile.component';
+import { InterviewerLayoutComponent } from './components/interviewer/interviewer-layout/interviewer-layout.component';
+import { InterviewerDashboardComponent } from './components/interviewer/interviewer-dashboard/interviewer-dashboard.component';
+import { ScheduledInterviewComponent } from './components/interviewer/scheduled-interview/scheduled-interview.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -51,6 +54,18 @@ const routes: Routes = [
       { path:'jobList', component: JobListComponent },
       { path:'jobSearch', component: JobSearchComponent },
       { path:'candidateProfile', component: CandidateProfileComponent },
+    ]
+  },
+  {
+    path: 'interviewerLayout',
+    component: InterviewerLayoutComponent,
+    children: [
+      { path:'', component: InterviewerDashboardComponent },
+      { path:'scheduledInterview', component: ScheduledInterviewComponent },
+      // { path:'appliedJobs', component: AppliedJobsComponent },
+      // { path:'jobList', component: JobListComponent },
+      // { path:'jobSearch', component: JobSearchComponent },
+      // { path:'candidateProfile', component: CandidateProfileComponent },
     ]
   }
 ];

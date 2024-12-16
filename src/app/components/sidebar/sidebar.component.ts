@@ -36,21 +36,28 @@ export class SidebarComponent implements OnInit{
     {
       number: '2',
       name: 'User Profile',
-      icon: 'bi bi-person-fill',
+      icon: 'fa-solid fa-id-badge',
       route: '/layout/userProfile',
       roles: ['recruiter'] 
     },
     {
       number: '2',
+      name: 'User Profile',
+      icon: 'fa-solid fa-id-badge',
+      route: '/layout/userProfile',
+      roles: ['interviewer'] 
+    },
+    {
+      number: '2',
       name: 'Job Opening',
-      icon: 'bi bi-person-fill',
+      icon: 'fa-solid fa-suitcase',
       route: '/layout/createJob',
       roles: ['recruiter'] 
     },
     {
       number: '2',
       name: 'Job Draft',
-      icon: 'bi bi-person-fill',
+      icon: 'bi bi-file-text-fill',
       route: '/layout/jobDraft',
       roles: ['recruiter'] 
     },
@@ -72,24 +79,31 @@ export class SidebarComponent implements OnInit{
     {
       number: '7',
       name: 'Interviews',
-      icon: 'bi bi-speedometer',
+      icon: 'fa-solid fa-headset',
       route: '/layout/scheduleInterview',
       roles: ['recruiter'] 
     },
     {
       number: '6',
       name: 'Interview Details',
-      icon: 'bi bi-award-fill',
+      icon: 'bi bi-phone-vibrate-fill',
       route: '/layout/interviewDetails',
       roles: ['recruiter'] 
     },
     {
       number: '6',
-      name: 'Demo',
-      icon: 'bi bi-award-fill',
-      route: '/layout/demo',
-      roles: ['recruiter'] 
+      name: 'Interview Details',
+      icon: 'bi bi-phone-vibrate-fill',
+      route: '/interviewerLayout/scheduledInterview',
+      roles: ['interviewer'] 
     },
+    // {
+    //   number: '6',
+    //   name: 'Demo',
+    //   icon: 'bi bi-award-fill',
+    //   route: '/layout/demo',
+    //   roles: ['recruiter'] 
+    // },
     {
       number: '5',
       name: 'Profile',
@@ -128,6 +142,8 @@ export class SidebarComponent implements OnInit{
     this.filteredList = this.sidebarItems.filter(item => 
       item.roles.includes(this.userRole)
     );
+    const currentRoute = this.router.url;
+    this.selectedItem = this.filteredList.find(item => item.route === currentRoute);
   }
 
   navigateToPage(item: any) {

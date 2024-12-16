@@ -235,7 +235,28 @@
 
 
 
-  
+  .table-section tr {
+    height: 60px;
+    border-bottom: 1px solid #e5eaef; 
+}
+
+
+.table-section table {
+    width: 100%; /* Ensure each table takes full width */
+    border-spacing: 0 10px; /* Add vertical spacing of 10px between rows (adjust as needed) */
+
+}
+
+.font-light {
+    font-weight: 500; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+    text-align: left;
+}
+
+.values {
+    font-weight: 10; /* Use a lighter weight; adjust as needed (100 to 400 are common ranges) */
+    text-align: left;
+    font-family: Plus Jakarta Sans, sans-serif;
+}
 
 
   .table-container {
@@ -422,4 +443,20 @@ table {
 }
 *, :after, :before {
   box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+.disabled-button {
+  background-color: #b2e0e1; /* Lighter shade of the button's color */
+  color: #f4e3e3; /* Keep text color white */
+  opacity: 0.6; /* Lower opacity */
+  cursor: not-allowed; /* Show that the button is not clickable */
+  pointer-events: none; /* Prevent interactions */
 }

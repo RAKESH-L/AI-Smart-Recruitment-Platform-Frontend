@@ -743,6 +743,8 @@ body {
     flex-direction: column;
     justify-content: end;
     align-items: self-start;
+    border-radius: 10px;
+
   }
    
   .swiper-slide h2 {
@@ -792,31 +794,31 @@ body {
    
   .swiper-slide--one {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-  /* url(/assets/img/faces/marc.jpg)       */
+  url(/assets/img/freepic/java.avif)      
   no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--two {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    /* url(/assets/img/faces/marc.jpg)     */
+    url(/assets/img/freepic/dotnet.avif)    
     no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--three {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    /* url(/assets/img/faces/marc.jpg)        */
+    url(/assets/img/freepic/py.jpg)       
     no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--four {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-      url("https://images.unsp")
+    url(/assets/img/freepic/testing.jpg)       
         no-repeat 50% 50% / cover;
   }
    
   .swiper-slide--five {
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-      url("https://images.unsplash.com/photo-15708&auto=format&fit=crop&w=765&q=80")
+    url(/assets/img/freepic/angular.jpg)       
         no-repeat 50% 50% / cover;
   }
    

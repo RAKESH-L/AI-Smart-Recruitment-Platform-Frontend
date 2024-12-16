@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JobPosting } from '../model/Job.model';
 import { Observable } from 'rxjs';
 import { JobLog } from '../model/joblog.model';
+import { PublishJob } from '../model/publishjob.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,9 @@ export class JobService {
 
   getJobByJobId(JobId: string): Observable<JobPosting> {
     return this.http.get<JobPosting>(`${this.api}/getJobByJobId/${JobId}`);
+  }
+
+  publishLinkedin(jobData: PublishJob): Observable<any> {
+    return this.http.post(`${this.api}/post`, jobData);
   }
 }

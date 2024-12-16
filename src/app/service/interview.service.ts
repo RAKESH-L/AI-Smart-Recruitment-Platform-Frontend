@@ -30,4 +30,11 @@ export class InterviewService {
   rescheduleInterview(interviewId: any, interviewData: any): Observable<Interview>{
     return this.http.patch<any>(`http://127.0.0.1:5000/updateInterview/${interviewId}`, interviewData);
   }
+  getInterviewsByInterviewerId(interviewId: string): Observable<InterviewDetails[]> {
+    return this.http.get<InterviewDetails[]>(`${this.baseUrl}/getInterviewsByInterviewerId/${interviewId}`);
+  }
+
+  updateFeedback(interviewId: number, feedback: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/updateInterview/${interviewId}`, feedback);
+  }
 }

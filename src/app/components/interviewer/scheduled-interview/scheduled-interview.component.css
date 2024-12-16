@@ -481,3 +481,37 @@ table {
   color: white;
   cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Apply custom styles to the ngb-rating stars */
+
+.ngb-rating .star {
+    font-size: 300px; /* Increase size of the stars */
+    color: yellow;   /* Change color of stars to yellow */
+}
+
+/* Optionally, ensure that full stars are also yellow */
+.ngb-rating .star.full {
+    color: yellow !important; /* Change filled star color */
+}
+
+/* Optionally, ensure that half stars are also yellow */
+.ngb-rating .star.half {
+    color: yellow !important; /* Change half star color */
+}
+
+/* If you're using Bootstrap icons, ensure they respond to the styles */
+.ngb-rating .star {
+    line-height: 1; /* Prevent line-height adjustments from affecting size */
+}
+

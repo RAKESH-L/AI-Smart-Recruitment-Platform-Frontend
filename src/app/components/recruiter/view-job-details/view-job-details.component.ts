@@ -3,6 +3,7 @@ import { JobService } from '../../../service/job.service';
 import { JobPosting } from '../../../model/Job.model';
 import { Application } from '../../../model/application.model';
 import { ApplicationService } from '../../../service/application.service';
+import { PublishJob } from '../../../model/publishjob.model';
 
 @Component({
   selector: 'app-view-job-details',
@@ -23,6 +24,7 @@ export class ViewJobDetailsComponent {
   createdBy: string = '';
   jobs: JobPosting[] = [];
   selectedJob: JobPosting;
+  publishJob: PublishJob;
   filteredJobs: JobPosting[] = [];
   searchQuery: string = '';
   jobId: string = '';
@@ -104,12 +106,54 @@ export class ViewJobDetailsComponent {
     document.getElementById('JobModal')!.style.display = 'block'; // Show modal
     document.body.style.overflow = 'hidden'; // Disable body scroll
   }
+
+  publishModel(job1: any) {
+    this.selectedJob = {
+      title: job1.title,
+      description: job1.description,
+      department: job1.department,
+      experience: job1.experience,
+      location: job1.location,
+      employment_type: job1.employment_type,
+      salary_range: job1.salary_range,
+      status: 'open',
+      client: job1.client,
+      application_deadline: job1.application_deadline,
+      created_by: localStorage.getItem('username') || '',
+      skills: job1.skills // This should be the array you collect from your input fields
+    } as JobPosting; // Use a type assertion to cast as JobPosting
+
+    document.getElementById('publishModel')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
+
+  selectedPublishJob(job1: any) {
+    this.publishJob = {
+      job_title: job1.title,
+      job_description: job1.description,
+      job_location: job1.location,
+      skills: job1.skills // This should be the array you collect from your input fields
+    } as PublishJob; // Use a type assertion to cast as JobPosting
+    this.jobService.publishLinkedin(this.publishJob).subscribe({
+      next: (data) => {
+        console.log('Published on LinkedIn', data);
+      },
+      error: (error) => {
+        console.error('Failed to update status', error);
+      }
+    });
+    console.log(this.publishJob);
+    
+  }
+
   closeApplicantModal() {
     this.jobId = '';
     this.applications = [];
     document.getElementById('JobModal')!.style.display = 'none'; // Hide modal
     document.body.style.overflow = 'auto'; // Re-enable body scroll
     document.getElementById('applicantModal')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
+    document.getElementById('publishModel')!.style.display = 'none'; // Hide modal
     document.body.style.overflow = 'auto'; // Re-enable body scroll
   }
 

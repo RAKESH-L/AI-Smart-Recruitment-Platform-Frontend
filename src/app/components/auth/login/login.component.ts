@@ -38,6 +38,9 @@ username: string;
           } else if (userRole === 'candidate') {
             localStorage.setItem("role",userRole);
             this.router.navigate(['/candidateLayout']); 
+          } else if (userRole === 'interviewer') {
+            localStorage.setItem("role",userRole);
+            this.router.navigate(['/interviewerLayout']); 
           }
           
         } else {

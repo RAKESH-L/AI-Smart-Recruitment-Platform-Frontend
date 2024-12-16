@@ -41,6 +41,11 @@ import { DashboardComponent } from './components/candidate/dashboard/dashboard.c
 import { JobListComponent } from './components/candidate/job-list/job-list.component';
 import { JobSearchComponent } from './components/candidate/job-search/job-search.component';
 import { CandidateProfileComponent } from './components/candidate/candidate-profile/candidate-profile.component';
+import { InterviewerLayoutComponent } from './components/interviewer/interviewer-layout/interviewer-layout.component';
+import { InterviewerDashboardComponent } from './components/interviewer/interviewer-dashboard/interviewer-dashboard.component';
+import { ScheduledInterviewComponent } from './components/interviewer/scheduled-interview/scheduled-interview.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingModule } from '@syncfusion/ej2-angular-inputs';
 
 @NgModule({
   declarations: [
@@ -68,6 +73,9 @@ import { CandidateProfileComponent } from './components/candidate/candidate-prof
     JobListComponent,
     JobSearchComponent,
     CandidateProfileComponent,
+    InterviewerLayoutComponent,
+    InterviewerDashboardComponent,
+    ScheduledInterviewComponent,
     
   ],
   imports: [
@@ -84,7 +92,9 @@ import { CandidateProfileComponent } from './components/candidate/candidate-prof
     MatNativeDateModule,
     NgApexchartsModule,
     MatCardModule,
-    MatAutocompleteModule 
+    MatAutocompleteModule,
+    NgbModule,
+    RatingModule 
   ],
   providers: [
     DatePipe,

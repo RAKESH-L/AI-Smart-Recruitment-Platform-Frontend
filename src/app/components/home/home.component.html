@@ -144,7 +144,18 @@
                                                 <tr role="row" mat-row class="values">
                                                     <td mat-cell>{{job.job_id}}</td>
                                                     <td mat-cell>{{job.title}}</td>
-                                                    <td mat-cell>{{job.status}}</td>
+                                                    <!-- <td mat-cell>{{job.status}}</td> -->
+                                                    <td mat-cell>
+                                                        <span [ngClass]="{
+                                                            'status-submitted': job.status === 'drafted',
+                                                            'status-interviewing': job.status === 'deleted',
+                                                            'status-rejected': job.status === 'closed',
+                                                            'status-hired': job.status === 'open',
+                                                            
+                                                        }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                            {{ job.status }}
+                                                        </span>
+                                                    </td>
                                                     <td mat-cell>
                                                         <span mat-header-cell
                                                             class="text-accent">{{job.application_deadline}}</span>
@@ -299,7 +310,16 @@
                                         <div class="desc">
                                             <span *ngIf="stat.subtext" class="mat-subtitle-1 f-s-14 lh-20"
                                                 style="margin-right: 10px;">
-                                                {{ stat.subtext }}
+                                                <td mat-cell>
+                                                    <span [ngClass]="{
+                                                        'status-interviewing': stat.subtext === 'updated',
+                                                        'status-rejected': stat.subtext === 'closed',
+                                                        'status-hired': stat.subtext === 'created',
+                                                        
+                                                    }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                        {{ stat.subtext }}
+                                                    </span>
+                                                </td>
                                             </span>
                                             <span *ngIf="stat.title" class="mat-subtitle-1 f-s-14 f-w-600 lh-20">{{
                                                 stat.title }}</span>
@@ -368,7 +388,19 @@
                                                         </div>
                                                     </td>
                                                     <td mat-cell>{{application.job_title}}</td>
-                                                    <td mat-cell>{{application.application_status}}</td>
+                                                    <td mat-cell>
+                                                        <span [ngClass]="{
+                                                            'status-submitted': application.application_status === 'submitted',
+                                                            'status-interviewing': application.application_status === 'interviewing',
+                                                            'status-rejected': application.application_status === 'rejected',
+                                                            'status-shortlisted': application.application_status === 'shortlisted',
+                                                            'status-hired': application.application_status === 'hired',
+                                                            'status-accepted': application.application_status === 'accepted',
+                                                            'status-offered': application.application_status === 'offered'
+                                                        }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                            {{ application.application_status }}
+                                                        </span>
+                                                    </td>
                                                     <td mat-cell>
                                                         <span mat-header-cell class="text-accent">{{application.submitted_at}}</span>
                                                     </td>
@@ -500,7 +532,19 @@
                                                                 </div>
                                                             </td>
                                                             <td mat-cell>{{application.job_title}}</td>
-                                                            <td mat-cell>{{application.application_status}}</td>
+                                                            <td mat-cell>
+                                                                <span [ngClass]="{
+                                                                    'status-submitted': application.application_status === 'submitted',
+                                                                    'status-interviewing': application.application_status === 'interviewing',
+                                                                    'status-rejected': application.application_status === 'rejected',
+                                                                    'status-shortlisted': application.application_status === 'shortlisted',
+                                                                    'status-hired': application.application_status === 'hired',
+                                                                    'status-accepted': application.application_status === 'accepted',
+                                                                    'status-offered': application.application_status === 'offered'
+                                                                }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                                    {{ application.application_status }}
+                                                                </span>
+                                                            </td>
                                                             <td mat-cell>
                                                                 <span mat-header-cell class="text-accent">{{application.submitted_at}}</span>
                                                             </td>

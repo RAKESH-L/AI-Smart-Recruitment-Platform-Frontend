@@ -166,11 +166,22 @@
                                                                 </button>
 
                                                                 <button mat-button color="warn"
-                                                                    style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">Move
-                                                                    to Next Stage
+                                                                    style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                                                    [disabled]="application.application_status !== 'submitted'"
+                                                                    [ngClass]="{'disabled-button': application.application_status !== 'submitted'}"
+                                                                    (click)="moveToNextStage(application.application_id)">
+                                                                    <!-- calling the method with application ID -->
+                                                                    Move to Next Stage
                                                                 </button>
+
+
+
                                                                 <button mat-button color="accent"
-                                                                    style="background-color: #fa896b; color: white; padding: 8px; border-radius: 7px;">Reject
+                                                                    style="background-color: #fa896b; color: white; padding: 8px; border-radius: 7px;"
+                                                                    [disabled]="application.application_status == 'rejected'"
+                                                                    [ngClass]="{'disabled-button': application.application_status == 'rejected'}"
+                                                                    (click)="reject(application.application_id)">
+                                                                    Reject
                                                                 </button>
                                                             </div>
 
@@ -198,7 +209,7 @@
                                 <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
                                     style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
                                     Application Information</h4>
-                                    
+
                                 <div class="d-flex align-items-top overflow-hidden"
                                     style="margin-top: 20px; color: #626263;">
                                     Applicant Details
@@ -222,15 +233,16 @@
                             <div class="p-16 bg-light-primary rounded">
                                 <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
                                     style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
-                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                        _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                                             <path d="M12 9h.01"></path>
                                             <path d="M11 12h1v4h1"></path>
                                         </svg>
-    
-    
+
+
                                     </i-tabler>Applicant Information
                                 </h5>
                             </div>
@@ -240,20 +252,21 @@
                             <p><strong>Phone Number:</strong> {{ selectedApplication?.phone_number }}</p>
                             <p><strong>Status:</strong> {{ selectedApplication?.application_status }}</p>
                             <p><strong>Date Applied:</strong> {{ selectedApplication?.submitted_at }}</p>
-        
+
                             <!-- Job Information Section -->
                             <div class="p-16 bg-light-primary rounded">
                                 <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
                                     style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
-                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                        _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                                             <path d="M12 9h.01"></path>
                                             <path d="M11 12h1v4h1"></path>
                                         </svg>
-    
-    
+
+
                                     </i-tabler>Job Information
                                 </h5>
                             </div>
@@ -262,20 +275,21 @@
                             <p><strong>Job Description:</strong> {{ selectedApplication?.job_description }}</p>
                             <p><strong>Department:</strong> {{ selectedApplication?.department }}</p>
                             <p><strong>Location:</strong> {{ selectedApplication?.location }}</p>
-        
+
                             <!-- Application Status Section -->
                             <div class="p-16 bg-light-primary rounded">
                                 <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
                                     style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
-                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                        _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                                             <path d="M12 9h.01"></path>
                                             <path d="M11 12h1v4h1"></path>
                                         </svg>
-    
-    
+
+
                                     </i-tabler>Application Status
                                 </h5>
                             </div>
@@ -297,34 +311,37 @@
                                 <button mat-button color="primary"
                                     style="background-color: #44b7f7; color: white; padding: 8px 16px; border-radius: 7px;"
                                     (click)="saveStatus()">Save </button>
-                            </div>                        </div>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div style="flex: 0 0 40%; margin-left: 20px;"> <!-- Fixed width for resume display -->
                                 <div class="p-16 bg-light-primary rounded">
                                     <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
                                         style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
-                                        <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                            _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                                                 <path d="M12 9h.01"></path>
                                                 <path d="M11 12h1v4h1"></path>
                                             </svg>
-        
-        
+
+
                                         </i-tabler>Resume
                                     </h5>
                                 </div>
                                 <br>
-                                <iframe [src]="resumePath" width="100%" height="500px" style="border: 1px solid #ccc;"></iframe>
+                                <iframe [src]="resumePath" width="100%" height="500px"
+                                    style="border: 1px solid #ccc;"></iframe>
                                 <!-- Alternative Method: Use [src]="safeResumeUrl(resumePath)" if using HttpClient with Angular for security -->
                                 <!-- <embed [src]="resumePath" type="application/pdf" width="100%" height="500px" /> -->
                             </div>
                         </div>
                     </div>
-                    
-            </div>
-        </div>
 
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>

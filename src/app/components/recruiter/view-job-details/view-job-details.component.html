@@ -88,7 +88,14 @@
 
                     <br>
                     <mat-card-content class="mat-mdc-card-content text-left p-y-24">
-                        <h5 class="m-b-4 mat-subtitle-2">{{ job.client }}</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="m-b-4 mat-subtitle-2">{{ job.client }}</h5>
+                            <button mat-button color="primary"
+                                style="background-color: #44b7f7; color: white; height: 25px; padding: 8px; border-radius: 7px; margin-right: 10px; font-size: 12px;"
+                                (click)="publishModel(job)">
+                                Publish
+                            </button>
+                        </div>
 
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="f-s-12">{{ job.experience }}</span>
@@ -186,6 +193,82 @@
             </div>
         </div>
 
+        <div id="publishModel" class="modal" style="display: none;">
+            <div class="modal-content" style="display: flex; width: 600px;">
+                <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+
+                    <span class="close-button" (click)="closeApplicantModal()">&times;</span>
+                    <br>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Publish Your Job
+                        </h5>
+                    </div>
+                    <br>
+                    <mat-card-actions class="mat-mdc-card-actions text-center p-y-8"
+                        style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
+                        <div class="container" >
+                            <div class="row row-cols-3">
+                                <span
+                                    class="bg-light-primary1 text-primary icon-48 rounded f-w-600 d-flex align-items-center justify-content-center">
+                                    <img src="/assets/img/logo/naukri.png" width="50" class="object-cover"
+                                        style="border-radius: 10px;  margin-bottom: 10px;">
+                                </span>
+                                <span
+                                    class="bg-light-primary1 text-primary icon-48 rounded f-w-600 d-flex align-items-center justify-content-center">
+                                    <img src="/assets/img/logo/linkedin.png" width="50" class="object-cover"
+                                        style="border-radius: 10px;  margin-bottom: 10px;">
+                                </span>
+                                <span
+                                    class="bg-light-primary1 text-primary icon-48 rounded f-w-600 d-flex align-items-center justify-content-center">
+                                    <img src="/assets/img/logo/indeed.png" width="50" class="object-cover"
+                                        style="border-radius: 10px;  margin-bottom: 10px;">
+                                </span>
+
+                                <button mat-button color="primary"
+                                    style="background-color: #44b7f7; width: 155px; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                    Naukri
+                                </button>
+                                <button mat-button color="primary"
+                                    style="background-color: #13deb9; width: 155px; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                    (click)="selectedPublishJob(selectedJob)">
+                                    LinkedIn
+                                </button>
+                                <button mat-button color="primary"
+                                    style="background-color: #ffae1f!important; width: 155px; color: white; height: 35px; padding: 8px; border-radius: 7px; ">
+                                    Indeed
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- <button mat-button color="primary"
+                            style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                            Naukri
+                        </button>
+                        <button mat-button color="primary"
+                            style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                            LinkedIn
+                        </button>
+                        <button mat-button color="primary"
+                            style="background-color: #ffae1f!important; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                            Indeed
+                        </button> -->
+                    </mat-card-actions>
+                </div>
+            </div>
+        </div>
+
         <div id="applicantModal" class="modal" style="display: none;">
             <div class="modal-content" style="display: flex;"> <!-- Use flex to allow side-by-side layout -->
                 <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
@@ -240,14 +323,16 @@
                                 </div>
                                 <div class="col-md-4 text-right" style="margin-top: 10px; margin-bottom: -20px;">
                                     <div class="form-group" style="max-width: 100%; ">
-                                        <select id="employmentType" class="form-control custom-input" [(ngModel)]="StatusValue"
-                                            (focus)="onStatusFocus()" (blur)="onStatusBlur()" style="height: 50px;">
+                                        <select id="employmentType" class="form-control custom-input"
+                                            [(ngModel)]="StatusValue" (focus)="onStatusFocus()" (blur)="onStatusBlur()"
+                                            style="height: 50px;">
                                             <option value="scheduled">scheduled</option>
                                             <option value="completed">completed</option>
                                             <option value="cancelled">cancelled</option>
-        
+
                                         </select>
-                                        <label for="customInput" [ngClass]="{'active': isStatusFocused || StatusValue}">Sort By
+                                        <label for="customInput"
+                                            [ngClass]="{'active': isStatusFocused || StatusValue}">Sort By
                                             Status</label>
                                         <span class="outline"></span>
                                     </div>
@@ -268,21 +353,25 @@
                                                             <th mat-header-cell class="font-light">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody role="rowgroup" *ngFor="let application of applications; let i = index">
+                                                    <tbody role="rowgroup"
+                                                        *ngFor="let application of applications; let i = index">
                                                         <tr role="row" mat-row class="values">
                                                             <td mat-cell>
                                                                 <div class="applicant-info d-flex align-items-center">
-                                                                    <img src="assets/img/faces/user-1.jpg" alt="Applicant Image"
-                                                                        width="40" class="rounded-circle mr-2"
+                                                                    <img src="assets/img/faces/user-1.jpg"
+                                                                        alt="Applicant Image" width="40"
+                                                                        class="rounded-circle mr-2"
                                                                         style="margin-right: 10px; margin-top: -5px;">
-        
-                                                                    <span class="applicant-name">{{application.first_name}}</span>
+
+                                                                    <span
+                                                                        class="applicant-name">{{application.first_name}}</span>
                                                                 </div>
                                                             </td>
                                                             <td mat-cell>{{application.job_title}}</td>
                                                             <td mat-cell>{{application.application_status}}</td>
                                                             <td mat-cell>
-                                                                <span mat-header-cell class="text-accent">{{application.submitted_at}}</span>
+                                                                <span mat-header-cell
+                                                                    class="text-accent">{{application.submitted_at}}</span>
                                                             </td>
                                                             <td mat-cell>
                                                                 <button mat-button color="primary"
