@@ -92,18 +92,32 @@ export class SidebarComponent implements OnInit{
     },
     {
       number: '6',
-      name: 'Interview Details',
+      name: 'Scheduled Interviews',
+      icon: 'fa-solid fa-calendar-check',
+      route: '/layout/interviewAppointment',
+      roles: ['recruiter'] 
+    },
+    {
+      number: '6',
+      name: 'ChatBot',
+      icon: 'fa-brands fa-discord',
+      route: '/layout/chatbot',
+      roles: ['recruiter'] 
+    },
+    {
+      number: '6',
+      name: 'ScheduledInterview',
       icon: 'bi bi-phone-vibrate-fill',
       route: '/interviewerLayout/scheduledInterview',
       roles: ['interviewer'] 
     },
-    // {
-    //   number: '6',
-    //   name: 'Demo',
-    //   icon: 'bi bi-award-fill',
-    //   route: '/layout/demo',
-    //   roles: ['recruiter'] 
-    // },
+    {
+      number: '6',
+      name: 'Demo',
+      icon: 'bi bi-award-fill',
+      route: '/layout/demo',
+      roles: ['candidate'] 
+    },
     {
       number: '5',
       name: 'Profile',

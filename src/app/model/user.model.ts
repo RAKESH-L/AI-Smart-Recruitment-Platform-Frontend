@@ -11,13 +11,13 @@
 // }
 
 export interface User {
-    created_at: string;
-    email: string;
-    employee_id: string;
-    full_name: string;
-    password: string;
-    phone_number: string;
-    role: string;
-    updated_at: string;
-    username: string
+    created_at?: string;
+    email?: string;
+    employee_id?: string;
+    full_name?: string;
+    password?: string;
+    phone_number?: string;
+    role?: string;
+    updated_at?: string;
+    username?: string
 }

@@ -167,14 +167,11 @@
 
                                                                 <button mat-button color="warn"
                                                                     style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                                                                    [disabled]="application.application_status !== 'submitted'"
-                                                                    [ngClass]="{'disabled-button': application.application_status !== 'submitted'}"
-                                                                    (click)="moveToNextStage(application.application_id)">
-                                                                    <!-- calling the method with application ID -->
+                                                                    [disabled]="application.application_status !== 'submitted' && application.application_status !== 'interviewing'"
+                                                                    [ngClass]="{'disabled-button': application.application_status !== 'submitted' && application.application_status !== 'interviewing'}"
+                                                                    (click)="moveToNextStage(application)">
                                                                     Move to Next Stage
                                                                 </button>
-
-
 
                                                                 <button mat-button color="accent"
                                                                     style="background-color: #fa896b; color: white; padding: 8px; border-radius: 7px;"

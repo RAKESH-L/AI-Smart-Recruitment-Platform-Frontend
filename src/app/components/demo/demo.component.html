@@ -1,4 +1,58 @@
-<main>
+<div class="container">
+  <ul class="list-inline">
+    <li class="list-inline-item" *ngFor="let step of steps; let i = index" [class.filled]="isStepFilled(i)">
+      <span class="step-number" [class.active]="currentStep === i"  [class.filled]="isStepFilled(i)">
+        <span class="pointer-dot" [class.active]="currentStep === i"></span>
+      </span>
+      <div>{{ step }}</div> <!-- Step name as usual -->
+    </li>
+  </ul>
+  
+  
+  <div class="step-content">
+    <ng-container [ngSwitch]="currentStep">
+      <div *ngSwitchCase="0">Content for Step 1</div>
+      <div *ngSwitchCase="1">Content for Step 2</div>
+      <div *ngSwitchCase="2">Content for Step 3</div>
+      <div *ngSwitchCase="3">Content for Step 4</div>
+    </ng-container>
+  </div>
+  
+  <div class="buttons">
+    <button class="btn btn-secondary" (click)="prevStep()" 
+            [disabled]="currentStep === 0">Previous</button>
+    <button class="btn btn-primary" (click)="nextStep()" 
+            [disabled]="currentStep === steps.length - 1">Next</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <main>
     <div class="swiper">
       <div class="swiper-wrapper">
         <div
@@ -9,10 +63,9 @@
           <div>
             <h2>{{ slide.title }}</h2>
             <p>{{ slide.description }}</p>
-            <!-- <a [href]="slide.link" target="_blank">{{ slide.linkText }}</a> -->
           </div>
         </div>
       </div>
       <div class="swiper-pagination"></div>
     </div>
-  </main>
+  </main> -->

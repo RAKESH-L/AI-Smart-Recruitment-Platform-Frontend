@@ -60,7 +60,10 @@ ngOnInit(): void {
 fetchAllUsers(){
   this.userservice.getAllUsers().subscribe(data => {
     this.users = data;
-    this.interviewers = this.users.filter(users => users.role === 'interviewer');
+    // Filtering users based on roles 'interviewer' and 'recruiter'
+    this.interviewers = this.users.filter(user => 
+      user.role === 'interviewer' || user.role === 'recruiter'
+    );
   }, error => {
     console.error('Error fetching job postings:', error);
   })

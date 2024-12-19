@@ -40,93 +40,7 @@ export class ScheduledInterviewComponent {
   labelTechnical = 'Technical Skills:';
   labelEnthusiasm = 'Candidate Enthusiasm:'; // New label for Candidate Enthusiasm
 
-  setRate(starValue: number, event: MouseEvent, ratingType: string) {
-    const starWidth = 30;
-    const clickPosX = event.offsetX;
-    const isHalf = clickPosX < starWidth / 2;
-
-    // Determine which rating to update based on the passed ratingType
-    switch (ratingType) {
-      case 'communication':
-        this.gfgCommunication = isHalf ? starValue - 0.5 : starValue; // Update communication rating
-        break;
-      case 'technical':
-        this.gfgTechnical = isHalf ? starValue - 0.5 : starValue; // Update technical skills rating
-        break;
-      case 'enthusiasm':
-        this.gfgEnthusiasm = isHalf ? starValue - 0.5 : starValue; // Update enthusiasm rating
-        break;
-    }
-  }
-
-  getStarType(index: number, ratingType: string) {
-    const starValue = index + 1;
-    let rating;
-
-    // Determine which rating to assess based on the ratingType
-    switch (ratingType) {
-      case 'communication':
-        rating = this.gfgCommunication;
-        break;
-      case 'technical':
-        rating = this.gfgTechnical;
-        break;
-      case 'enthusiasm':
-        rating = this.gfgEnthusiasm;
-        break;
-    }
-
-    if (this.hoverRating && rating >= starValue) {
-      return 'full';
-    } else if (this.hoverRating && rating >= starValue - 0.5) {
-      return 'half';
-    } else {
-      return rating >= starValue ? 'full' : 'empty';
-    }
-  }
-
-  isHalfClickedState(starValue: number, event: MouseEvent, ratingType: string): boolean {
-    const starWidth = 30;
-    const clickPosX = event.offsetX;
-    this.hoverRating = clickPosX < (starWidth / 2) ? starValue - 0.5 : starValue; // Set hover rating
-    return clickPosX < starWidth / 2;
-  }
-
-  clearHover() {
-    this.hoverRating = 0; // Clear hover rating when mouse leaves
-  }
-
-  submitRatings(selectedFeedback: any) {
-    console.log(selectedFeedback.interview_id);
-    console.log(`Communication Rating: ${this.gfgCommunication}`);
-    console.log(`Technical Skills Rating: ${this.gfgTechnical}`);
-    console.log(`Candidate Enthusiasm Rating: ${this.gfgEnthusiasm}`); // Log the enthusiasm rating
-
-    const feedback = {
-      status: 'completed',
-      feedback: {
-        'communication': this.gfgCommunication,
-        'Technical Skills': this.gfgTechnical,
-        'Candidate Enthusiasm': this.gfgEnthusiasm,
-        'feedback': this.DescriptionValue, // Assuming the text area collects feedback
-      },
-    };
-    console.log(feedback);
-    
-
-    this.interviewService.updateFeedback(selectedFeedback.interview_id, feedback).subscribe(
-      response => {
-        console.log('Feedback submitted successfully:', response);
-        // Optionally close the modal or reset form fields
-        this.fetchInterviews();
-        this.closeApplicantModal();
-      },
-      error => {
-        console.error('Error submitting feedback:', error);
-      }
-    );
   
-  }
 
   constructor(private interviewService: InterviewService, private applicationService: ApplicationService,
     private sanitizer: DomSanitizer, private datePipe: DatePipe) { }
@@ -241,6 +155,96 @@ export class ScheduledInterviewComponent {
     document.body.style.overflow = 'hidden'; // Disable body scroll
 
   }
+
+
+  setRate(starValue: number, event: MouseEvent, ratingType: string) {
+    const starWidth = 30;
+    const clickPosX = event.offsetX;
+    const isHalf = clickPosX < starWidth / 2;
+
+    // Determine which rating to update based on the passed ratingType
+    switch (ratingType) {
+      case 'communication':
+        this.gfgCommunication = isHalf ? starValue - 0.5 : starValue; // Update communication rating
+        break;
+      case 'technical':
+        this.gfgTechnical = isHalf ? starValue - 0.5 : starValue; // Update technical skills rating
+        break;
+      case 'enthusiasm':
+        this.gfgEnthusiasm = isHalf ? starValue - 0.5 : starValue; // Update enthusiasm rating
+        break;
+    }
+  }
+
+  getStarType(index: number, ratingType: string) {
+    const starValue = index + 1;
+    let rating;
+
+    // Determine which rating to assess based on the ratingType
+    switch (ratingType) {
+      case 'communication':
+        rating = this.gfgCommunication;
+        break;
+      case 'technical':
+        rating = this.gfgTechnical;
+        break;
+      case 'enthusiasm':
+        rating = this.gfgEnthusiasm;
+        break;
+    }
+
+    if (this.hoverRating && rating >= starValue) {
+      return 'full';
+    } else if (this.hoverRating && rating >= starValue - 0.5) {
+      return 'half';
+    } else {
+      return rating >= starValue ? 'full' : 'empty';
+    }
+  }
+
+  isHalfClickedState(starValue: number, event: MouseEvent, ratingType: string): boolean {
+    const starWidth = 30;
+    const clickPosX = event.offsetX;
+    this.hoverRating = clickPosX < (starWidth / 2) ? starValue - 0.5 : starValue; // Set hover rating
+    return clickPosX < starWidth / 2;
+  }
+
+  clearHover() {
+    this.hoverRating = 0; // Clear hover rating when mouse leaves
+  }
+
+  submitRatings(selectedFeedback: any) {
+    console.log(selectedFeedback.interview_id);
+    console.log(`Communication Rating: ${this.gfgCommunication}`);
+    console.log(`Technical Skills Rating: ${this.gfgTechnical}`);
+    console.log(`Candidate Enthusiasm Rating: ${this.gfgEnthusiasm}`); // Log the enthusiasm rating
+
+    const feedback = {
+      status: 'completed',
+      feedback: {
+        'communication': this.gfgCommunication,
+        'Technical Skills': this.gfgTechnical,
+        'Candidate Enthusiasm': this.gfgEnthusiasm,
+        'feedback': this.DescriptionValue, // Assuming the text area collects feedback
+      },
+    };
+    console.log(feedback);
+    
+
+    this.interviewService.updateFeedback(selectedFeedback.interview_id, feedback).subscribe(
+      response => {
+        console.log('Feedback submitted successfully:', response);
+        // Optionally close the modal or reset form fields
+        this.fetchInterviews();
+        this.closeApplicantModal();
+      },
+      error => {
+        console.error('Error submitting feedback:', error);
+      }
+    );
+  
+  }
+  
   saveStatus() {
     // Here, you'll implement the logic to save the new status.
     

@@ -24,73 +24,134 @@
             <div class="card-body">
                 <div class="row">
 
-            <!-- New Card Below Search Bar Card -->
-            <div class="col-md-4 mb-4" *ngFor="let job of applications let i = index"
-                style="font-family: Plus Jakarta Sans, sans-serif;">
-                <mat-card class="mat-mdc-card mdc-card cardWithShadow overflow-hidden"
-                    style="border-radius: 10px; border: 2px solid rgb(220, 217, 217); box-shadow: #919eab4d 0 0 2px,">
-                    <mat-card-header class="mat-mdc-card-header  d-flex justify-content-left"
-                        [style.background-color]="headerColors[i % headerColors.length]" style="height: 60px; ">
-                        <div class="mat-mdc-card-header-text" style="flex: 1;">
-                            <mat-card-title class="mat-mdc-card-title m-b-0 f-s-16"
-                                style="color: white; font-weight: bold; font-size: large;">
-                                {{ job.job_title }}
-                            </mat-card-title>
-                        </div>
-                        <span class="d-flex align-items-center gap-4"
-                            style="color: white; font-weight: lighter; font-size: medium;">
-                            <i-tabler name="time" class="icon-16 d-flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M12 6v6l4 4"></path>
-                                    <circle cx="12" cy="12" r="9"></circle>
-                                </svg>
-                            </i-tabler>
-                            {{ job.job_department }}
-                        </span>
-                    </mat-card-header>
+                    <!-- New Card Below Search Bar Card -->
+                    <div class="col-md-4 mb-4" *ngFor="let job of applications let i = index"
+                        style="font-family: Plus Jakarta Sans, sans-serif;">
+                        <mat-card class="mat-mdc-card mdc-card cardWithShadow overflow-hidden"
+                            style="border-radius: 10px; border: 2px solid rgb(220, 217, 217); box-shadow: #919eab4d 0 0 2px,">
+                            <mat-card-header class="mat-mdc-card-header  d-flex justify-content-left"
+                                [style.background-color]="headerColors[i % headerColors.length]" style="height: 60px; ">
+                                <div class="mat-mdc-card-header-text" style="flex: 1;">
+                                    <mat-card-title class="mat-mdc-card-title m-b-0 f-s-16"
+                                        style="color: white; font-weight: bold; font-size: large;">
+                                        {{ job.job_title }}
+                                    </mat-card-title>
+                                </div>
+                                <span class="d-flex align-items-center gap-4"
+                                    style="color: white; font-weight: lighter; font-size: medium;">
+                                    <i-tabler name="time" class="icon-16 d-flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 6v6l4 4"></path>
+                                            <circle cx="12" cy="12" r="9"></circle>
+                                        </svg>
+                                    </i-tabler>
+                                    {{ job.job_department }}
+                                </span>
+                            </mat-card-header>
 
-                    <br>
-                    <mat-card-content class="mat-mdc-card-content text-left p-y-24">
-                        <h5 class="m-b-4 mat-subtitle-2">{{ job.job_status }}</h5>
+                            <br>
+                            <mat-card-content class="mat-mdc-card-content text-left p-y-24">
+                                <h5 class="m-b-4 mat-subtitle-2">{{ job.job_status }}</h5>
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="f-s-12">{{ job.experience }}</span>
-                            <span class="f-s-12">{{ job.job_location }}</span>
-                        </div>
-                    </mat-card-content>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="f-s-12">{{ job.experience }}</span>
+                                    <span class="f-s-12">{{ job.job_location }}</span>
+                                </div>
+                            </mat-card-content>
 
-                    <mat-card-content class="mat-mdc-card-content text-left p-y-24">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="f-s-12">{{ job.job_salary_range }}</span>
-                            <span class="f-s-12">{{job.submitted_at}}</span>
-                        </div>
-                    </mat-card-content>
-
-
-                    <mat-divider role="separator" class="mat-divider mat-divider-horizontal"
-                        aria-orientation="horizontal"></mat-divider>
-                    <hr>
-                    <mat-card-actions class="mat-mdc-card-actions text-center p-y-8"
-                        style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
-                        <!-- <button mat-button color="primary"
-                            style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                            >
-                            Edit
-                        </button> -->
-                        <button mat-button color="primary"
-                            style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
-                            (click)="deleteJob(job.job_id)">
-                            Withdraw
-                        </button>
-                    </mat-card-actions>
+                            <mat-card-content class="mat-mdc-card-content text-left p-y-24">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="f-s-12">{{ job.job_salary_range }}</span>
+                                    <span class="f-s-12">{{job.submitted_at}}</span>
+                                </div>
+                            </mat-card-content>
 
 
-                </mat-card>
+                            <mat-divider role="separator" class="mat-divider mat-divider-horizontal"
+                                aria-orientation="horizontal"></mat-divider>
+                            <hr>
+                            <mat-card-actions class="mat-mdc-card-actions text-center p-y-8"
+                                style="margin-bottom: 0; margin-top: -15px; display: flex; justify-content: center;">
+                                <button mat-button color="primary"
+                                    style="background-color: #13deb9; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                    (click)="deleteJob(job.job_id)">
+                                    Withdraw
+                                </button>
+                                <button mat-button color="primary"
+                                    style="background-color: #44b7f7; color: white; height: 35px; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                    (click)="checkStatus(job)">
+                                    Chech Status
+                                </button>
+                            </mat-card-actions>
 
+
+                        </mat-card>
+
+                    </div>
+
+                </div>
             </div>
-
         </div>
+
+        <div id="statusModal" class="modal" style="display: none; justify-content: center; align-items: center;">
+            <div class="modal-content" style="margin: auto; width: 600px;">
+                <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <span class="close-button" (click)="closeModal()">&times;</span>
+                    <div class="p-16 bg-light-primary rounded" style="background-color: #9bcbe6; height: 40px;">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Application Status
+                        </h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="container">
+                            <ul class="list-inline">
+                                <li class="list-inline-item" *ngFor="let step of steps; let i = index"
+                                    [class.filled]="isStepFilled(i)">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="step-number" [class.active]="currentStep === i"
+                                                [class.filled]="isStepFilled(i)">
+                                                <span class="pointer-dot" [class.active]="currentStep === i"></span>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-12" style="margin-left: -20px; ">
+                                            {{ step }}
+                                            <p *ngIf="currentStep === i" style="margin-top: 10px;">{{ getStepName() }}
+                                            </p>
+                                            <!-- Where the dynamic message will be shown -->
+                                        </div>
+                                    </div>
+
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button mat-button color="primary"
+                        style="background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                        (click)="acceptOffer(selectedJob)"
+                        >
+                        Accept Offer
+                    </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -50,6 +50,31 @@ export class ApplicationService {
 
     return this.http.put(url, body); // Assuming PUT method is needed
   }
+
+  acceptOffer(applicationId: number): Observable<any> {
+    
+    const offerAcceptedDate = this.formatDate(new Date());
+
+    const body = {
+      "application_id": applicationId,
+      "offer_accepted_date": offerAcceptedDate // use the formatted date here
+    };
+
+    return this.http.post<any>('http://127.0.0.1:5000/acceptOffer', body);
+  }
+
+
+   // Helper method to format date to 'YYYY-MM-DD HH:MM:SS'
+   private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
 }
 
 

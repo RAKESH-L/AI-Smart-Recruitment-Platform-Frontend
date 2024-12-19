@@ -1,0 +1,270 @@
+<!-- <p>login works!</p> -->
+
+<main id="page-content" class="d-flex nm-aic nm-vh-md-100" style="position: relative; ">
+    <div class="overlay"></div>
+
+    <div class="nm-tm-wr" style="margin-top: 200px;">
+        <div class="container">
+            <form [formGroup]="signUpForm" (submit)="onSignUp()">
+                <div class="nm-hr nm-up-rl-3">
+                    <h2>Sign Up</h2>
+                    <ul class="social-buttons">
+                        <li class="nm-hvr">
+                            <a href="http://google.com/">
+                                <i class="bi bi-google"></i>
+                            </a>
+                        </li>
+                        <li class="nm-hvr">
+                            <a href="https://twitter.com/">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="nm-hvr">
+                            <a href="https://www.facebook.com/">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
+
+                
+                    <div class="form-group">
+
+                        <div class="row">
+
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-person-fill"></i></span>
+                            </div>
+
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="text" class="form-control" id="customUsername" #customUsername
+                                    (focus)="onFullnameFocus()" (blur)="onUsernameBlur()"
+                                    [placeholder]="onFullnameFocus ? 'ex Johndeep' : ''" [(ngModel)]="fullnameValue"
+                                    formControlName="full_name" />
+
+                                <label for="customEmail"
+                                    [ngClass]="{'active': isFullnameFocused || fullnameValue}">Full Name</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger"
+                        *ngIf="signUpForm.controls['full_name'].touched &&
+                                                                                    signUpForm.controls['full_name'].invalid"
+                        style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['full_name'].errors['required']">*Name is required</span>
+                        <span *ngIf="signUpForm.controls['full_name'].errors['pattern']">*Valid Name is
+                            required</span>
+                    </span>
+                </div>
+
+                <div class="">
+
+                
+                    <div class="form-group">
+
+                        <div class="row">
+
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-person-fill"></i></span>
+                            </div>
+
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="text" class="form-control" id="customUsername" #customUsername
+                                    (focus)="onUsernameFocus()" (blur)="onUsernameBlur()"
+                                    [placeholder]="isUsernameFocused ? 'ex Johndeep' : ''" [(ngModel)]="usernameValue"
+                                    formControlName="username" />
+
+                                <label for="customEmail"
+                                    [ngClass]="{'active': isUsernameFocused || usernameValue}">Username</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger"
+                        *ngIf="signUpForm.controls['username'].touched &&
+                                                                                    signUpForm.controls['username'].invalid"
+                        style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['username'].errors['required']">*Username is required</span>
+                        <span *ngIf="signUpForm.controls['username'].errors['pattern']">*Valid Username is
+                            required</span>
+                    </span>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-telephone-fill"></i></span>
+                            </div>
+
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="text" class="form-control" id="customContact" #customContact
+                                    (focus)="onEmployeeIdFocus()" (blur)="onEmployeeIdBlur()"
+                                    [placeholder]="isEmployeeIdFocused ? 'ex x0000xxxxx' : ''" [(ngModel)]="employeeIdValue"
+                                    formControlName="employee_id" />
+
+                                <label for="customContact"
+                                    [ngClass]="{'active': isEmployeeIdFocused || employeeIdValue}">EmployeeId</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger"
+                        *ngIf="signUpForm.controls['employee_id'].touched &&
+                                                                                    signUpForm.controls['employee_id'].invalid"
+                        style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['employee_id'].errors['required']">*ID Number is
+                            required</span>
+                        <span *ngIf="signUpForm.controls['employee_id'].errors['pattern']">*Valid Id is
+                            required</span>
+                    </span>
+                </div>
+
+                <div class="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-telephone-fill"></i></span>
+                            </div>
+
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="text" class="form-control" id="customContact" #customContact
+                                    (focus)="onContactFocus()" (blur)="onContactBlur()"
+                                    [placeholder]="isContactFocused ? 'ex 8005003050' : ''" [(ngModel)]="contactValue"
+                                    formControlName="phone_number" />
+
+                                <label for="customContact"
+                                    [ngClass]="{'active': isContactFocused || contactValue}">Contact</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger"
+                        *ngIf="signUpForm.controls['phone_number'].touched &&
+                                                                                    signUpForm.controls['phone_number'].invalid"
+                        style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['phone_number'].errors['required']">*Contact Number is
+                            required</span>
+                        <span *ngIf="signUpForm.controls['phone_number'].errors['pattern']">*Valid Number is
+                            required</span>
+                    </span>
+                </div>
+
+                <div class="">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-envelope-open-fill"></i></span>
+                            </div>
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="text" class="form-control" id="customEmail" #customEmail
+                                    (focus)="onEmailFocus()" (blur)="onEmailBlur()"
+                                    [placeholder]="isEmailFocused ? 'ex abc@gmail.com' : ''" [(ngModel)]="emailValue"
+                                    formControlName="email" />
+
+                                <label for="customEmail"
+                                    [ngClass]="{'active': isEmailFocused || emailValue}">Email</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger" *ngIf="signUpForm.controls['email'].touched &&
+                                        signUpForm.controls['email'].invalid" style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['email'].errors['required']">*Username is required</span>
+                        <span *ngIf="signUpForm.controls['email'].errors['pattern']">*please enter valid email</span>
+                    </span>
+                </div>
+
+                <div class="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-lock-fill"></i></span>
+                            </div>
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="password" class="form-control" id="customPassword" #customEmail
+                                    (focus)="onPasswordFocus()" (blur)="onPasswordBlur()"
+                                    [placeholder]="isPasswordFocused ? '' : ''" [(ngModel)]="passwordValue"
+                                    formControlName="password" />
+
+                                <label for="customPassword"
+                                    [ngClass]="{'active': isPasswordFocused || passwordValue}">Password</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger" *ngIf="signUpForm.controls['password'].touched &&
+                                                                    signUpForm.controls['password'].invalid"
+                        style="margin-left: 50px;">
+                        <span *ngIf="signUpForm.controls['password'].errors['required']">*Password is required</span>
+                        <span *ngIf="signUpForm.controls['password'].errors['pattern']">*Password can have alphabets,
+                            digits &#64; _ #</span>
+                        <span *ngIf="signUpForm.controls['password'].errors['minlength']">*Password should be min 5
+                            chars</span>
+                        <span *ngIf="signUpForm.controls['password'].errors['maxlength']">*Password should be max 15
+                            chars</span>
+                    </span>
+                </div>
+
+                <div class="">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="nm-gp-pp"><i class="bi bi-envelope-open-fill"></i></span>
+                            </div>
+                            <div class="col-md-10" style="margin-left: 10px;">
+
+                                <input type="password" class="form-control" id="customRePassword" #customEmail
+                                    (focus)="onRePasswordFocus()" (blur)="onRePasswordBlur()"
+                                    [placeholder]="isRePasswordFocused ? '' : ''" [(ngModel)]="repasswordValue"
+                                    formControlName="repassword" />
+
+                                <label for="customRePassword"
+                                    [ngClass]="{'active': isRePasswordFocused || repasswordValue}">Confirm
+                                    Password</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="error_msg text-danger" style="margin-left: 50px;">
+                        {{msg}}
+                    </span>
+                </div>
+
+                
+
+                <div class="row nm-aic nm-mb-1">
+                    <div class="col-sm-6 nm-mb-1 nm-mb-sm-0">
+                        <button type="submit" class="btn btn-primary nm-hvr nm-btn-2">Sign Up</button>
+                    </div>
+
+                    <div class="col-sm-6 nm-sm-tr">
+                        <a class="nm-fs-1 nm-fw-bd" href="recover.html">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <footer
+                    style="text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #97a4af; font-weight: 400;">
+                    Already have an account <a class="nm-fs-1 nm-fw-bd" style="font-size: 0.75rem;"
+                        routerLink="/login">Login</a></footer>
+            </form>
+        </div>
+        <div *ngIf="successMessage" class="success-message">
+            <span>{{ successMessage }}</span>
+            <button (click)="dismissError()">X</button>
+        </div>
+        <div *ngIf="errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+            <button (click)="dismissError()">X</button>
+        </div>
+    </div>
+</main>

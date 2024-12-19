@@ -9,7 +9,7 @@ export class AuthService {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
 
-
+  private apiUrl = 'http://127.0.0.1:5000/postUser';
   constructor(private http: HttpClient, private router: Router,
     // private localStorageService: LocalStorageService
     ){}
@@ -38,6 +38,16 @@ export class AuthService {
   // Method to get the authentication status as an observable
   isAuthenticated$(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  updatePassword(userId: string, newPassword: string): Observable<any> {
+    const url = `http://127.0.0.1:5000/updateUser/${userId}`;
+    const body = { password: newPassword };
+    return this.http.post(url, body);
+  }
+
+  addUser(user: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, user);
   }
 }
 

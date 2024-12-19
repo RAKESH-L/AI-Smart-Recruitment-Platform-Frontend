@@ -41,6 +41,7 @@ export class JobApplicationsComponent implements OnInit{
   statusValue: string = '';     // To hold selected status
   deadlineValue: string = '';   // Any other input e.g. deadline
   createdBy: string='';
+  nextStatus: string='';
   jobs: JobPosting[] = [];
 
 
@@ -94,8 +95,16 @@ export class JobApplicationsComponent implements OnInit{
       });
   }
 
-  moveToNextStage(applicationId: number) {
-    this.applicationService.updateApplicationStatus(applicationId, 'shortlisted').subscribe({
+  moveToNextStage(application: any) {
+    const appId = application.application_id
+    const status = application.application_status
+    console.log(status);
+    if (status == 'submitted'){
+      this.nextStatus = 'shortlisted'
+    } else if (status == 'interviewing'){
+      this.nextStatus = 'offered'
+    }
+    this.applicationService.updateApplicationStatus(appId, this.nextStatus).subscribe({
       next: (data) => {
         console.log('Status updated successfully', data);
         // Optionally, reload or update the applications list here if needed

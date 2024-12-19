@@ -1,5 +1,153 @@
- 
-  /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap"); */
+@keyframes circle-wave {
+  0% {
+      transform: scale(1);
+      opacity: 1;
+  }
+  100% {
+      transform: scale(2);
+      opacity: 0;
+  }
+}
+
+
+.step-content {
+  margin-top: 20px;
+}
+
+.step-number {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #13deb9;
+  display: inline-block;
+  text-align: center;
+  margin-right: 80px;
+  background-color: white;
+
+}
+
+
+.pointer-dot.active {
+  background-color: #13deb9;
+}
+
+/* Wave effect for active steps */
+.step-number.active::before {
+  content: ""; /* Necessary for the pseudo-element */
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(19, 222, 185, 0.5); /* Wave color */
+  width: 20px; /* Size of the wave */
+  height: 20px; /* Size of the wave */
+  top: 0%; /* Centering */
+  left: 0%; /* Centering */
+  transform: translate(-50%, -50%); /* Centering */
+  animation: circle-wave 1.5s infinite; /* Animation timing and repetition */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+.step-number.active {
+  background-color: #13deb9;
+  color: white;
+}
+
+
+.list-inline {
+  padding-left: 0;
+}
+
+.list-inline-item {
+  position: relative;
+}
+
+.list-inline-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #007bff;
+  top: 8px;
+  left: 10px;
+  z-index: -1;
+  transition: width 0.3s; /* Smooth transition for width change */
+
+}
+
+/* Completed line color */
+.list-inline-item.filled::after {
+  background: #13deb9; /* Color for filled/completed steps */
+  
+}
+
+
+.list-inline-item:last-child::after {
+  content: none;
+}
+
+.step-number.filled {
+  background-color: #13deb9; /* Background for completed step */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  
  
   * {
     margin: 0;
@@ -220,4 +368,4 @@
    
    
      
-   
+    */

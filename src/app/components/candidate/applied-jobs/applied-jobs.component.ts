@@ -12,12 +12,49 @@ export class AppliedJobsComponent {
 
   createdBy: string='';
   jobs: JobPosting[] = [];
+  selectedJob: Application[] = [];
   filteredJobs: JobPosting[] = []; 
   searchQuery: string = '';
   applications: Application[] = [];
   errorMessage: string = '';
+  applicationStatus: string = '';
 
   headerColors: string[] = ['#5d87ff', '#fa896b', '#ffae1f', '#49beff'];
+  currentStep: number = 0; // Track the current step
+  steps: string[] = ['', '', '', ''];
+  currentStepName: string = ''; // Store the name of the current step
+
+  nextStep() {
+    if (this.currentStep < this.steps.length - 1) {
+      this.currentStep++;
+    }
+  }
+
+  prevStep() {
+    if (this.currentStep > 0) {
+      this.currentStep--;
+    }
+  }
+
+  // Method to check if the step is completed
+  isStepFilled(index: number): boolean {
+    return index < this.currentStep || index === this.currentStep;
+  }
+
+  getStepName(): string {
+    switch (this.applicationStatus) {
+        case 'submitted':
+            return 'Submitted';
+        case 'shortlisted':
+            return 'Shortlisted';
+        case 'interviewing':
+            return 'Interviewing';
+        case 'offered':
+            return 'Offered';
+        default:
+            return 'Rejected';
+    }
+}
 
   constructor(private applicationService: ApplicationService) { }
 
@@ -57,5 +94,57 @@ export class AppliedJobsComponent {
 
   deleteJob(jobId: number){
     
+  }
+
+  checkStatus(job: any){
+    console.log(job);
+    this.selectedJob = job;
+    this.applicationStatus = job.application_status
+    console.log(this.applicationStatus);
+    
+
+    // Update currentStep based on applicationStatus
+    switch (this.applicationStatus) {
+      case 'submitted':
+          this.currentStep = 0; // Step 1
+          break;
+      case 'shortlisted':
+          this.currentStep = 1; // Step 2
+          break;
+      case 'interviewing':
+          this.currentStep = 2; // Step 3
+          break;
+      case 'offered':
+          this.currentStep = 3; // Step 4
+          break;
+      default:
+          this.currentStep = 0; // Default to Step 1
+          break;
+  }
+  
+    document.getElementById('statusModal')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
+
+  acceptOffer(selected: any){
+    console.log(selected);
+    const applicationId = selected.application_id
+    console.log(applicationId);
+    
+    this.applicationService.acceptOffer(applicationId).subscribe(
+      response => {
+        console.log('Offer accepted successfully', response);
+        // handle successful response
+      },
+      error => {
+        console.error('Error accepting offer', error);
+        // handle error
+      }
+    );
+  }
+
+  closeModal() {
+    document.getElementById('statusModal')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
   }
 }

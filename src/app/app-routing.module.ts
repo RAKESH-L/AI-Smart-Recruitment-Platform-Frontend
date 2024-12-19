@@ -22,10 +22,16 @@ import { CandidateProfileComponent } from './components/candidate/candidate-prof
 import { InterviewerLayoutComponent } from './components/interviewer/interviewer-layout/interviewer-layout.component';
 import { InterviewerDashboardComponent } from './components/interviewer/interviewer-dashboard/interviewer-dashboard.component';
 import { ScheduledInterviewComponent } from './components/interviewer/scheduled-interview/scheduled-interview.component';
+import { InterviewAppointmentComponent } from './components/recruiter/interview-appointment/interview-appointment.component';
+import { ChatbotComponent } from './components/recruiter/chatbot/chatbot.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'resetPassword', component: ResetPasswordComponent},
+  { path: 'signup', component: SignupComponent},
 
   {
     path: 'layout',
@@ -40,7 +46,8 @@ const routes: Routes = [
       { path: 'interviewDetails', component: InterviewDetailsComponent},
       { path: 'jobDraft', component: JobDraftComponent},
       { path: 'demo', component: DemoComponent},
-
+      { path: 'interviewAppointment', component: InterviewAppointmentComponent},
+      { path: 'chatbot', component: ChatbotComponent},
       // Add more child routes as needed
     ]
   },

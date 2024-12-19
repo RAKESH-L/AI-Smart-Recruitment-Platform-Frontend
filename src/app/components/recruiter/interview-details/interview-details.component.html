@@ -196,7 +196,7 @@
                             <!-- Application Status Section -->
 
                             <br>
-                            <div class="text-center " >
+                            <div class="text-center ">
                                 <button mat-button color="warn" (click)="onRescheduleInterview()"
                                     style=" background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;">
                                     Reschedule Interview
@@ -218,10 +218,149 @@
                                             </svg>
 
 
+                                        </i-tabler>Feedback
+                                    </h5>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <p><strong>Feedback:</strong> {{ selectedInterviewFeedback.feedback }}</p>
+
+                                    <div class="col-md-6">
+                                        <!-- <pre style="margin-left: 10px; font-size: large; margin-top: 5px;"> -->
+                                            <p><strong>Communication:</strong> {{ selectedInterviewFeedback.communication }}</p>
+                                            <!-- </pre> -->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span *ngFor="let star of stars; let i = index">
+                                            <span 
+                                                  (mouseenter)="isHalfClickedState(i + 1, $event, 'communication')">
+                                                <ng-container [ngSwitch]="getStarType(i, 'communication')">
+                                                    <ng-container *ngSwitchCase="'full'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'half'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <clipPath id="clip-half">
+                                                                <rect x="0" y="0" width="12" height="24"/>
+                                                            </clipPath>
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"
+                                                                style="clip-path: url(#clip-half);"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'empty'">
+                                                        <svg viewBox="0 0 24 24" style="fill: gray; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Repeat for Technical Skills and Candidate Enthusiasm -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- <pre > -->
+                                            <p><strong>Technical Skills:</strong> {{ selectedInterviewFeedback.technicalSkills }}</p>
+                                            <!-- </pre> -->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span *ngFor="let star of stars; let i = index">
+                                            <span 
+                                                  (mouseenter)="isHalfClickedState(i + 1, $event, 'technicalSkills')">
+                                                <ng-container [ngSwitch]="getStarType(i, 'technicalSkills')">
+                                                    <ng-container *ngSwitchCase="'full'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'half'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <clipPath id="clip-half">
+                                                                <rect x="0" y="0" width="12" height="24"/>
+                                                            </clipPath>
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"
+                                                                style="clip-path: url(#clip-half);"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'empty'">
+                                                        <svg viewBox="0 0 24 24" style="fill: gray; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- <pre style="margin-left: 10px; font-size: large; margin-top: 5px;"> -->
+                                            <p><strong>Candidate Enthusiasm:</strong> {{ selectedInterviewFeedback.candidateEnthusiasm }}</p>
+                                            <!-- </pre> -->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span *ngFor="let star of stars; let i = index">
+                                            <span 
+                                                  (mouseenter)="isHalfClickedState(i + 1, $event, 'candidateEnthusiasm')">
+                                                <ng-container [ngSwitch]="getStarType(i, 'candidateEnthusiasm')">
+                                                    <ng-container *ngSwitchCase="'full'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'half'">
+                                                        <svg viewBox="0 0 24 24" style="fill: #ff902b; width: 30px; height: 30px;">
+                                                            <clipPath id="clip-half">
+                                                                <rect x="0" y="0" width="12" height="24"/>
+                                                            </clipPath>
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"
+                                                                style="clip-path: url(#clip-half);"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'empty'">
+                                                        <svg viewBox="0 0 24 24" style="fill: gray; width: 30px; height: 30px;">
+                                                            <path
+                                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01z"/>
+                                                        </svg>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="p-16 bg-light-primary rounded">
+                                    <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                                        style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                                        <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex"
+                                            _nghost-ng-c2605515766=""><svg xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                <path d="M12 9h.01"></path>
+                                                <path d="M11 12h1v4h1"></path>
+                                            </svg>
+
+
                                         </i-tabler>Resume
                                     </h5>
                                 </div>
                                 <br>
+
                                 <iframe [src]="resumePath" width="100%" height="500px"
                                     style="border: 1px solid #ccc;"></iframe>
                                 <!-- Alternative Method: Use [src]="safeResumeUrl(resumePath)" if using HttpClient with Angular for security -->

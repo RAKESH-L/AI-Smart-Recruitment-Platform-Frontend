@@ -45,7 +45,10 @@ import { InterviewerLayoutComponent } from './components/interviewer/interviewer
 import { InterviewerDashboardComponent } from './components/interviewer/interviewer-dashboard/interviewer-dashboard.component';
 import { ScheduledInterviewComponent } from './components/interviewer/scheduled-interview/scheduled-interview.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RatingModule } from '@syncfusion/ej2-angular-inputs';
+import { InterviewAppointmentComponent } from './components/recruiter/interview-appointment/interview-appointment.component';
+import { ChatbotComponent } from './components/recruiter/chatbot/chatbot.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,10 @@ import { RatingModule } from '@syncfusion/ej2-angular-inputs';
     InterviewerLayoutComponent,
     InterviewerDashboardComponent,
     ScheduledInterviewComponent,
+    InterviewAppointmentComponent,
+    ChatbotComponent,
+    ResetPasswordComponent,
+    SignupComponent,
     
   ],
   imports: [
@@ -94,7 +101,6 @@ import { RatingModule } from '@syncfusion/ej2-angular-inputs';
     MatCardModule,
     MatAutocompleteModule,
     NgbModule,
-    RatingModule 
   ],
   providers: [
     DatePipe,

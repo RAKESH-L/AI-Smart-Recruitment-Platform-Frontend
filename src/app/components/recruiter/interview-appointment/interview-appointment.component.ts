@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Interview } from '../../../model/interview.model';
-import { InterviewService } from '../../../service/interview.service';
+import { Component } from '@angular/core';
 import { InterviewDetails } from '../../../model/interviewdetails.model';
-import { ApplicationService } from '../../../service/application.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { InterviewService } from '../../../service/interview.service';
+import { ApplicationService } from '../../../service/application.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-interview-details',
-  templateUrl: './interview-details.component.html',
-  styleUrl: './interview-details.component.css'
+  selector: 'app-interview-appointment',
+  templateUrl: './interview-appointment.component.html',
+  styleUrl: './interview-appointment.component.css'
 })
-export class InterviewDetailsComponent implements OnInit {
-
+export class InterviewAppointmentComponent {
   isStatusFocused: boolean = false;
   StatusValue: string = '';
 
@@ -22,30 +20,38 @@ export class InterviewDetailsComponent implements OnInit {
   isDateFocused: boolean = false;
   DateValue: string = '';
 
+  isDescriptionFocused: boolean = false;
+  DescriptionValue: string = '';
+
   interviews: InterviewDetails[] = [];
-  ownerId: string = '';
+  interviewId: string = '';
   selectedInterview: any | null = null;
+  selectedFeedback: any | null = null;
   resumePath: SafeResourceUrl;
   interviewDate: string;
   interviewTime: string;
   successMessage: string = ''; // Property to store the success message
-  selectedInterviewFeedback: any = {
-    feedback: "",
-    communication: null,
-    technicalSkills: null,
-    candidateEnthusiasm: null,
-  };
+  gfgCommunication = 0; // Communication rating value
+  gfgTechnical = 0; // Technical Skills rating value
+  gfgEnthusiasm = 0; // Candidate Enthusiasm rating value
+  hoverRating: number = 0; // Temporary rating value for hover effect
+  stars = [1, 2, 3, 4, 5]; // Array to represent stars
+  labelCommunication = 'Communication:';
+  labelTechnical = 'Technical Skills:';
+  labelEnthusiasm = 'Candidate Enthusiasm:'; // New label for Candidate Enthusiasm
+
+  
 
   constructor(private interviewService: InterviewService, private applicationService: ApplicationService,
     private sanitizer: DomSanitizer, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.ownerId = localStorage.getItem('username');
+    this.interviewId = localStorage.getItem('username');
     this.fetchInterviews();
   }
 
   fetchInterviews(): void {
-    this.interviewService.getInterviewsByOwnerId(this.ownerId).subscribe(
+    this.interviewService.getInterviewsByInterviewerId(this.interviewId).subscribe(
       (data: InterviewDetails[]) => {
         this.interviews = data.map(interview => {
           const originalDateTime = new Date(interview.schedule_date);
@@ -77,13 +83,7 @@ export class InterviewDetailsComponent implements OnInit {
     // Directly access the formatted date and time from the interview object
     this.interviewDate = this.selectedInterview.formatted_date; // e.g., "11/30/2024"
     this.interviewTime = this.selectedInterview.formatted_time; // e.g., "10:00 AM"
-    const feedbackData = JSON.parse(this.selectedInterview.feedback);
-    this.selectedInterviewFeedback = {
-      feedback: feedbackData.feedback,
-      communication: feedbackData.communication,
-      technicalSkills: feedbackData["Technical Skills"],
-      candidateEnthusiasm: feedbackData["Candidate Enthusiasm"],
-    };
+  
     // Fetch the resume by application ID
     this.applicationService.getResumeById(interview.application_id).subscribe(
       (blob: Blob) => {
@@ -99,10 +99,20 @@ export class InterviewDetailsComponent implements OnInit {
     document.getElementById('applicantModal')!.style.display = 'block'; // Show modal
     document.body.style.overflow = 'hidden'; // Disable body scroll
   }
+
+  openFeedbackModel(feedback: any) {
+    console.log(feedback);
+    this.selectedFeedback = feedback;
+    
+    
   
+    document.getElementById('feedbackModel')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+  }
 
   closeApplicantModal() {
     document.getElementById('applicantModal')!.style.display = 'none'; // Hide modal
+    document.getElementById('feedbackModel')!.style.display = 'none'; // Hide modal
     document.body.style.overflow = 'auto'; // Re-enable body scroll
   }
 
@@ -147,35 +157,94 @@ export class InterviewDetailsComponent implements OnInit {
   }
 
 
-  stars: number[] = Array(5).fill(0); // For 5-star rating system
+  setRate(starValue: number, event: MouseEvent, ratingType: string) {
+    const starWidth = 30;
+    const clickPosX = event.offsetX;
+    const isHalf = clickPosX < starWidth / 2;
 
-  // Function to get the star type
-// Function to get the star type
-getStarType(index: number, aspect: string): string {
-  const rating = this.selectedInterviewFeedback[aspect];
-
-  // If rating is between 0 and 5
-  if (rating >= index + 1) {
-      return 'full'; // Full star if the rating is greater than the current index +1
-  } else if (rating > index) { // rating is greater than the current index
-      return 'half'; // Half star if the rating is greater than the current index
-  } else {
-      return 'empty'; // Empty star if none matches
-  }
-}
-
-
-  setRate(value: number, event: MouseEvent, aspect: string) {
-    // Handle click event to set rating
-    this.selectedInterviewFeedback[aspect] = value;
-    console.log(`Rated ${aspect} as ${value}`);
+    // Determine which rating to update based on the passed ratingType
+    switch (ratingType) {
+      case 'communication':
+        this.gfgCommunication = isHalf ? starValue - 0.5 : starValue; // Update communication rating
+        break;
+      case 'technical':
+        this.gfgTechnical = isHalf ? starValue - 0.5 : starValue; // Update technical skills rating
+        break;
+      case 'enthusiasm':
+        this.gfgEnthusiasm = isHalf ? starValue - 0.5 : starValue; // Update enthusiasm rating
+        break;
+    }
   }
 
-  isHalfClickedState(index: number, event: MouseEvent, aspect: string) {
-    // Handle mouse enter to show half rating
-    const rating = this.selectedInterviewFeedback[aspect];
-    // Logic can be added if needed for temporary visual feedback
+  getStarType(index: number, ratingType: string) {
+    const starValue = index + 1;
+    let rating;
+
+    // Determine which rating to assess based on the ratingType
+    switch (ratingType) {
+      case 'communication':
+        rating = this.gfgCommunication;
+        break;
+      case 'technical':
+        rating = this.gfgTechnical;
+        break;
+      case 'enthusiasm':
+        rating = this.gfgEnthusiasm;
+        break;
+    }
+
+    if (this.hoverRating && rating >= starValue) {
+      return 'full';
+    } else if (this.hoverRating && rating >= starValue - 0.5) {
+      return 'half';
+    } else {
+      return rating >= starValue ? 'full' : 'empty';
+    }
   }
+
+  isHalfClickedState(starValue: number, event: MouseEvent, ratingType: string): boolean {
+    const starWidth = 30;
+    const clickPosX = event.offsetX;
+    this.hoverRating = clickPosX < (starWidth / 2) ? starValue - 0.5 : starValue; // Set hover rating
+    return clickPosX < starWidth / 2;
+  }
+
+  clearHover() {
+    this.hoverRating = 0; // Clear hover rating when mouse leaves
+  }
+
+  submitRatings(selectedFeedback: any) {
+    console.log(selectedFeedback.interview_id);
+    console.log(`Communication Rating: ${this.gfgCommunication}`);
+    console.log(`Technical Skills Rating: ${this.gfgTechnical}`);
+    console.log(`Candidate Enthusiasm Rating: ${this.gfgEnthusiasm}`); // Log the enthusiasm rating
+
+    const feedback = {
+      status: 'completed',
+      feedback: {
+        'communication': this.gfgCommunication,
+        'Technical Skills': this.gfgTechnical,
+        'Candidate Enthusiasm': this.gfgEnthusiasm,
+        'feedback': this.DescriptionValue, // Assuming the text area collects feedback
+      },
+    };
+    console.log(feedback);
+    
+
+    this.interviewService.updateFeedback(selectedFeedback.interview_id, feedback).subscribe(
+      response => {
+        console.log('Feedback submitted successfully:', response);
+        // Optionally close the modal or reset form fields
+        this.fetchInterviews();
+        this.closeApplicantModal();
+      },
+      error => {
+        console.error('Error submitting feedback:', error);
+      }
+    );
+  
+  }
+  
   saveStatus() {
     // Here, you'll implement the logic to save the new status.
     
@@ -187,6 +256,19 @@ getStarType(index: number, aspect: string): string {
     // Close modal after saving
     this.closeApplicantModal();
   }
+
+  onDescriptionFocus() {
+    this.isDescriptionFocused = true;
+    
+  }
+
+  onDescriptionBlur() {
+    if (!this.DescriptionValue) {
+      this.isDescriptionFocused = false;
+    }
+  }
+
+
   onStatusFocus() {
     this.isStatusFocused = true;
 

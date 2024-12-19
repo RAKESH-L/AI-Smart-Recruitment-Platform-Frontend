@@ -1,0 +1,45 @@
+<div class="chat-container">
+    
+
+    <div class="chat-area">
+   
+        <div class="chat-window">
+
+
+            <div class="chatbot-body flex-grow-1 p-3 overflow-auto">
+
+                
+
+
+            </div>
+
+            <div  class="boolean-options transition-fade ">
+                <div class="option " >
+                    <button class="btn btn-outline-secondary btn-block mb-2 " > bu
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Input area for the chat -->
+        <div class="chat-input-group">
+
+            <input type="text" class="form-control" [(ngModel)]="userInput" placeholder="Type a message..."
+                (keyup.enter)="sendMessage()" />
+            <div class="btn btn-mic">
+                <i class="bi bi-mic"></i>
+            </div>
+
+            <button class="btn btn-primary" (click)="sendMessage()">
+
+                <i class="bi bi-send-fill "></i>
+            </button>
+        </div>
+
+
+
+    </div>
+
+</div>
