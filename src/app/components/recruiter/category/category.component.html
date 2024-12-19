@@ -1,0 +1,170 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Categories</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Know more about Categories</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- <br> -->
+        <div class="card mb-4" style="border-radius: 10px;">
+            <div class="card-body">
+
+                <div class="row">
+
+
+                    <div class="col-md-9" style="margin-top: -10px; ">
+                        <div class="form-group" style="max-width: 40%; ">
+                            <select id="employmentType" class="form-control custom-input" [(ngModel)]="TypeValue"
+                                (change)="onCategoryChange($event)" (focus)="onTypeFocus()" (blur)="onTypeBlur()"
+                                style="height: 50px;">
+                                <option value="IT">IT</option>
+                                <option value="HR">HR</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Freelance">Freelance</option>
+                            </select>
+                            <label for="customInput" [ngClass]="{'active': isTypeFocused || TypeValue}">Category</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group mb-3" style="max-width: 100%;">
+                                <button mat-button color="primary"
+                                    style="background-color: #5d87ff; color: white;  border-radius: 7px; width: 70%"
+                                    (click)="onCreateCategory()">
+                                    Create Category
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+            <div class="card-body">
+
+                <mat-card>
+                    <mat-card-content>
+                        <div class="table-container">
+                            <ng-container>
+                                <div class="table-section">
+                                    <table mat-table multitemplatedatarows
+                                        class="mat-mdc-table mdc-data-table__table cdk-table" role="table">
+                                        <thead role="rowgroup">
+                                            <tr role="row" mat-header-row
+                                                class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                                                <th mat-header-cell> Id </th>
+                                                <th mat-header-cell> Category Type </th>
+                                                <th mat-header-cell> Category Name </th>
+                                                <th mat-header-cell> Status </th>
+                                                <th mat-header-cell> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody role="rowgroup" class="mdc-data-table__content">
+                                            <tr *ngFor="let category of categories" mat-row
+                                                class="mat-mdc-row mdc-data-table__row cdk-row">
+                                                <td mat-cell>{{ category.category_id }}</td>
+                                                <td mat-cell>{{ category.category_type }}</td>
+                                                <td mat-cell>{{ category.category_name }}</td>
+                                                <td mat-cell>{{ category.status }}</td>
+
+                                                <td mat-cell>
+                                                    <button mat-button color="primary"
+                                                        style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                                        Edit
+                                                    </button>
+                                                    <button mat-button color="accent"
+                                                    style="height: 30px; margin-bottom: 10px; background-color: #fa896b; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                                        
+                                                        
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <div id="categoryModel" class="modal" style="display: none; justify-content: center; align-items: center;">
+            <div class="modal-content" style="margin: auto; width: 600px;">
+                <!-- Use flex to allow side-by-side layout -->
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <span class="close-button" (click)="closeCategoryModal()">&times;</span>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Reschedule Interview
+                        </h5>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-top: 5px;">
+                                <select id="employmentType" class="form-control custom-input" [(ngModel)]="categoryTypeypeValue"
+                                (change)="onCategoryTypeChange($event)" (focus)="onCategoryTypeFocus()" (blur)="onCategoryTypeBlur()"
+                                style="height: 50px;">
+                                <option value="Department">Department</option>
+                                <option value="Location">Location</option>
+                                <option value="Employee Type">Employee Type</option>
+                                
+                            </select>
+                            <label for="customInput" [ngClass]="{'active': isCategoryTypeFocused || categoryTypeValue}">Category</label>
+                            <span class="outline"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-top: 5px;">
+                                <input type="text" class="form-control custom-input" id="interviewTime" #customInput
+                                    (focus)="onCategoryNameFocus()" (blur)="onCategoryNameBlur()"
+                                    [placeholder]="isCategoryNameFocused ? '' : ''" [(ngModel)]="categoryNameValue" required />
+                                <label for="interviewTime" [ngClass]="{'active': isCategoryNameFocused || categoryNameValue}">Category Name</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button mat-button color="warn" 
+                            style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;">
+                            Create
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

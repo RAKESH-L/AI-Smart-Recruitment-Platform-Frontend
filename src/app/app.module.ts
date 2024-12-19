@@ -49,6 +49,7 @@ import { InterviewAppointmentComponent } from './components/recruiter/interview-
 import { ChatbotComponent } from './components/recruiter/chatbot/chatbot.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { CategoryComponent } from './components/recruiter/category/category.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
     ChatbotComponent,
     ResetPasswordComponent,
     SignupComponent,
+    CategoryComponent,
     
   ],
   imports: [

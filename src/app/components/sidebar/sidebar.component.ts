@@ -75,7 +75,13 @@ export class SidebarComponent implements OnInit{
       route: '/layout/jobApplications',
       roles: ['recruiter'] 
     },
-    
+    {
+      number: '4',
+      name: 'Category',
+      icon: 'bi bi-person-badge-fill',
+      route: '/layout/category',
+      roles: ['recruiter'] 
+    },
     {
       number: '7',
       name: 'Interviews',

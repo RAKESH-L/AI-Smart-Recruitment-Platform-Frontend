@@ -26,6 +26,7 @@ import { InterviewAppointmentComponent } from './components/recruiter/interview-
 import { ChatbotComponent } from './components/recruiter/chatbot/chatbot.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { CategoryComponent } from './components/recruiter/category/category.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -48,7 +49,7 @@ const routes: Routes = [
       { path: 'demo', component: DemoComponent},
       { path: 'interviewAppointment', component: InterviewAppointmentComponent},
       { path: 'chatbot', component: ChatbotComponent},
-      // Add more child routes as needed
+      { path: 'category', component: CategoryComponent},
     ]
   },
   {
