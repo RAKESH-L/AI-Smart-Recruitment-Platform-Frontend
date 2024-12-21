@@ -64,21 +64,21 @@ export class SidebarComponent implements OnInit{
     {
       number: '3',
       name: 'Job Details',    
-      icon: 'bi bi-person-badge',
+      icon: 'bi bi-clipboard-check-fill',
       route: '/layout/viewJobDetails',
       roles: ['recruiter'] 
     },
     {
       number: '4',
       name: 'Job Applications',
-      icon: 'bi bi-person-badge-fill',
+      icon: 'bi bi-journal-bookmark-fill',
       route: '/layout/jobApplications',
       roles: ['recruiter'] 
     },
     {
       number: '4',
       name: 'Category',
-      icon: 'bi bi-person-badge-fill',
+      icon: 'bi bi-diagram-3-fill',
       route: '/layout/category',
       roles: ['recruiter'] 
     },
@@ -121,20 +121,20 @@ export class SidebarComponent implements OnInit{
       number: '6',
       name: 'Demo',
       icon: 'bi bi-award-fill',
-      route: '/layout/demo',
+      route: '/candidateLayout/candidateReview',
       roles: ['candidate'] 
     },
     {
       number: '5',
       name: 'Profile',
-      icon: 'bi bi-file-earmark-break-fill',
+      icon: 'fa-solid fa-id-badge',
       route: '/candidateLayout/candidateProfile',
       roles: ['candidate'] 
     },
     {
       number: '5',
       name: 'Apply Job',
-      icon: 'bi bi-file-earmark-break-fill',
+      icon: 'bi bi-person-workspace',
       route: '/candidateLayout/applyJob',
       roles: ['candidate'] 
     },
@@ -142,7 +142,7 @@ export class SidebarComponent implements OnInit{
     {
       number: '5',
       name: 'Applied Jobs',
-      icon: 'bi bi-file-earmark-break-fill',
+      icon: 'bi bi-suitcase-lg-fill',
       route: '/candidateLayout/appliedJobs',
       roles: ['candidate'] 
     },
@@ -152,24 +152,75 @@ export class SidebarComponent implements OnInit{
   filteredList: any[] = [];
   selectedItem: any;
   userRole: string;
+  isExpanded: boolean = false; 
+  groupedItems: { [key: string]: any[] } = {};
+  headings: string[] = []; // Array to hold the heading keys
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role');
 
-    // Filter the list of items based on user role
-    this.filteredList = this.sidebarItems.filter(item => 
-      item.roles.includes(this.userRole)
-    );
-    const currentRoute = this.router.url;
-    this.selectedItem = this.filteredList.find(item => item.route === currentRoute);
+    switch (this.userRole) {
+      case 'recruiter':
+        this.groupedItems = this.getRecruiterGroup();
+        break;
+      case 'candidate':
+        this.groupedItems = this.getCandidateGroup();
+        break;
+      case 'interviewer':
+        this.groupedItems = this.getInterviewerGroup();
+        break;
+    }
+
+    // Populate headings based on the grouped items
+    this.headings = Object.keys(this.groupedItems);
+  }
+
+  getRecruiterGroup() {
+    const filteredList = this.sidebarItems.filter(item => item.roles.includes('recruiter'));
+
+    return {
+      'HOME': filteredList.filter(item => item.name === 'Dashboard' || item.name === 'User Profile'),
+      'JOB': filteredList.filter(item => item.name === 'Job Opening' || item.name === 'Job Applications' || item.name === 'Job Draft' || item.name === 'Job Details'),
+      'CATEGORY': filteredList.filter(item => item.name === 'Category' ),
+      'INTERVIEW': filteredList.filter(item => item.name === 'Interviews'|| item.name === 'Interview Details'|| item.name === 'Scheduled Interviews' ),
+      
+
+      'OTHERS': filteredList.filter(item => ['ChatBot'].includes(item.name))
+    };
+  }
+
+  getCandidateGroup() {
+    const filteredList = this.sidebarItems.filter(item => item.roles.includes('candidate'));
+
+    return {
+      'HOME': filteredList.filter(item => item.name === 'Dashboard' || item.name === 'Profile' ),
+      'JOB': filteredList.filter(item => item.name === 'Applied Jobs' || item.name === 'Apply Job'),
+      'OTHERS': filteredList.filter(item => [ 'Demo'].includes(item.name))
+    };
+  }
+
+  getInterviewerGroup() {
+    const filteredList = this.sidebarItems.filter(item => item.roles.includes('interviewer'));
+
+    return {
+      'HOME': filteredList.filter(item => item.name === 'Dashboard' || item.name === 'User Profile'),
+      'INTERVIEW': filteredList.filter(item => item.name === 'ScheduledInterview' ),
+      // 'OTHERS': filteredList.filter(item => !['Dashboard', 'User Profile'].includes(item.name))
+    };
   }
 
   navigateToPage(item: any) {
     this.selectedItem = item;
     this.router.navigate([item.route]);
   }
-  
+  onMouseEnter() {
+    this.sideNavStatus = true; // Expand sidebar
+  }
+
+  onMouseLeave() {
+    this.sideNavStatus = false; // Collapse sidebar
+  }
   
 }

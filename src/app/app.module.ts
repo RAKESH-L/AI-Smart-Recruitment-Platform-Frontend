@@ -50,6 +50,7 @@ import { ChatbotComponent } from './components/recruiter/chatbot/chatbot.compone
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { CategoryComponent } from './components/recruiter/category/category.component';
+import { CandidateReviewComponent } from './components/candidate/candidate-review/candidate-review.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { CategoryComponent } from './components/recruiter/category/category.comp
     ResetPasswordComponent,
     SignupComponent,
     CategoryComponent,
+    CandidateReviewComponent,
     
   ],
   imports: [

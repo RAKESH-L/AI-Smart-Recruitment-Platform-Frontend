@@ -31,12 +31,9 @@
                             <select id="employmentType" class="form-control custom-input" [(ngModel)]="TypeValue"
                                 (change)="onCategoryChange($event)" (focus)="onTypeFocus()" (blur)="onTypeBlur()"
                                 style="height: 50px;">
-                                <option value="IT">IT</option>
-                                <option value="HR">HR</option>
-                                <option value="Sales">Sales</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Engineering">Engineering</option>
-                                <option value="Freelance">Freelance</option>
+                                <option value="Department">Department</option>
+                                <option value="Location">Location</option>
+                                <option value="Employee Type">Employee Type</option>
                             </select>
                             <label for="customInput" [ngClass]="{'active': isTypeFocused || TypeValue}">Category</label>
                             <span class="outline"></span>
@@ -47,7 +44,7 @@
                             <div class="input-group mb-3" style="max-width: 100%;">
                                 <button mat-button color="primary"
                                     style="background-color: #5d87ff; color: white;  border-radius: 7px; width: 70%"
-                                    (click)="onCreateCategory()">
+                                    (click)="onOpenCategory()">
                                     Create Category
                                 </button>
                             </div>
@@ -79,7 +76,7 @@
                                             </tr>
                                         </thead>
                                         <tbody role="rowgroup" class="mdc-data-table__content">
-                                            <tr *ngFor="let category of categories" mat-row
+                                            <tr *ngFor="let category of filteredCategories" mat-row
                                                 class="mat-mdc-row mdc-data-table__row cdk-row">
                                                 <td mat-cell>{{ category.category_id }}</td>
                                                 <td mat-cell>{{ category.category_type }}</td>
@@ -88,13 +85,13 @@
 
                                                 <td mat-cell>
                                                     <button mat-button color="primary"
-                                                        style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
+                                                        style="height: 30px; margin-bottom: 10px; background-color: #44b7f7; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                                        (click)="onEditCategory(category)">
                                                         Edit
                                                     </button>
                                                     <button mat-button color="accent"
-                                                    style="height: 30px; margin-bottom: 10px; background-color: #fa896b; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;">
-                                                        
-                                                        
+                                                        style="height: 30px; margin-bottom: 10px; background-color: #fa896b; color: white; padding: 8px; border-radius: 7px; margin-right: 10px;"
+                                                        (click)="deleteCategoryById(category.category_id)">
                                                         Delete
                                                     </button>
                                                 </td>
@@ -127,40 +124,64 @@
                                 </svg>
 
 
-                            </i-tabler>Reschedule Interview
+                            </i-tabler>Create Category
                         </h5>
                     </div>
                     <br>
+                    <div class="container">
+                        <div class="row justify-content-end" style="margin-top: 20px;">
+                            <div class="col-md-10 text-end">
+                                <span>{{ categoryStatus ? 'Active' : 'Inactive' }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check form-switch">
+                                    <input mdbCheckbox class="form-check-input" type="checkbox"
+                                           id="flexSwitchCheckDefault"
+                                           [(ngModel)]="categoryStatus" (change)="toggleStatus()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <br>
                     <div class="row">
+                        
+                        <br>
                         <div class="col-md-6">
                             <div class="form-group" style="margin-top: 5px;">
-                                <select id="employmentType" class="form-control custom-input" [(ngModel)]="categoryTypeypeValue"
-                                (change)="onCategoryTypeChange($event)" (focus)="onCategoryTypeFocus()" (blur)="onCategoryTypeBlur()"
-                                style="height: 50px;">
-                                <option value="Department">Department</option>
-                                <option value="Location">Location</option>
-                                <option value="Employee Type">Employee Type</option>
-                                
-                            </select>
-                            <label for="customInput" [ngClass]="{'active': isCategoryTypeFocused || categoryTypeValue}">Category</label>
-                            <span class="outline"></span>
+                                <select id="employmentType" class="form-control custom-input"
+                                    [(ngModel)]="categoryTypeValue" (change)="onCategoryTypeChange($event)"
+                                    (focus)="onCategoryTypeFocus()" (blur)="onCategoryTypeBlur()">
+                                    <option value="Department">Department</option>
+                                    <option value="Location">Location</option>
+                                    <option value="Employee Type">Employee Type</option>
+
+                                </select>
+                                <label for="customInput"
+                                    [ngClass]="{'active': isCategoryTypeFocused || categoryTypeValue}">Category</label>
+                                <span class="outline"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" style="margin-top: 5px;">
                                 <input type="text" class="form-control custom-input" id="interviewTime" #customInput
                                     (focus)="onCategoryNameFocus()" (blur)="onCategoryNameBlur()"
-                                    [placeholder]="isCategoryNameFocused ? '' : ''" [(ngModel)]="categoryNameValue" required />
-                                <label for="interviewTime" [ngClass]="{'active': isCategoryNameFocused || categoryNameValue}">Category Name</label>
+                                    [placeholder]="isCategoryNameFocused ? '' : ''" [(ngModel)]="categoryNameValue"
+                                    required />
+                                <label for="interviewTime"
+                                    [ngClass]="{'active': isCategoryNameFocused || categoryNameValue}">Category
+                                    Name</label>
                                 <span class="outline"></span>
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="text-center">
-                        <button mat-button color="warn" 
-                            style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;">
-                            Create
+                        <button mat-button color="warn"
+                            style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;"
+                            (click)="onCreateOrUpdateCategory()">
+                            {{ isEditMode ? 'Update' : 'Create' }}
                         </button>
                     </div>
                 </div>

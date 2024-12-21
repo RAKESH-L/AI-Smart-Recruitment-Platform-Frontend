@@ -57,7 +57,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchEmployeeDetails();
-    // this.fetchLinkedInDetails();
   }
   toggleNotifications() {
     this.isNotificationOpen = !this.isNotificationOpen;
@@ -77,24 +76,7 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  // fetchLinkedInDetails(): void {
-  //   const employeeId = localStorage.getItem('username');
-  //   console.log(employeeId);
-    
-  //   this.linkedinservice.getLinkedInByEmployeeId(employeeId).subscribe(
-  //     (response) => {
-  //       this.linkedInData = response;
-  //       console.log('LinkedInDetails Details:', this.linkedInData);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching linkedin details:', error);
-  //     }
-  //   );
-  // }
 
-  // toggleProfileDropdown() {
-  //   this.profileDropdownOpen = !this.profileDropdownOpen;
-  // }
   toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
   }

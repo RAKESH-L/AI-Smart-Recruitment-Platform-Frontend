@@ -9,14 +9,14 @@ app-navbar {
     width: calc(100% - 60px); /* Adjust this depending on the initial width of your sidebar */
     top: 0;
     height: 4rem;
-    z-index: 2;
+    z-index: 3;
     margin-left: 60px; /* Initial margin for sidebar */
     transition: margin-left 250ms ease-in;
 }
 
 .navbar-shrink {
     margin-left: 250px; /* Adjust to the width of the expanded sidebar */
-    width: 83%;
+    width: calc(100% - 250px);
 }
 
 main {
@@ -26,8 +26,17 @@ main {
     z-index: 1;
 }
 
+ .nav-list-open {
+    opacity: 1; 
+  }
+  
+  .nav-list:not(.nav-list-open) {
+    display: none; 
+  }
 
-
+  .g-0 {
+    display: flex;
+}
 app-sidebar {
     position: fixed;
     left: 0rem;
@@ -41,6 +50,7 @@ app-sidebar {
     white-space: nowrap;
     transition: width 250ms ease-in;
     background: rgb(255, 255, 255); 
+    z-index: 2; /* Ensure sidebar is on top */
     /* background-image: url('../assets/img/faces/sidebar-1.jpg'); */
     /* background-size: cover; 
     background-repeat: no-repeat;
@@ -57,11 +67,12 @@ app-sidebar {
     opacity: 0.1; */
 }
 .display-area {
-    position: absolute;
+    position: relative;
     left: 60px;
     width: calc(100% - 60px);
     transition: left 250ms ease-in, width 250ms ease-in;
-    
+    z-index: 1; /* Below sidebar */
+    overflow: auto; /* Ensure scroll if needed */
 }
 
 .display-area-shrink {

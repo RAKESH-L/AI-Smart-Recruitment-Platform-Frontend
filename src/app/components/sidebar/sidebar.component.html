@@ -1,39 +1,44 @@
 <div class="side-nav-content">
-  <div class="d-flex align-items-center justify-content-between">
-      <app-branding>
-          <div class="branding">
-              <a href="/">
-                  <img src="./assets/img/logo/dark-logo.svg" alt="Company Logo" class="align-middle m-2">
-              </a>
-          </div>
-      </app-branding>
-      <a href="javascript:void(0)" class="d-flex justify-content-center align-items-center icon-40 mat-body-1" style="">
-          <i-tabler name="x" class="icon-20 d-flex">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M18 6l-12 12"></path>
-                  <path d="M6 6l12 12"></path>
-              </svg>
-          </i-tabler>
-      </a>
-  </div>
-  <br>
-  <div class="sidebar-background"></div>
-  <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
-      <li class="nav-list-item" *ngFor="let item of filteredList" (click)="navigateToPage(item)" [routerLink]="item.route" [class.selected]="selectedItem === item">
-          <i [class]="item.icon" [ngStyle]="{'color': selectedItem === item ? 'white' : 'inherit'}"></i>
-          <span [ngStyle]="{'color': selectedItem === item ? 'white' : 'inherit'}">
-              <a>{{ item.name }}</a>
-          </span>
-      </li>
-  </ul>
-  <!-- Footer Section -->
-  <div class="sidebar-footer">
-      <li class="nav-list-item" *ngFor="let item of listEnd" (click)="navigateToPage(item)" [routerLink]="item.route" [class.selected]="selectedItem === item">
-          <i [class]="item.icon"></i>
-          <span>
-              <a>{{ item.name }}</a>
-          </span>
-      </li>
-  </div>
+    <div class="d-flex align-items-center justify-content-between">
+        <app-branding>
+            <div class="branding">
+                <a href="/">
+                    <img src="./assets/img/logo/dark-logo.svg" alt="Company Logo" class="align-middle m-2">
+                </a>
+            </div>
+        </app-branding>
+        <a href="javascript:void(0)" class="d-flex justify-content-center align-items-center icon-40 mat-body-1">
+            <i-tabler name="x" class="icon-20 d-flex">
+                ... <!-- SVG for close icon -->
+            </i-tabler>
+        </a>
+    </div>
+    <br>
+    <div class="sidebar-background"></div>
+    <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
+        <!-- Display grouped items -->
+        <ng-container *ngFor="let heading of headings">
+            <li class="nav-heading" style="font-size: x-small;  text-align: center; width: 20%;  list-style: none; margin-bottom: 10px; margin-top: 10px; color: gray;">
+                {{ heading }}
+            </li>
+            <ng-container *ngFor="let item of groupedItems[heading]">
+                <li class="nav-list-item" (click)="navigateToPage(item)" [routerLink]="item.route" [class.selected]="selectedItem === item">
+                    <i [class]="item.icon" [ngStyle]="{'color': selectedItem === item ? 'white' : 'inherit'}"></i>
+                    <span [ngStyle]="{'color': selectedItem === item ? 'white' : 'inherit'}" *ngIf="sideNavStatus">
+                        <a>{{ item.name }}</a>
+                    </span>
+                </li>
+            </ng-container>
+        </ng-container>
+    </ul>
+    <!-- Footer Section -->
+    <div class="sidebar-footer">
+        <li class="nav-list-item" *ngFor="let item of listEnd" (click)="navigateToPage(item)" [routerLink]="item.route"
+            [class.selected]="selectedItem === item">
+            <i [class]="item.icon"></i>
+            <span *ngIf="sideNavStatus">
+                <a>{{ item.name }}</a>
+            </span>
+        </li>
+    </div>
 </div>

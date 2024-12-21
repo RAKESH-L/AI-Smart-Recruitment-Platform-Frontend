@@ -17,25 +17,17 @@
     
   }
   .sidebar-footer {
-    padding: 10px;
+    /* padding: 10px; */
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color:transparent; /* Set your desired background color */
     color: black; /* Set your desired text color */
     text-align: start;
-    border-top: 1px solid #ccc; /* Add a top border for separation */
+    /* border-top: 1px solid #ccc;  */
   }
   
   
-  /* Add any other styles you need for the sidebar */
-  
-  
-  /* .nav-list-open  {
-    opacity: 0.3; 
-  } */
-  
-  /* Add any other styles you need for the sidebar */
-  
-  /* Add any other styles you need for the sidebar */
-  
+
   
   .border-white{
     border: 1px solid black;
@@ -47,7 +39,7 @@
     /* transition: background 250ms ease-in;  */
     color: black;
     width: 230px;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: 10px;
     margin-top: 10px;
     display: flex;
@@ -62,7 +54,39 @@
     flex: 1; /* Allow the list to grow and take available space */
     overflow-y: auto; /* Add a scroll if the list items exceed the available height */
   }
-  
+  /* Scrollbar for Webkit browsers (Chrome, Safari) */
+.nav-list::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  background: transparent; /* Transparent background of the scrollbar track */
+}
+
+/* Track style */
+.nav-list::-webkit-scrollbar-track {
+  background: transparent; /* Background for the scrollbar track */
+}
+
+/* Thumb style */
+.nav-list::-webkit-scrollbar-thumb {
+  background-color: gray; /* Color of the scrollbar */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Optional: Hide scrollbar buttons (in Webkit browsers, they don't show by default) */
+.nav-list::-webkit-scrollbar-button {
+  display: none; /* Hide scrollbar buttons */
+}
+
+/* Scrollbars for Firefox */
+.nav-list {
+  scrollbar-width: thin; /* Make scrollbar thin */
+  scrollbar-color: gray transparent; /* Set thumb color to gray and track to transparent */
+}
+
+/* Optional: Disable all scrollbars in certain scenarios */
+.nav-list::-webkit-scrollbar {
+  display: none; /* For Webkit browsers, hide scrollbar completely - can be uncommented if needed */
+  /* opacity: 0; */ /* Alternatively, reduce opacity if you want a hidden scrollbar */
+}
   .nav-list-item{
     display: flex;
     align-items: center;
