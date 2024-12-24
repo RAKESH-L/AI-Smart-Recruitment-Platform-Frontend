@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit{
     {
       number: '2',
       name: 'Job Draft',
-      icon: 'bi bi-file-text-fill',
+      icon: 'fa-solid fa-business-time',
       route: '/layout/jobDraft',
       roles: ['recruiter'] 
     },
@@ -101,6 +101,13 @@ export class SidebarComponent implements OnInit{
       name: 'Scheduled Interviews',
       icon: 'fa-solid fa-calendar-check',
       route: '/layout/interviewAppointment',
+      roles: ['recruiter'] 
+    },
+    {
+      number: '6',
+      name: 'Generate Report',
+      icon: 'fa-solid fa-clipboard-list',
+      route: '/layout/customReport',
       roles: ['recruiter'] 
     },
     {
@@ -185,8 +192,7 @@ export class SidebarComponent implements OnInit{
       'JOB': filteredList.filter(item => item.name === 'Job Opening' || item.name === 'Job Applications' || item.name === 'Job Draft' || item.name === 'Job Details'),
       'CATEGORY': filteredList.filter(item => item.name === 'Category' ),
       'INTERVIEW': filteredList.filter(item => item.name === 'Interviews'|| item.name === 'Interview Details'|| item.name === 'Scheduled Interviews' ),
-      
-
+      'REPORT': filteredList.filter(item => item.name === 'Generate Report' ),
       'OTHERS': filteredList.filter(item => ['ChatBot'].includes(item.name))
     };
   }

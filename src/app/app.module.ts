@@ -51,6 +51,7 @@ import { ResetPasswordComponent } from './components/auth/reset-password/reset-p
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { CategoryComponent } from './components/recruiter/category/category.component';
 import { CandidateReviewComponent } from './components/candidate/candidate-review/candidate-review.component';
+import { CustomReportComponent } from './components/recruiter/custom-report/custom-report.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { CandidateReviewComponent } from './components/candidate/candidate-revie
     SignupComponent,
     CategoryComponent,
     CandidateReviewComponent,
+    CustomReportComponent,
     
   ],
   imports: [

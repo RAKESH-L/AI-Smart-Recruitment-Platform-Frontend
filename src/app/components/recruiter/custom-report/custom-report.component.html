@@ -1,0 +1,535 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+            <div class="row">
+                <div class="col-sm-9" style=" padding: 30px;">
+                    <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                        style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                        Custom Report</h4>
+                    <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
+                        Generate Report based on preference</div>
+                </div>
+                <div class="col-sm-3 text-right position-relative">
+                    <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                        <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                            style="margin-bottom: -75px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- <br> -->
+        <div class="card mb-4" style="border-radius: 10px;">
+            <div class="card-body">
+
+                <div class="row">
+
+
+                    <div class="col-md-9" style="margin-top: -10px; ">
+                        <div class="form-group" style="max-width: 40%; ">
+                            <select id="employmentType" class="form-control custom-input" style="height: 50px;">
+                                <option value="Department">Department</option>
+                                <option value="Location">Location</option>
+                                <option value="Employee Type">Employee Type</option>
+                            </select>
+                            <label for="customInput" [ngClass]="{'active': isTypeFocused || TypeValue}">Category</label>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group mb-3" style="max-width: 100%;">
+                                <button mat-button color="primary"
+                                    style="background-color: #5d87ff; color: white;  border-radius: 7px; width: 70%"
+                                    (click)="onCreateReport()">
+                                    Create New Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+            <div class="card-body">
+
+                <mat-card>
+                    <mat-card-content>
+                        <div class="table-container">
+                            <ng-container>
+                                <div class="table-section">
+                                    <table mat-table multitemplatedatarows
+                                        class="mat-mdc-table mdc-data-table__table cdk-table" role="table">
+                                        <thead role="rowgroup">
+                                            <tr role="row" mat-header-row
+                                                class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                                                <th mat-header-cell> Id </th>
+                                                <th mat-header-cell> Report Name </th>
+                                                <th mat-header-cell> Created Date </th>
+                                                <th mat-header-cell> Created By </th>
+                                                <th mat-header-cell> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody role="rowgroup" class="mdc-data-table__content" *ngFor="let report of reports">
+                                            <tr mat-row 
+                                                class="mat-mdc-row mdc-data-table__row cdk-row">
+                                                <td mat-cell>{{ report.id }}</td>
+                                                <td mat-cell>{{ report.reportName }}</td>
+                                                <td mat-cell>{{ report.createdDate }}</td>
+                                                <td mat-cell>{{ report.createdBy }}</td>
+                                                <td mat-cell>
+                                                    
+                                                    <i class="bi bi-caret-down-fill" (click)="toggleActions(report.id)"></i>
+                                                </td>
+                                            </tr>
+                                            <!-- Action Card Row -->
+                                            <tr *ngIf="showActionCard[report.id]">
+                                                <td colspan="5" style="text-align: center; padding: 10px;">
+                                                    <div class="action-card" style="background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; padding: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 10px;">
+                                                        <button mat-button color="primary" 
+                                                            style="background-color: #44b7f7; color: white; border-radius: 5px;"
+                                                            (click)="viewReport(report)">View</button>
+                                                        <button mat-button color="accent" 
+                                                            style="background-color: #fa896b; color: white; border-radius: 5px;"
+                                                            >Delete</button>
+                                                        <button mat-button color="primary" 
+                                                            style="background-color: #44b7f7; color: white; border-radius: 5px;"
+                                                            >Edit</button>
+                                                        <button mat-button color="accent" 
+                                                            style="background-color: #13deb9; color: white; border-radius: 5px;"
+                                                            (click)="toggleExportModal(report)">
+                                                            Export</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div id="exportModal" class="modal" [ngStyle]="{'display': showExportModal ? 'flex' : 'none'}"
+            style="z-index: 1000; justify-content: center; align-items: center;">
+            <div class="modal-content" style="width: 300px; padding: 20px; text-align: center;">
+                <h5>Select Export Format</h5>
+                <button mat-button color="primary" style="margin: 5px;" (click)="exportAsPDF()">Export as PDF</button>
+                <button mat-button color="primary" style="margin: 5px;" (click)="exportAsExcel()">Export as
+                    Excel</button>
+                <button mat-button color="warn" style="margin: 5px; background-color: red; color: white;"
+                    (click)="closeExportModal()">Cancel</button>
+            </div>
+        </div>
+        <div id="createReportModel" class="modal"
+            style="display: none; z-index: 4; justify-content: center; align-items: center;">
+            <div class="modal-content" style="margin: auto; ">
+                <!-- Use flex to allow side-by-side layout -->
+
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+                        <div class="row">
+                            <div class="col-sm-9" style=" padding: 30px;">
+                                <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                                    style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                                    Custom Report</h4>
+                                <div class="d-flex align-items-top overflow-hidden"
+                                    style="margin-top: 20px; color: #626263;">
+                                    Generation of custom reports</div>
+                            </div>
+                            <div class="col-sm-3 text-right position-relative">
+                                <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                                    <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                                        style="margin-bottom: -75px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <span class="close-button" (click)="closeCategoryModal()">&times;</span>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Report Information Section
+                        </h5>
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        <br>
+                        <div class="col-md-6">
+
+                            <div class="form-group" style="margin-top: 5px;">
+                                <input type="text" class="form-control custom-input" id="customInput" #customInput
+                                    (focus)="onReportNameFocus()" (blur)="onReportNameBlur()"
+                                    [placeholder]="isReportNameFocused ? ' ' : ''" [(ngModel)]="ReportNameValue" />
+                                <label for="customInput"
+                                    [ngClass]="{'active': isReportNameFocused || ReportNameValue}">Report
+                                    Name</label>
+                                <span class="outline"></span>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Filter Section
+                        </h5>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <input type="date" class="form-control custom-input" id="customInput" #customInput
+                                    (focus)="onDeadlineFocus()" (blur)="onDeadlineBlur()"
+                                    [placeholder]="isDateRangeFocused ? '' : ''" [(ngModel)]="DateRangeValue" />
+                                <label for="customInput"
+                                    [ngClass]="{'active': isDateRangeFocused || DateRangeValue}">Date Range</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="employmentType" class="form-label">Employment Type</label> -->
+                                <select id="status" class="form-control custom-input" [(ngModel)]="StatusValue"
+                                    (focus)="onStatusFocus()" (blur)="onStatusBlur()">
+                                    <!-- <option value="" disabled selected>Select Employment Type</option> -->
+                                    <option value="submitted">Applied</option>
+                                    <option value="shortlisted">Shortlisted</option>
+                                    <option value="interviewing">Interviewing</option>
+                                    <option value="offered">Offered</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="hired">Hired</option>
+                                </select>
+                                <label for="customInput"
+                                    [ngClass]="{'active': isSatusFocused || StatusValue}">Status</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="employmentType" class="form-label">Employment Type</label> -->
+                                <select id="postionValue" class="form-control custom-input" [(ngModel)]="PositionValue"
+                                    (focus)="onPositionFocus()" (blur)="onPositionBlur()">
+                                    <!-- <option value="" disabled selected>Select Employment Type</option> -->
+                                    <option value="placeholder" disabled selected>Select Job Title</option>
+                                    <!-- Placeholder -->
+                                    <option *ngFor="let job of jobs" [value]="job.job_id">{{ job.title }}</option>
+                                </select>
+                                <label for="customInput"
+                                    [ngClass]="{'active': isPositionFocused || PositionValue}">Position</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="employmentType" class="form-label">Employment Type</label> -->
+                                <select id="source" class="form-control custom-input" [(ngModel)]="SourceValue"
+                                    (focus)="onSourceFocus()" (blur)="onSourceBlur()">
+                                    <!-- <option value="" disabled selected>Select Employment Type</option> -->
+                                    <option value="full-time">Refferal</option>
+                                    <option value="part-time">Job board</option>
+                                    <option value="contract">Linkedin</option>
+                                    <option value="internship">Indeed</option>
+                                    <option value="temporary">Naukri</option>
+                                </select>
+                                <label for="customInput"
+                                    [ngClass]="{'active': isSourceFocused || SourceValue}">Source</label>
+                                <span class="outline"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Fields to Include Section
+                        </h5>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <br>
+                        <div class="col-md-4">
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="applicantName"
+                                    [(ngModel)]="includeApplicantName">
+                                <span class="form-check-label" for="applicantName">Applicant Name</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dateApplied"
+                                    [(ngModel)]="includeDateApplied">
+                                <span class="form-check-label" for="applicantName">Date Applied</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="status" [(ngModel)]="includeStatus">
+                                <span class="form-check-label" for="applicantName">Status</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="source" [(ngModel)]="includeSource">
+                                <span class="form-check-label" for="applicantName">Source</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="email" [(ngModel)]="includeEmail">
+                                <span class="form-check-label" for="applicantName">Email</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="phoneNumber"
+                                    [(ngModel)]="includePhoneNumber">
+                                <span class="form-check-label" for="applicantName">Phone Number</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="nlpScore"
+                                    [(ngModel)]="includeNlpScore">
+                                <span class="form-check-label" for="applicantName">NLP Score</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="openaiScore"
+                                    [(ngModel)]="includeOpenaiScore">
+                                <span class="form-check-label" for="applicantName">OpenAI Score</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="jobTitle"
+                                    [(ngModel)]="includeJobTitle">
+                                <span class="form-check-label" for="applicantName">Job Title</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="jobLocation"
+                                    [(ngModel)]="includeJobLocation">
+                                <span class="form-check-label" for="applicantName">Job Location</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="experience"
+                                    [(ngModel)]="includeExperience">
+                                <span class="form-check-label" for="applicantName">Experience</span>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="submiitedAt"
+                                    [(ngModel)]="includeSubmittedAt">
+                                <span class="form-check-label" for="applicantName">Submitted At</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button mat-button color="warn"
+                            style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;"
+                            (click)="CreateReport()">
+                            Create
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="viewModel" class="modal"
+            style="display: none; z-index: 4; justify-content: center; align-items: center;">
+            <div class="modal-content" style="margin: auto; ">
+                <!-- Use flex to allow side-by-side layout -->
+
+                <div style="flex: 1; padding: 20px;"> <!-- Main content area -->
+                    <div class="" style="background-color: #ecf2ff; border-radius: 10px; ">
+                        <div class="row">
+                            <div class="col-sm-9" style=" padding: 30px;">
+                                <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16"
+                                    style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 20px !important;">
+                                    Custom Report Deatils</h4>
+                                <div class="d-flex align-items-top overflow-hidden"
+                                    style="margin-top: 20px; color: #626263;">
+                                    Details of custom reports</div>
+                            </div>
+                            <div class="col-sm-3 text-right position-relative">
+                                <div class="breadcrumb-icon" style="overflow: hidden; margin-left: 20px;">
+                                    <img src="assets/img/card/ChatBc.png" alt="breadcrumb" width="210"
+                                        style="margin-bottom: -75px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <span class="close-button" (click)="closeCategoryModal()">&times;</span>
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Report Information Section
+                        </h5>
+                    </div>
+
+                    <div class="job-info">
+                        <!-- <h1 class="text-center mt-5 mb-3" style="font-size: 26px; line-height: 3.231rem; color: GREY;">JOB INFO</h1> -->
+                        <div class="job-details">
+                            <div class="row">
+                                <span class="label">Report Name</span>
+                                <span class="value">{{reportDetails.reportName}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Created Date</span>
+                                <span class="value">{{reportDetails.createdDate}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Created By</span>
+                                <span class="value">{{reportDetails.createdBy}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br>
+
+
+
+                    <div class="p-16 bg-light-primary rounded">
+                        <h5 class="mat-subtitle-2 text-primary d-flex align-items-center f-w-600"
+                            style="font-family: Plus Jakarta Sans, sans-serif; margin-top: 6px; font-size: large;">
+                            <i-tabler name="info-circle" class="icon-20 m-r-8 d-flex" _nghost-ng-c2605515766=""><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 9h.01"></path>
+                                    <path d="M11 12h1v4h1"></path>
+                                </svg>
+
+
+                            </i-tabler>Applicant Deatils
+                        </h5>
+                    </div>
+                    <br>
+
+                    <div class="card mb-4" style="border-radius: 10px; font-size: Plus Jakarta Sans, sans-serif;">
+                        <div class="card-body">
+                            <mat-card>
+                                <mat-card-content>
+                                    <div class="table-container">
+                                        <ng-container>
+                                            <div class="table-section">
+                                                <table mat-table class="mat-mdc-table mdc-data-table__table cdk-table"
+                                                    role="table">
+                                                    <thead role="rowgroup">
+                                                        <tr role="row" mat-header-row
+                                                            class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                                                            <th mat-header-cell *ngIf="includeApplicantName">Applicant
+                                                                Name</th>
+                                                            <th mat-header-cell *ngIf="includeEmail">Email</th>
+                                                            <th mat-header-cell *ngIf="includePhoneNumber">Phone Number
+                                                            </th>
+                                                            <th mat-header-cell *ngIf="includeNlpScore">NLP Score</th>
+                                                            <th mat-header-cell *ngIf="includeOpenaiScore">OpenAI Score
+                                                            </th>
+                                                            <th mat-header-cell *ngIf="includeJobTitle">Job Title</th>
+                                                            <th mat-header-cell *ngIf="includeJobLocation">Job Location
+                                                            </th>
+                                                            <th mat-header-cell *ngIf="includeDateApplied">Date Applied
+                                                            </th>
+                                                            <th mat-header-cell *ngIf="includeStatus">Status</th>
+                                                            <th mat-header-cell *ngIf="includeExperience">Experience
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup" class="mdc-data-table__content">
+                                                        <tr mat-row *ngFor="let applicant of reportDetails?.applicants"
+                                                            class="mat-mdc-row mdc-data-table__row cdk-row">
+                                                            <td mat-cell *ngIf="includeApplicantName">{{ applicant.name
+                                                                || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeEmail">{{ applicant.email ||
+                                                                'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includePhoneNumber">{{
+                                                                applicant.phoneNumber || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeNlpScore">{{ applicant.nlpScore
+                                                                || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeOpenaiScore">{{
+                                                                applicant.openaiScore || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeJobTitle">{{ applicant.jobTitle
+                                                                || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeJobLocation">{{
+                                                                applicant.jobLocation || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeDateApplied">{{
+                                                                applicant.dateApplied || 'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeStatus">{{ applicant.status ||
+                                                                'N/A' }}</td>
+                                                            <td mat-cell *ngIf="includeExperience">{{
+                                                                applicant.experience || 'N/A' }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="text-center">
+                        <button mat-button color="warn"
+                            style="background-color: #13deb9!important; color: white; padding: 8px; border-radius: 7px; margin-right: 10px; width: 100%;"
+                            (click)="closeCategoryModal()">
+                            close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
