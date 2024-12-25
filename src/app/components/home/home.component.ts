@@ -66,6 +66,8 @@ import { JobPosting } from '../../model/Job.model';
 import { Application } from '../../model/application.model';
 import { JobLog } from '../../model/joblog.model';
 import { DatePipe } from '@angular/common';
+import { UserService } from '../../service/user.service';
+import { User } from '../../model/user.model';
 
 export type ChartOptions3 = {
   series: ApexAxisChartSeries;
@@ -78,9 +80,9 @@ export type ChartOptions3 = {
   title: ApexTitleSubtitle;
 };
 declare var Swiper: any;
- 
+
 interface Slide {
-  class:string;
+  class: string;
   title: string;
   description: string;
   linkText: string;
@@ -152,6 +154,10 @@ export class HomeComponent {
   filteredApplication: Application[] = [];
   errorMessage: string = '';
   jobLogs: JobLog[] = [];
+  user: User | null = null; // Use the User interface
+  applicationCount: number = 0;
+  jobCount: number = 0;
+  applicationStatusCounts: { [key: string]: number } = {};
 
   currentPage: number = 0; // To track the current page
   itemsPerPage: number = 3; // Number of items per page
@@ -160,6 +166,11 @@ export class HomeComponent {
   StatusValue: string = '';
 
   application_status: string = 'updated';
+
+  submitted: number = 0;
+  hired: number =0;
+  interviewing: number =0;
+  rejected: number = 0;
   // @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public chartOptions1: Partial<ChartOptions1>;
@@ -168,10 +179,28 @@ export class HomeComponent {
 
 
   public colors: string[] = ['#008FFB', '#00E396', '#ffae1f', '#FF4560'];
-  constructor(private jobService: JobService, private applicationService: ApplicationService, private datePipe: DatePipe) {
-
+  constructor(private jobService: JobService, private applicationService: ApplicationService, private datePipe: DatePipe,
+    private userService: UserService) {
+      this.openApplicantByCreatedById()
+      const submitted = 45
+      const hired = 55
+      const interviewing = 67
+      const rejected = 83
+  
+      const total = this.recentApplications.length || 1; // Use 1 to avoid division by zero
+  
+      // Calculate percentage for each status
+      const submittedPercentage = ((submitted / total) * 100);
+      const hiredPercentage = ((hired / total) * 100);
+      const interviewingPercentage = ((interviewing / total) * 100);
+      const rejectedPercentage = ((rejected / total) * 100);
+      console.log('percentage'+total, submitted, hired, interviewing, rejected);
+      
     this.chartOptions = {
-      series: [44, 55, 67, 83],
+      series: [ submitted,
+        hired,
+        interviewing,
+        rejected,],
       chart: {
         height: 350,
         type: "radialBar",
@@ -188,9 +217,10 @@ export class HomeComponent {
             total: {
               show: true,
               label: "Total Applications",
-              formatter: function (w) {
-                return "249";
-              }
+              formatter: () => {
+                // Return the total count of applications
+                return this.recentApplications.length.toString(); // Total applications
+            }
             }
           }
         }
@@ -213,7 +243,7 @@ export class HomeComponent {
         type: "area",
         sparkline: {
           enabled: false,
-      },
+        },
       },
 
       dataLabels: {
@@ -287,13 +317,25 @@ export class HomeComponent {
   ngOnInit(): void {
     this.createdBy = localStorage.getItem('username');
     this.fetchJobPostings();
+    this.getUserById(this.createdBy)
     // this.getJobLogsByEmployeeId();
+  }
+
+  getUserById(employeeId: string) {
+    this.userService.getUserById(employeeId).subscribe(response => {
+      this.user = response; // Store the response in the user property
+      console.log(this.user);
+
+    }, error => {
+      console.error('Error fetching user data:', error);
+    });
   }
 
   fetchJobPostings(): void {
     const createdBy = localStorage.getItem('username');
     this.jobService.getJobsByEmployeeId(createdBy).subscribe(data => {
       this.jobs = data;
+      this.jobCount = this.jobs.length
       this.updateFilteredJobs();
       this.getJobLogsByEmployeeId();
       this.openApplicantByCreatedById();
@@ -359,38 +401,38 @@ export class HomeComponent {
     console.log("Fetching job logs for user:", createdBy);
 
     this.jobService.getJobLogsByEmployeeId(createdBy).subscribe(data => {
-        console.log("Fetched job logs:", data);
-        
-        // Sort the logs by timestamp in descending order (most recent first)
-        const sortedLogs = data.sort((a: JobLog, b: JobLog) => {
-            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-        });
+      console.log("Fetched job logs:", data);
 
-        // Take the 5 most recent job logs
-        const recentLogs = sortedLogs.slice(0, 5);
+      // Sort the logs by timestamp in descending order (most recent first)
+      const sortedLogs = data.sort((a: JobLog, b: JobLog) => {
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+      });
 
-        // Map to the desired stats format
-        this.stats = recentLogs.map((log: JobLog, index: number) => {
-            const date = new Date(log.timestamp);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-            const year = date.getFullYear();
-            const formattedDate = `${day}/${month}/${year}`; // Format date as dd/mm/yyyy
+      // Take the 5 most recent job logs
+      const recentLogs = sortedLogs.slice(0, 5);
 
-            return {
-                id: index + 1,
-                time: formattedDate, // Use formatted date here
-                color: this.getColorByAction(log.action),
-                title: log.job_title,
-                subtext: log.action
-            };
-        });
+      // Map to the desired stats format
+      this.stats = recentLogs.map((log: JobLog, index: number) => {
+        const date = new Date(log.timestamp);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = date.getFullYear();
+        const formattedDate = `${day}/${month}/${year}`; // Format date as dd/mm/yyyy
 
-        console.log("Transformed stats with recent logs:", this.stats);
+        return {
+          id: index + 1,
+          time: formattedDate, // Use formatted date here
+          color: this.getColorByAction(log.action),
+          title: log.job_title,
+          subtext: log.action
+        };
+      });
+
+      console.log("Transformed stats with recent logs:", this.stats);
     }, error => {
-        console.error('Error fetching job logs:', error);
+      console.error('Error fetching job logs:', error);
     });
-}
+  }
 
 
   // Helper function to determine color based on action
@@ -417,22 +459,22 @@ export class HomeComponent {
     this.jobId = job.job_id
     this.applicationService.getApplicationsByJobId(this.jobId).subscribe({
       next: (data) => {
-          this.applications = data;
-          console.log("appliaction", this.applications);
+        this.applications = data;
+        console.log("appliaction", this.applications);
 
       },
       error: (error) => {
-          this.errorMessage = 'Failed to load applications';
-          console.error(error);
+        this.errorMessage = 'Failed to load applications';
+        console.error(error);
       }
-  });
+    });
     document.getElementById('applicantModal')!.style.display = 'block'; // Show modal
     document.body.style.overflow = 'hidden'; // Disable body scroll
   }
 
   closeApplicantModal() {
     this.applications = [];
-    
+
     document.getElementById('applicantModal')!.style.display = 'none'; // Hide modal
     document.body.style.overflow = 'auto'; // Re-enable body scroll
   }
@@ -442,17 +484,39 @@ export class HomeComponent {
     const createdBy = localStorage.getItem('username');
     this.applicationService.getApplicationsByCreatedBy(createdBy).subscribe({
       next: (data) => {
-          this.recentApplications = data;
-          this.updateFilteredApplication()
-          console.log("appliaction", this.applications);
+        this.recentApplications = data;
+        this.applicationCount = this.recentApplications.length;
+        this.updateFilteredApplication()
+        this.applicationStatusCounts = {
+          submitted: 0,
+          shortlisted: 0,
+          interviewing: 0,
+          offered: 0,
+          accepted: 0,
+          rejected: 0,
+          hired: 0,
+        };
+        this.recentApplications.forEach(application => {
+          const status = application.application_status; // Adjust according to actual field name in your data
+          if (this.applicationStatusCounts.hasOwnProperty(status)) {
+            this.applicationStatusCounts[status]++;
+          }
+        });
+         this.submitted = this.applicationStatusCounts['submitted'] || 0;
+         this.hired = this.applicationStatusCounts['hired'] || 0;
+         this.interviewing = this.applicationStatusCounts['interviewing'] || 0;
+         this.rejected = this.applicationStatusCounts['rejected'] || 0;
+        
+        console.log("Application Status Counts:", this.submitted);
+        console.log("appliaction", this.applications);
 
       },
       error: (error) => {
-          this.errorMessage = 'Failed to load applications';
-          console.error(error);
+        this.errorMessage = 'Failed to load applications';
+        console.error(error);
       }
-  });
-    
+    });
+
   }
 
   private updateFilteredApplication() {
@@ -481,45 +545,45 @@ export class HomeComponent {
 
   slides: Slide[] = [
     {
-      class:"swiper-slide swiper-slide--one",
+      class: "swiper-slide swiper-slide--one",
       title: 'Java',
-      description: 'Jellyfish and sea jellies are the informal common names given to the medusa-phase of certain gelatinous members of the subphylum Medusozoa, a major part of the phylum Cnidaria.',
+      description: 'Submitted - 145 Interviewing - 10 Rejected - 62 and Hired - 40 ',
       linkText: 'explore'
     },
     {
-      class:"swiper-slide swiper-slide--two",
+      class: "swiper-slide swiper-slide--two",
       title: '.Net',
-      description: 'Seahorses are mainly found in shallow tropical and temperate salt water throughout the world. They live in sheltered areas such as seagrass beds, estuaries, coral reefs, and mangroves.',
+      description: 'Submitted - 12 Interviewing - 2 Rejected - 7 and Hired - 3',
       linkText: 'explore'
     },
     {
-      class:"swiper-slide swiper-slide--three",
+      class: "swiper-slide swiper-slide--three",
       title: 'Python',
-      description: 'Octopuses inhabit various regions of the ocean, including coral reefs, pelagic waters, and the seabed; some live in the intertidal zone and others at abyssal depths.',
+      description: 'Submitted - 39 Interviewing - 3 Rejected - 14 and Hired - 20',
       linkText: 'explore'
     },
     {
-      class:"swiper-slide swiper-slide--four",
+      class: "swiper-slide swiper-slide--four",
       title: 'Tester',
-      description: 'Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head.',
+      description: 'Submitted - 390 Interviewing - 40 Rejected - 20 and Hired - 232',
       linkText: 'explore'
     },
     {
-      class:"swiper-slide swiper-slide--five",
+      class: "swiper-slide swiper-slide--five",
       title: 'Angular',
-      description: 'Dolphins are widespread. Most species prefer the warm waters of the tropic zones, but some, such as the right whale dolphin, prefer colder climates.',
+      description: 'Submitted - 10 Interviewing - 1 Rejected - 3 and Hired - 5',
       linkText: 'explore'
     }
   ];
   ngAfterViewInit() {
-   
+
     const swiper = new Swiper('.swiper', {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
-      loop: true,  
+      loop: true,
       autoplay: {
-        delay: 2000,  
+        delay: 2000,
       },
       coverflowEffect: {
         rotate: 0,
@@ -556,10 +620,10 @@ export class HomeComponent {
   }
   onSlideClick(event: any) {
     const swiperElement = document.querySelector('.swiper') as HTMLElement | null;
- 
+
     if (swiperElement) {
-      const swiper = (swiperElement as any).swiper; 
- 
+      const swiper = (swiperElement as any).swiper;
+
       const clickedSlide = event.currentTarget;
       swiper.slideTo(swiper.slides.indexOf(clickedSlide));
     }

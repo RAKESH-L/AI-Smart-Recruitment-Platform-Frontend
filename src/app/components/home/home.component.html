@@ -1,4 +1,3 @@
-<!-- <app-theme-toggle></app-theme-toggle>"" -->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -14,13 +13,13 @@
                 <div class="col-sm-9" style=" padding: 30px;">
                     <h2 class="page-title m-0 f-s-20 f-w-600 m-b-16"
                         style="margin: 0 !important; margin-bottom: 40px; font-weight: bold; font-family: Plus Jakarta Sans, sans-serif; font-size: 25px !important;">
-                        Welcome back name</h2>
+                        Welcome back {{user.full_name}}</h2>
                     <div class="d-flex align-items-top overflow-hidden" style="margin-top: 20px; color: #626263;">
-                        Generate Your Skillset</div>
+                        Track Your Recruitment Process</div>
                     <br>
                     <button mat-button color="primary"
-                        style="background-color: #5d87ff; color: white; padding: 4px; border-radius: 7px; margin-right: 10px;">
-                        View
+                        style="background-color: #5d87ff; color: white; padding: 4px; border-radius: 7px; margin-right: 10px; width: 100px;">
+                        Refresh
                     </button>
                 </div>
                 <div class="col-sm-3 text-right position-relative">
@@ -40,7 +39,7 @@
                     <mat-card-content class="mat-mdc-card-content p-32">
                         <img alt="users" width="40" class="rounded-circle" src="/assets/img/icon/icon-user-male.svg">
                         <h6 class="f-w-600 m-t-8 mat-subtitle-2 text-primary">Applications</h6>
-                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-primary">3,685</h4>
+                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-primary">{{applicationCount}}</h4>
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -49,7 +48,7 @@
                     <mat-card-content class="mat-mdc-card-content p-32">
                         <img alt="users" width="40" class="rounded-circle" src="/assets/img/icon/icon-briefcase.svg">
                         <h6 class="f-w-600 m-t-8 mat-subtitle-2 text-warning">Jobs</h6>
-                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-warning">256</h4>
+                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-warning">{{jobCount}}</h4>
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -69,7 +68,7 @@
                     <mat-card-content class="mat-mdc-card-content p-32">
                         <img alt="users" width="40" class="rounded-circle" src="/assets/img/icon/icon-favorites.svg">
                         <h6 class="f-w-600 m-t-8 mat-subtitle-2 text-error" style="color: #fa896b!important">Email</h6>
-                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-error" style="color: #fa896b!important">$348K
+                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-error" style="color: #fa896b!important">48+
                         </h4>
                     </mat-card-content>
                 </mat-card>
@@ -80,7 +79,7 @@
                         <img alt="users" width="40" class="rounded-circle"
                             src="/assets/img/icon/icon-speech-bubble.svg">
                         <h6 class="f-w-600 m-t-8 mat-subtitle-2 text-success">Interviewing</h6>
-                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-success">96</h4>
+                        <h4 class="f-w-600 m-t-4 m-t-8 mat-subtitle-1 text-success">{{applicationStatusCounts['interviewing']}}</h4>
                     </mat-card-content>
                 </mat-card>
             </div>

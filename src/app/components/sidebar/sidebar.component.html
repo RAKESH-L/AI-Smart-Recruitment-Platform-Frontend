@@ -1,19 +1,22 @@
 <div class="side-nav-content">
     <div class="d-flex align-items-center justify-content-between">
-        <app-branding>
-            <div class="branding">
-                <a href="/">
-                    <img src="./assets/img/logo/dark-logo.svg" alt="Company Logo" class="align-middle m-2">
-                </a>
-            </div>
+        <app-branding class="d-flex align-items-center"> <!-- Added d-flex for branding -->
+          <div class="branding">
+            <a href="/">
+              <img src="./assets/img/hexa/logo1.png" alt="Company Logo" class="align-middle m-2" style="height: 40px; width: 40px;">
+            </a>
+          </div>
+      
+          <div class="branding">
+            <a href="/">
+              <img src="./assets/img/hexa/logonameblack.svg" alt="Company Logo" class="align-middle m-2" 
+              style="size: 20px; height: 60px; width:auto; ">
+            </a>
+          </div>
         </app-branding>
-        <a href="javascript:void(0)" class="d-flex justify-content-center align-items-center icon-40 mat-body-1">
-            <i-tabler name="x" class="icon-20 d-flex">
-                ... <!-- SVG for close icon -->
-            </i-tabler>
-        </a>
-    </div>
-    <br>
+      </div>
+      
+    <!-- <br> -->
     <div class="sidebar-background"></div>
     <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus}">
         <!-- Display grouped items -->

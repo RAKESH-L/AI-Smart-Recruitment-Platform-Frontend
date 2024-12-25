@@ -34,7 +34,7 @@ export class JobService {
   }
 
   getJobLogsByEmployeeId(employeeId: string): Observable<JobLog[]>{
-    return this.http.get<JobLog[]>('http://127.0.0.1:5000/jobLogsByPerformedById/2000080631')
+    return this.http.get<JobLog[]>(`http://127.0.0.1:5000/jobLogsByPerformedById/${employeeId}`)
   }
 
   getAllJobs(): Observable<JobPosting[]> {

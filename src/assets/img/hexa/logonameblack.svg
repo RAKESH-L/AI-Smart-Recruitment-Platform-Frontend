@@ -1,0 +1,24 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <!-- Define the filter for the shadow -->
+    <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" />  <!-- Adjust stdDeviation for shadow strength -->
+            <feOffset dx="2" dy="2" result="offsetblur" />
+            <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+    </defs>
+
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          font-family="'Roboto', sans-serif"
+          font-size="40"
+          font-weight="600"
+          font-style="italic"
+          fill="black"
+          filter="url(#shadow)"> <!-- Apply the shadow filter -->
+        HEXHIRE
+    </text>
+</svg>

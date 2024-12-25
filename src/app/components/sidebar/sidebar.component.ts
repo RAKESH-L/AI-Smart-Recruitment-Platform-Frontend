@@ -129,7 +129,7 @@ export class SidebarComponent implements OnInit{
       name: 'Demo',
       icon: 'bi bi-award-fill',
       route: '/candidateLayout/candidateReview',
-      roles: ['candidate'] 
+      roles: ['candidate', 'recruiter'] 
     },
     {
       number: '5',

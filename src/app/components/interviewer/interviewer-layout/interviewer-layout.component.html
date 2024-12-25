@@ -1,14 +1,22 @@
 <div class="g-0">
-    <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open': sideNavStatus}" class="black-border">
-      <div class="sidebar-content"></div>
-    </app-sidebar>
-  
-    <main>
-      <app-navbar [ngClass]="{'navbar-shrink': sideNavStatus}" (sideNavToggled)="sideNavStatus = $event;"></app-navbar>
-  
-      <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
-  </div>
-  
+  <app-sidebar
+    [sideNavStatus]="sideNavStatus"
+    [ngClass]="{'app-side-nav-open': sideNavStatus}"
+    class="black-border"
+    (mouseenter)="onMouseEnterSidebar()"
+    (mouseleave)="onMouseLeaveSidebar()"
+  >
+    <div class="sidebar-content"></div>
+  </app-sidebar>
+
+  <main>
+    <app-navbar
+      [ngClass]="{'navbar-shrink': menuLocked && sideNavStatus}" 
+      (sideNavToggled)="toggleSidebar()"
+    ></app-navbar>
+
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink': menuLocked && sideNavStatus}">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
