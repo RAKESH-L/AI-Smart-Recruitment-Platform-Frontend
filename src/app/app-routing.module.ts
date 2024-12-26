@@ -29,51 +29,54 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { CategoryComponent } from './components/recruiter/category/category.component';
 import { CandidateReviewComponent } from './components/candidate/candidate-review/candidate-review.component';
 import { CustomReportComponent } from './components/recruiter/custom-report/custom-report.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'resetPassword', component: ResetPasswordComponent},
-  { path: 'signup', component: SignupComponent},
+  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'aboutus', component: AboutusComponent },
 
   {
     path: 'layout',
     component: LayoutComponent,
     children: [
-      { path:'', component: HomeComponent },
-      { path:'userProfile', component: UserProfileComponent },
-      { path:'createJob', component: CreateJobComponent},
-      { path: 'viewJobDetails', component: ViewJobDetailsComponent},
-      { path: 'jobApplications', component: JobApplicationsComponent},
-      { path: 'scheduleInterview', component: ScheduleInterviewComponent},
-      { path: 'interviewDetails', component: InterviewDetailsComponent},
-      { path: 'jobDraft', component: JobDraftComponent},
-      { path: 'demo', component: DemoComponent},
-      { path: 'interviewAppointment', component: InterviewAppointmentComponent},
-      { path: 'chatbot', component: ChatbotComponent},
-      { path: 'category', component: CategoryComponent},
-      { path: 'customReport', component: CustomReportComponent},
+      { path: '', component: HomeComponent },
+      { path: 'userProfile', component: UserProfileComponent },
+      { path: 'createJob', component: CreateJobComponent },
+      { path: 'viewJobDetails', component: ViewJobDetailsComponent },
+      { path: 'jobApplications', component: JobApplicationsComponent },
+      { path: 'scheduleInterview', component: ScheduleInterviewComponent },
+      { path: 'interviewDetails', component: InterviewDetailsComponent },
+      { path: 'jobDraft', component: JobDraftComponent },
+      { path: 'demo', component: DemoComponent },
+      { path: 'interviewAppointment', component: InterviewAppointmentComponent },
+      { path: 'chatbot', component: ChatbotComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'customReport', component: CustomReportComponent },
+      { path: 'aboutus', component: AboutusComponent },
     ]
   },
   {
     path: 'candidateLayout',
     component: CandidateLayoutComponent,
     children: [
-      { path:'', component: DashboardComponent },
-      { path:'applyJob', component: ApplyJobComponent },
-      { path:'appliedJobs', component: AppliedJobsComponent },
-      { path:'jobList', component: JobListComponent },
-      { path:'jobSearch', component: JobSearchComponent },
-      { path:'candidateProfile', component: CandidateProfileComponent },
-      { path:'candidateReview', component: CandidateReviewComponent },
+      { path: '', component: DashboardComponent },
+      { path: 'applyJob', component: ApplyJobComponent },
+      { path: 'appliedJobs', component: AppliedJobsComponent },
+      { path: 'jobList', component: JobListComponent },
+      { path: 'jobSearch', component: JobSearchComponent },
+      { path: 'candidateProfile', component: CandidateProfileComponent },
+      { path: 'candidateReview', component: CandidateReviewComponent },
     ]
   },
   {
     path: 'interviewerLayout',
     component: InterviewerLayoutComponent,
     children: [
-      { path:'', component: InterviewerDashboardComponent },
-      { path:'scheduledInterview', component: ScheduledInterviewComponent },
+      { path: '', component: InterviewerDashboardComponent },
+      { path: 'scheduledInterview', component: ScheduledInterviewComponent },
       // { path:'appliedJobs', component: AppliedJobsComponent },
       // { path:'jobList', component: JobListComponent },
       // { path:'jobSearch', component: JobSearchComponent },

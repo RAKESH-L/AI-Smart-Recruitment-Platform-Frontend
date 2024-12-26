@@ -72,20 +72,22 @@
 
                                     </div>
 
-                                    <div class="col-md-6">
-
-                                        <div class="form-group" style="margin-top: 5px;">
-                                            <input type="text" class="form-control custom-input" id="customInput"
-                                                #customInput (focus)="onDepartmentFocus()" (blur)="onDepartmentBlur()"
-                                                [placeholder]="isDepartmentFocused ? ' ' : ''"
-                                                [(ngModel)]="DepartmentValue" />
-                                            <label for="customInput"
-                                                [ngClass]="{'active': isDepartmentFocused || DepartmentValue}">Department
-                                                Name</label>
+                                    <div class="col-md-6" style="margin-top: -10px;">
+                                        <div class="form-group">
+                                            <select id="departmentName" class="form-control custom-input"
+                                                [(ngModel)]="DepartmentValue" (focus)="onDepartmentFocus()">
+                                                <option value="" disabled selected>Select Department</option>
+                                                <option *ngFor="let department of departments"
+                                                    [value]="department.category_name">
+                                                    {{ department.category_name }}
+                                                </option>
+                                            </select>
+                                            <label for="departmentName"
+                                                [ngClass]="{'active': isDepartmentFocused || DepartmentValue}">
+                                                Department Name *
+                                            </label>
                                             <span class="outline"></span>
                                         </div>
-
-
                                     </div>
                                 </div>
 
@@ -93,10 +95,15 @@
                                 <div class="row">
                                     <div class="col-md-6" style="margin-top: -10px;">
                                         <div class="form-group">
-                                            <input type="text" class="form-control custom-input" id="customInput"
-                                                #customInput (focus)="onlocationFocus()" (blur)="onlocationBlur()"
-                                                [placeholder]="islocationFocused ? '' : ''"
-                                                [(ngModel)]="locationValue" />
+
+                                            <select id="location" class="form-control custom-input"
+                                                [(ngModel)]="locationValue" (focus)="onlocationFocus()">
+                                                <option value="" disabled selected>Select Location</option>
+                                                <option *ngFor="let location of locations"
+                                                    [value]="location.category_name">
+                                                    {{ location.category_name }}
+                                                </option>
+                                            </select>
                                             <label for="customInput"
                                                 [ngClass]="{'active': islocationFocused || locationValue}">Job
                                                 Location</label>
@@ -109,13 +116,12 @@
                                             <!-- <label for="employmentType" class="form-label">Employment Type</label> -->
                                             <select id="employmentType" class="form-control custom-input"
                                                 [(ngModel)]="TypeValue" (focus)="onTypeFocus()" (blur)="onTypeBlur()">
-                                                <!-- <option value="" disabled selected>Select Employment Type</option> -->
-                                                <option value="full-time">Full Time</option>
-                                                <option value="part-time">Part Time</option>
-                                                <option value="contract">Contract</option>
-                                                <option value="internship">Internship</option>
-                                                <option value="temporary">Temporary</option>
-                                                <option value="freelance">Freelance</option>
+                                                <option value="" disabled selected>Select Employee Type</option>
+                                                <option *ngFor="let employeeType of employeeTypes"
+                                                    [value]="employeeType.category_name">
+                                                    {{ employeeType.category_name }}
+                                                </option>
+                                                
                                             </select>
                                             <label for="customInput"
                                                 [ngClass]="{'active': isTypeFocused || TypeValue}">Employment
@@ -239,19 +245,22 @@
 
                                                 <div class="button-container" style="margin-left: 150px;">
                                                     <div class="outside-up-stars">
-                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.2rem;" class="star-r">
+                                                        <img src="../../assets/img/icon/star.png" alt="star"
+                                                            style="height: 1.2rem;" class="star-r">
                                                     </div>
                                                     <button (click)="generateJobDescription()" class="ask-ai-button">
-                                                      <span class="star left-star">
-                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.5rem;">
-                                                      </span>
-                                                      <span class="text">Ask AI</span>
-                                                      <span class="star right-star">&#10022;</span>
+                                                        <span class="star left-star">
+                                                            <img src="../../assets/img/icon/star.png" alt="star"
+                                                                style="height: 1.5rem;">
+                                                        </span>
+                                                        <span class="text">Ask AI</span>
+                                                        <span class="star right-star">&#10022;</span>
                                                     </button>
                                                     <div class="outside-stars">
-                                                        <img src="../../assets/img/icon/star.png" alt="star" style="height: 1.5rem;" class="star-l">
+                                                        <img src="../../assets/img/icon/star.png" alt="star"
+                                                            style="height: 1.5rem;" class="star-l">
                                                     </div>
-                                                  </div>
+                                                </div>
 
 
                                                 <span class="outline"></span>

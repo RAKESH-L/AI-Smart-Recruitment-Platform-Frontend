@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 0px;
+}
+
+h1 {
+    margin: 20px 0;
+    color: #333;
+    font-size: larger;
+}
+
+.team {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    width: 20%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    position: relative;
+    text-align: center;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.image-container {
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    margin-top: -60px;
+    margin-bottom: 10px;
+    width: 140px;
+    height: 140px;
+    display: inline-block;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member h2 {
+    color: #333;
+    margin: 10px 0;
+}
+
+.team-member .designation {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    color: #777;
+}
+
+.team-member:nth-child(1) {
+    background-color: #d4e157;
+    border-radius: 50px 0px 50px 0px;
+}
+
+.team-member:nth-child(2) {
+    background-color: #81d4fa;
+    border-radius: 50px 0px 50px 0px;
+}
+
+.team-member:nth-child(3) {
+    background-color: #ffab91 ;
+    border-radius: 50px 0px 50px 0px;
+}
+
+.team-member:nth-child(4) {
+    background-color: #ffd54f;
+    border-radius: 50px 0px 50px 0px;
+}
+.image-container img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.team-member hr {
+    border: none;
+    height: 5px;
+    background-color: white;
+    width: 60%;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.mat-h2,.mat-title,.mat-typography h2 {
+    font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0 0 16px;
+    
+}
+
+.mat-toolbar,.mat-toolbar h2,.mat-toolbar h3,.mat-toolbar h4,.mat-toolbar h5,.mat-toolbar h6 {
+    font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0;
+}
+
+h2,h3,h4,h5,h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    color: #fa896b;
+
+}
+
+.h2,.h3,.h4,.h5,.h6,h2,h3,h4,h5,h6 {
+    margin-bottom: .5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    
+}
+h2,h3,p {
+    orphans: 3;
+    widows: 3
+}
+
+h2,h3 {
+    page-break-after: avoid
+}
+
+.h2,.h3,.h4,body,h2,h3,h4,h5,h6 {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    line-height: 1.5em
+}
+
+.h2,h2 {
+    font-size: 2.25rem
+}
+
+h2.title {
+    margin-bottom: 2.142rem
+}
+
+.card[class*=bg-] .card-body h1 small,.card[class*=bg-] .card-body h2 small,.card[class*=bg-] .card-body h3 small,.card[class*=bg-] h1 small,.card[class*=bg-] h2 small,.card[class*=bg-] h3 small {
+    color: rgba(255,255,255,.8)
+}
+

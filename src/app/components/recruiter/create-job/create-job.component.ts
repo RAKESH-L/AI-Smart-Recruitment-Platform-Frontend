@@ -4,6 +4,8 @@ import { JobService } from '../../../service/job.service';
 import { OpenaiService } from '../../../service/openai.service';
 import { GenerateJD } from '../../../model/openai.model';
 import { marked } from 'marked';
+import { CategoryService } from '../../../service/category.service';
+import { Category } from '../../../model/category.model';
 
 @Component({
   selector: 'app-create-job',
@@ -33,7 +35,7 @@ export class CreateJobComponent {
   ClientValue: string = '';
 
   isSkillsFocused: boolean = false;
-  SkillsValue: string = '';
+  SkillsValue: string[];
 
   isDescriptionFocused: boolean = false;
   DescriptionValue: string = '';
@@ -61,15 +63,40 @@ export class CreateJobComponent {
   addressValue: string = '';
   inputValue: string = ''; // Binding for the input field
   errorMessage: string = ''; // Variable to hold error message
-  
-  successMessage: string = '';
 
-  constructor(private jobService: JobService, private openaiService: OpenaiService) {}
+  successMessage: string = '';
+  categories: Category[] = [];
+  filteredCategories: Category[] = [];
+  departments: Category[] = [];
+  locations: Category[] = [];
+  employeeTypes: Category[] = [];
+
+  constructor(private jobService: JobService, private openaiService: OpenaiService,
+    private categoryService: CategoryService) { }
 
 
   ngOnInit(): void {
     const employeeId = localStorage.getItem('username');
     console.log(employeeId);
+    this.loadCategories();
+  }
+  loadCategories(): void {
+    this.categoryService.fetchAllCategories().subscribe({
+      next: (data: Category[]) => {
+        this.categories = data;
+        this.filteredCategories = data;
+        this.filterDepartments();
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
+      }
+    });
+  }
+
+  filterDepartments(): void {
+    this.departments = this.categories.filter(category => category.category_type === 'Department');
+    this.locations = this.categories.filter(category => category.category_type === 'Location');
+    this.employeeTypes = this.categories.filter(category => category.category_type === 'Employee Type')
   }
 
   submitForm() {
@@ -85,20 +112,20 @@ export class CreateJobComponent {
       client: this.ClientValue,
       application_deadline: this.DeadlineValue,
       created_by: localStorage.getItem('username'),
-      skills: ["Python", "Flask", "MySQL"]  // This should be the array you collect from your input fields
+      skills: this.SkillsValue
     };
+    console.log(jobData);
 
     this.jobService.submitJobPosting(jobData).subscribe({
       next: (response) => {
         console.log('Job posted successfully:', response);
-        // You can reset the form fields or navigate to another page here
-        this.successMessage = response.message; // Update the success message
+        this.successMessage = response.message; 
         console.log(this.successMessage);
         this.clearForm();
         setTimeout(() => {
           this.successMessage = '';
         }, 3000);
-        
+
       },
       error: (err) => {
         console.error('Error posting job:', err);
@@ -123,14 +150,15 @@ export class CreateJobComponent {
       client: this.ClientValue,
       application_deadline: this.DeadlineValue,
       created_by: localStorage.getItem('username'),
-      skills: ["Python", "Flask", "MySQL"]  // This should be the array you collect from your input fields
+      skills: this.SkillsValue
     };
-
+    console.log(jobData);
+    
     this.jobService.submitJobPosting(jobData).subscribe({
       next: (response) => {
         console.log('Job posted successfully:', response);
-        // You can reset the form fields or navigate to another page here
-        this.successMessage = response.message; // Set success message
+        this.successMessage = response.message; 
+        this.clearForm();
         setTimeout(() => {
           this.successMessage = '';
         }, 3000);
@@ -144,58 +172,58 @@ export class CreateJobComponent {
       }
     });
   }
-  
+
   generateJobDescription() {
     console.log("generate");
     const jobData: GenerateJD = {
-        job_title: this.TitleValue,
-        experience: this.ExperienceValue,
-        location: this.locationValue,
-        employment_type: this.TypeValue,
-        salary_range: this.SalaryValue,
-        company_name: "Hexaware Technologies"
+      job_title: this.TitleValue,
+      experience: this.ExperienceValue,
+      location: this.locationValue,
+      employment_type: this.TypeValue,
+      salary_range: this.SalaryValue,
+      company_name: "Hexaware Technologies"
     };
 
     this.openaiService.generateJD(jobData).subscribe({
-        next: (response) => {
-            console.log('generated', response);
-            // Setting the DescriptionValue to the received job description
-            this.DescriptionValue = response.job_description;
-            console.log(this.DescriptionValue);
-            
-        },
-        error: (err) => {
-            console.error('Error posting job:', err);
+      next: (response) => {
+        console.log('generated', response);
+        // Setting the DescriptionValue to the received job description
+        this.DescriptionValue = response.job_description;
+        console.log(this.DescriptionValue);
 
-            this.errorMessage = 'There was an error posting your job, please try again.';
-        }
+      },
+      error: (err) => {
+        console.error('Error posting job:', err);
+
+        this.errorMessage = 'There was an error posting your job, please try again.';
+      }
     });
-}
+  }
 
-// Method to convert markdown to HTML
-getFormattedDescription() {
+  // Method to convert markdown to HTML
+  getFormattedDescription() {
     return marked(this.DescriptionValue);
-}
+  }
 
-dismissError() {
-  // Method to dismiss the error message
-  this.successMessage = '';
-  this.errorMessage='';
-}
+  dismissError() {
+    // Method to dismiss the error message
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
 
-clearForm() {
-  this.TitleValue = '';
-  this.DescriptionValue = '';
-  this.DepartmentValue = '';
-  this.ExperienceValue = '';
-  this.locationValue = '';
-  this.TypeValue = '';
-  this.SalaryValue = '';
-  this.DeadlineValue = '';
-  this.ClientValue = '';
-  this.PreferredQualificationsValue = '';
-  this.SkillsValue = ''; // Added to clear the 'Skills' field
-}
+  clearForm() {
+    this.TitleValue = '';
+    this.DescriptionValue = '';
+    this.DepartmentValue = '';
+    this.ExperienceValue = '';
+    this.locationValue = '';
+    this.TypeValue = '';
+    this.SalaryValue = '';
+    this.DeadlineValue = '';
+    this.ClientValue = '';
+    this.PreferredQualificationsValue = '';
+    this.SkillsValue['']; // Added to clear the 'Skills' field
+  }
   onTitleFocus() {
     this.isTitleFocused = true;
   }
@@ -212,7 +240,7 @@ clearForm() {
 
   onlocationFocus() {
     this.islocationFocused = true;
-    
+
   }
 
   onlocationBlur() {
@@ -223,7 +251,7 @@ clearForm() {
 
   onSalaryFocus() {
     this.isSalaryFocused = true;
-    
+
   }
 
   onSalaryBlur() {
@@ -234,7 +262,7 @@ clearForm() {
 
   onExperienceFocus() {
     this.isExperienceFocused = true;
-    
+
   }
 
   onExperienceBlur() {
@@ -245,7 +273,7 @@ clearForm() {
 
   onClientFocus() {
     this.isClientFocused = true;
-    
+
   }
 
   onClientBlur() {
@@ -256,7 +284,7 @@ clearForm() {
 
   onSkillsFocus() {
     this.isSkillsFocused = true;
-    
+
   }
 
   onSkillsBlur() {
@@ -267,7 +295,7 @@ clearForm() {
 
   onDescriptionFocus() {
     this.isDescriptionFocused = true;
-    
+
   }
 
   onDescriptionBlur() {
@@ -278,7 +306,7 @@ clearForm() {
 
   onResponsibilitiesFocus() {
     this.isResponsibilitiesFocused = true;
-    
+
   }
 
   onResponsibilitiesBlur() {
@@ -289,7 +317,7 @@ clearForm() {
 
   onDepartmentFocus() {
     this.isDepartmentFocused = true;
-    
+
   }
 
   onDepartmentBlur() {
@@ -300,7 +328,7 @@ clearForm() {
 
   onTypeFocus() {
     this.isTypeFocused = true;
-    
+
   }
 
   onTypeBlur() {
@@ -311,7 +339,7 @@ clearForm() {
 
   onDeadlineFocus() {
     this.isDeadlineFocused = true;
-    
+
   }
 
   onDeadlineBlur() {
@@ -322,7 +350,7 @@ clearForm() {
 
   onPreferredQualificationsFocus() {
     this.isPreferredQualificationsFocused = true;
-    
+
   }
 
   onPreferredQualificationsBlur() {
@@ -333,7 +361,7 @@ clearForm() {
 
   onRequiredQualificationsFocus() {
     this.isRequiredQualificationsFocused = true;
-    
+
   }
 
   onRequiredQualificationsBlur() {
@@ -366,10 +394,10 @@ clearForm() {
       this.currentStep--;
     }
 
-  
+
   }
 
-  formSubmit(){
+  formSubmit() {
     if (this.currentStep > 2) {
       this.currentStep--;
     }

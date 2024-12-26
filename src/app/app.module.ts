@@ -52,6 +52,8 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { CategoryComponent } from './components/recruiter/category/category.component';
 import { CandidateReviewComponent } from './components/candidate/candidate-review/candidate-review.component';
 import { CustomReportComponent } from './components/recruiter/custom-report/custom-report.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,8 @@ import { CustomReportComponent } from './components/recruiter/custom-report/cust
     CategoryComponent,
     CandidateReviewComponent,
     CustomReportComponent,
+    AboutusComponent,
+    FooterComponent,
     
   ],
   imports: [
