@@ -54,6 +54,7 @@ import { CandidateReviewComponent } from './components/candidate/candidate-revie
 import { CustomReportComponent } from './components/recruiter/custom-report/custom-report.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CandidateInterviewComponent } from './components/candidate/candidate-interview/candidate-interview.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { FooterComponent } from './components/footer/footer.component';
     CustomReportComponent,
     AboutusComponent,
     FooterComponent,
+    CandidateInterviewComponent,
     
   ],
   imports: [

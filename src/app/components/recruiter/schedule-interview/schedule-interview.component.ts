@@ -38,42 +38,42 @@ export class ScheduleInterviewComponent {
   isTimeFocused: boolean = false;
   TimeValue: string = '';
   jobs: JobPosting[] = [];
-  createdBy: string='';
+  createdBy: string = '';
   applications: Application[] = [];
   filteredApplications: Application[] = [];
   users: User[] = [];
   interviewers: User[] = [];
   errorMessage: string = '';
-  jobValue: string = '';       
+  jobValue: string = '';
   statusValue: string = '';
-  
-  
-constructor(private interviewService: InterviewService, private applicationService: ApplicationService,
-  private userservice: UserService){}
+  successMessage: string = '';
 
-ngOnInit(): void {
-  this.createdBy = localStorage.getItem('username');
-  this.loadApplications(this.jobValue, this.statusValue, ); 
-  this.fetchJobPostings();
-  this.fetchAllUsers();
-}
-fetchAllUsers(){
-  this.userservice.getAllUsers().subscribe(data => {
-    this.users = data;
-    // Filtering users based on roles 'interviewer' and 'recruiter'
-    this.interviewers = this.users.filter(user => 
-      user.role === 'interviewer' || user.role === 'recruiter'
-    );
-  }, error => {
-    console.error('Error fetching job postings:', error);
-  })
-}
+  constructor(private interviewService: InterviewService, private applicationService: ApplicationService,
+    private userservice: UserService) { }
+
+  ngOnInit(): void {
+    this.createdBy = localStorage.getItem('username');
+    this.loadApplications(this.jobValue, this.statusValue,);
+    this.fetchJobPostings();
+    this.fetchAllUsers();
+  }
+  fetchAllUsers() {
+    this.userservice.getAllUsers().subscribe(data => {
+      this.users = data;
+      // Filtering users based on roles 'interviewer' and 'recruiter'
+      this.interviewers = this.users.filter(user =>
+        user.role === 'interviewer' || user.role === 'recruiter'
+      );
+    }, error => {
+      console.error('Error fetching job postings:', error);
+    })
+  }
   fetchJobPostings(): void {
     this.interviewService.getJobsByEmployeeId(this.createdBy).subscribe(data => {
       this.jobs = data; // Store the received data
-      
+
       console.log(this.jobs); // Log the jobs for debug purposes
-  
+
     }, error => {
       console.error('Error fetching job postings:', error);
     });
@@ -82,43 +82,43 @@ fetchAllUsers(){
   loadApplications(jobTitle: string, status: string, deadline?: string) {
 
     this.applicationService.getApplications(this.createdBy, jobTitle, status).subscribe({
-        next: (data) => {
-            this.applications = data; 
-            this.filteredApplications = data;
-            console.log("appliaction", this.applications);
+      next: (data) => {
+        this.applications = data;
+        this.filteredApplications = data;
+        console.log("appliaction", this.applications);
 
-        },
-        error: (error) => {
-            this.errorMessage = 'Failed to load applications';
-            console.error(error);
-        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Failed to load applications';
+        console.error(error);
+      }
     });
-}
-
-onJobChange(selectedJobId: string): void {
-  const jobId = Number(selectedJobId);
-  const selectedJob = this.applications.find(job => job.job_id === jobId);
-  
-  if (selectedJob) {
-    const selectedJobId = selectedJob.job_id;
-    // Filter applications based on the selected job ID
-    this.filteredApplications = this.applications.filter(application => application.job_id === selectedJobId);
-  } else {
-    this.filteredApplications = null; // Reset if no job is selected
   }
-}
-scheduleInterview() {
-  if (this.formValid()) {
+
+  onJobChange(selectedJobId: string): void {
+    const jobId = Number(selectedJobId);
+    const selectedJob = this.applications.find(job => job.job_id === jobId);
+
+    if (selectedJob) {
+      const selectedJobId = selectedJob.job_id;
+      // Filter applications based on the selected job ID
+      this.filteredApplications = this.applications.filter(application => application.job_id === selectedJobId);
+    } else {
+      this.filteredApplications = null; // Reset if no job is selected
+    }
+  }
+  scheduleInterview() {
+    if (this.formValid()) {
       // Logic to schedule the interview
       console.log('Interview Scheduled!', {
-          jobValue: this.jobValue,
-          statusValue: this.statusValue,
-          DateValue: this.DateValue,
-          TimeValue: this.TimeValue,
-          InterviewerValue: this.InterviewerValue,
-          InterviewTypeValue: this.InterviewTypeValue,
-          InterviewModeValue: this.InterviewModeValue,
-          InterviewLocationValue: this.InterviewLocationValue
+        jobValue: this.jobValue,
+        statusValue: this.statusValue,
+        DateValue: this.DateValue,
+        TimeValue: this.TimeValue,
+        InterviewerValue: this.InterviewerValue,
+        InterviewTypeValue: this.InterviewTypeValue,
+        InterviewModeValue: this.InterviewModeValue,
+        InterviewLocationValue: this.InterviewLocationValue
       });
       const interview: Interview = {
         type: this.InterviewTypeValue,
@@ -126,7 +126,7 @@ scheduleInterview() {
         interviewer_id: this.InterviewerValue,
         application_id: this.statusValue,
         owner_id: this.createdBy,
-        schedule_date: this.DateValue +' '+this.TimeValue+':00',
+        schedule_date: this.DateValue + ' ' + this.TimeValue + ':00',
         status: 'scheduled',
         feedback: null,
         interviewMode: this.InterviewModeValue,
@@ -137,6 +137,11 @@ scheduleInterview() {
         next: (response) => {
           console.log('Interview posted successfully:', response);
           // Optionally reset the form fields or navigate to another page here
+          this.successMessage = response.message;
+          setTimeout(() => {
+            this.successMessage = '';
+          }, 3000);
+          this.clearForm();
         },
         error: (err) => {
           // Handle error response here
@@ -144,7 +149,7 @@ scheduleInterview() {
           if (err.error && err.error.message) {
             // Assuming the error response structure
             console.error('Error message:', err.error.message);
-            this.errorMessage = err.error.message; 
+            this.errorMessage = err.error.message;
             setTimeout(() => {
               this.errorMessage = '';
             }, 3000);
@@ -154,33 +159,42 @@ scheduleInterview() {
           }
         }
       });
-      
-  } else {
+
+    } else {
       // Logic to inform user of invalid fields
       alert('Please fill in all required fields.');
+    }
   }
-}
 
-dismissError() {
-  // Method to dismiss the error message
-  this.errorMessage = '';
-}
+  dismissError() {
+    // Method to dismiss the error message
+    this.errorMessage = '';
+  }
 
-formValid(): boolean {
-  // Check if all required fields have values
-  return Boolean(this.jobValue) && 
-         Boolean(this.statusValue) && 
-         Boolean(this.DateValue) && 
-         Boolean(this.TimeValue) &&
-         Boolean(this.InterviewerValue) && 
-         Boolean(this.InterviewTypeValue) && 
-         Boolean(this.InterviewModeValue) && 
-         (this.InterviewModeValue !== 'inPerson' || Boolean(this.InterviewLocationValue));
-}
-
+  formValid(): boolean {
+    // Check if all required fields have values
+    return Boolean(this.jobValue) &&
+      Boolean(this.statusValue) &&
+      Boolean(this.DateValue) &&
+      Boolean(this.TimeValue) &&
+      Boolean(this.InterviewerValue) &&
+      Boolean(this.InterviewTypeValue) &&
+      Boolean(this.InterviewModeValue) &&
+      (this.InterviewModeValue !== 'inPerson' || Boolean(this.InterviewLocationValue));
+  }
+  clearForm() {
+    this.jobValue = '',
+      this.statusValue = '',
+      this.DateValue = '',
+      this.TimeValue = '',
+      this.InterviewerValue = '',
+      this.InterviewTypeValue = '',
+      this.InterviewModeValue = '',
+      this.InterviewLocationValue = ''
+  }
   onJobFocus() {
     this.isJobFocused = true;
-    
+
   }
 
   onJobBlur() {
@@ -191,7 +205,7 @@ formValid(): boolean {
 
   onStatusFocus() {
     this.isStatusFocused = true;
-    
+
   }
 
   onStatusBlur() {
@@ -202,7 +216,7 @@ formValid(): boolean {
 
   onInterviewerFocus() {
     this.isInterviewerFocused = true;
-    
+
   }
 
   onInterviewerBlur() {
@@ -213,7 +227,7 @@ formValid(): boolean {
 
   onInterviewModeFocus() {
     this.isInterviewModeFocused = true;
-    
+
   }
 
   onInterviewModeBlur() {
@@ -224,7 +238,7 @@ formValid(): boolean {
 
   onDateFocus() {
     this.isDateFocused = true;
-    
+
   }
 
   onDateBlur() {
@@ -235,7 +249,7 @@ formValid(): boolean {
 
   onInterviewLocationFocus() {
     this.isInterviewLocationFocused = true;
-    
+
   }
 
   onInterviewLocationBlur() {
@@ -246,7 +260,7 @@ formValid(): boolean {
 
   onInterviewTypeFocus() {
     this.isInterviewTypeFocused = true;
-    
+
   }
 
   onInterviewTypeBlur() {
@@ -257,7 +271,7 @@ formValid(): boolean {
 
   onTimeFocus() {
     this.isTimeFocused = true;
-    
+
   }
 
   onTimeBlur() {

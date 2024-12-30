@@ -153,7 +153,13 @@ export class SidebarComponent implements OnInit{
       route: '/candidateLayout/appliedJobs',
       roles: ['candidate'] 
     },
-    
+    {
+      number: '5',
+      name: 'Scheduled Interview',
+      icon: 'bi bi-phone-vibrate-fill',
+      route: '/candidateLayout/candidateInterview',
+      roles: ['candidate'] 
+    },
   ];
 
   filteredList: any[] = [];
@@ -203,7 +209,8 @@ export class SidebarComponent implements OnInit{
     return {
       'HOME': filteredList.filter(item => item.name === 'Dashboard' || item.name === 'Profile' ),
       'JOB': filteredList.filter(item => item.name === 'Applied Jobs' || item.name === 'Apply Job'),
-      'OTHERS': filteredList.filter(item => [ 'Demo'].includes(item.name))
+      'INTERVIEW': filteredList.filter(item => item.name === 'Scheduled Interview' ),
+      // 'OTHERS': filteredList.filter(item => [ 'Demo'].includes(item.name))
     };
   }
 

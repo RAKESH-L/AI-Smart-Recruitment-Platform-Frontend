@@ -48,4 +48,8 @@ export class JobService {
   publishLinkedin(jobData: PublishJob): Observable<any> {
     return this.http.post(`${this.api}/post`, jobData);
   }
+
+  updateJobPosting(jobData: JobPosting, jobId: string): Observable<any> {
+    return this.http.put(`${this.api}/updateJobDetailsByJobId/${jobId}`, jobData);
+  }
 }

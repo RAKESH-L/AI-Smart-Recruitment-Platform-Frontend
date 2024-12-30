@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { JobPosting } from '../../../model/Job.model';
 import { ApplicationService } from '../../../service/application.service';
 import { Application } from '../../../model/application.model';
+import { InterviewService } from '../../../service/interview.service';
+import { Interview } from '../../../model/interview.model';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -16,6 +18,7 @@ export class AppliedJobsComponent {
   filteredJobs: JobPosting[] = []; 
   searchQuery: string = '';
   applications: Application[] = [];
+  interviews: Interview[] = [];
   errorMessage: string = '';
   applicationStatus: string = '';
 
@@ -23,6 +26,16 @@ export class AppliedJobsComponent {
   currentStep: number = 0; // Track the current step
   steps: string[] = ['', '', '', ''];
   currentStepName: string = ''; // Store the name of the current step
+
+  isStatusFocused: boolean = false;
+  StatusValue: string = '';
+
+  isTimeFocused: boolean = false;
+  TimeValue: string = '';
+
+  isDateFocused: boolean = false;
+  DateValue: string = '';
+
 
   nextStep() {
     if (this.currentStep < this.steps.length - 1) {
@@ -56,7 +69,7 @@ export class AppliedJobsComponent {
     }
 }
 
-  constructor(private applicationService: ApplicationService) { }
+  constructor(private applicationService: ApplicationService, private interviewservice: InterviewService) { }
 
   ngOnInit(): void {
     this.createdBy = localStorage.getItem('username');
@@ -94,6 +107,24 @@ export class AppliedJobsComponent {
 
   deleteJob(jobId: number){
     
+  }
+  openInterview(job: any){
+    const jobId = job.job_id;
+    const applicationId = job.application_id;
+    this.interviewservice.getInterviewByjobAndApplicationId(jobId, applicationId).subscribe({
+      next: (data) => {
+        this.interviews = data;
+        // this.filteredApplications = data;
+        console.log("interviews", this.interviews);
+
+    },
+    error: (error) => {
+        this.errorMessage = 'Failed to load applications';
+        console.error(error);
+    }
+    })
+    document.getElementById('interviewModel')!.style.display = 'block'; // Show modal
+    document.body.style.overflow = 'hidden'; // Disable body scroll
   }
 
   checkStatus(job: any){
@@ -146,5 +177,54 @@ export class AppliedJobsComponent {
   closeModal() {
     document.getElementById('statusModal')!.style.display = 'none'; // Hide modal
     document.body.style.overflow = 'auto'; // Re-enable body scroll
+    document.getElementById('interviewModel')!.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
   }
+
+
+ 
+
+
+
+
+
+
+  
+
+
+  onStatusFocus() {
+    this.isStatusFocused = true;
+
+  }
+
+  onStatusBlur() {
+    if (!this.StatusValue) {
+      this.isStatusFocused = false;
+    }
+  }
+  onTimeFocus() {
+    this.isTimeFocused = true;
+    
+  }
+
+  onTimeBlur() {
+    if (!this.TimeValue) {
+      this.isTimeFocused = false;
+    }
+  }
+  onDateFocus() {
+    this.isDateFocused = true;
+    
+  }
+
+  onDateBlur() {
+    if (!this.DateValue) {
+      this.isDateFocused = false;
+    }
+  }
+
+  // dismissError() {
+    
+  //   this.successMessage = '';
+  // }
 }

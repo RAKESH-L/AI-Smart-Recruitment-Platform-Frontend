@@ -44,7 +44,7 @@ color: #212121;
 margin: auto;
 width: 93%;
 position: relative;
-z-index: 1;
+/* z-index: 1; */
 }
 
 .btn-outline-white {

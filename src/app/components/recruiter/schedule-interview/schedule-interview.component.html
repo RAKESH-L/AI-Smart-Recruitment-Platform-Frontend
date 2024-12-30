@@ -176,6 +176,10 @@
             </div>
         </div>
     </div>
+    <div *ngIf="successMessage" class="success-message">
+        <span>{{ successMessage }}</span>
+        <button (click)="dismissError()">X</button>
+    </div>
     <div *ngIf="errorMessage" class="error-message">
         <span>{{ errorMessage }}</span>
         <button (click)="dismissError()">X</button>

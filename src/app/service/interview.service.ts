@@ -34,6 +34,10 @@ export class InterviewService {
     return this.http.get<InterviewDetails[]>(`${this.baseUrl}/getInterviewsByInterviewerId/${interviewId}`);
   }
 
+  getInterviewByjobAndApplicationId(jobId: string, candidateId: string): Observable<Interview[]> {
+    return this.http.get<Interview[]>(`${this.baseUrl}/getInterviewsByJobIdAndApplicationId/${jobId}/${candidateId}`);
+  }
+
   updateFeedback(interviewId: number, feedback: any): Observable<any> {
     return this.http.patch(`${this.baseUrl}/updateInterview/${interviewId}`, feedback);
   }

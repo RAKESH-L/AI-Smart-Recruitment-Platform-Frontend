@@ -30,6 +30,7 @@ import { CategoryComponent } from './components/recruiter/category/category.comp
 import { CandidateReviewComponent } from './components/candidate/candidate-review/candidate-review.component';
 import { CustomReportComponent } from './components/recruiter/custom-report/custom-report.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { CandidateInterviewComponent } from './components/candidate/candidate-interview/candidate-interview.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: 'jobSearch', component: JobSearchComponent },
       { path: 'candidateProfile', component: CandidateProfileComponent },
       { path: 'candidateReview', component: CandidateReviewComponent },
+      { path: 'candidateInterview', component: CandidateInterviewComponent },
     ]
   },
   {

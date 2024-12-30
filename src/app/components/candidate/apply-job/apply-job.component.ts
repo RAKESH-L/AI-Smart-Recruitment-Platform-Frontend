@@ -368,6 +368,15 @@ export class ApplyJobComponent {
         console.log('Response from server:', response);
         this.applicationMessage = response.message; // Get success message from the response
         this.isErrorMessage = false; // It's not an error message
+        this.FNameValue = ''; // Clear first name
+        this.LNameValue = ''; // Clear last name
+        this.EmailValue = ''; // Clear email
+        this.PhoneValue = ''; // Clear phone number
+        this.ExperienceValue = ''; // Clear experience
+        this.CurrentCTCValue = ''; // Clear current CTC
+        this.ExpectedCTCValue = ''; // Clear expected CTC
+        this.SkillKnownValue = ''; // Clear skills
+        this.ResumeValue = null; // Clear resume file
         setTimeout(() => {
           this.applicationMessage = '';
         }, 3000);

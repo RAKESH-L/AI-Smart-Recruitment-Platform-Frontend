@@ -10,7 +10,7 @@ app-navbar {
     top: 0;
     /* left: 0; */
     height: 4rem;
-    z-index: 3;
+    z-index: 1;
     margin-left: 80px; /* Initial margin for sidebar */
     transition: margin-left 250ms ease-in;
 }
@@ -23,7 +23,7 @@ app-navbar {
 main {
     position: absolute;
     width: 100%;
-    top: 3rem;
+    /* top: 3rem; */
     z-index: 1;
 }
 
@@ -66,10 +66,11 @@ app-sidebar {
     width: 250px;
     /* background-image: url('../assets/img/faces/sidebar-1.jpg');
     opacity: 0.1; */
-    /* z-index: 2; */
+    z-index: 2;
 }
 .display-area {
     position: relative;
+    top: 50px;
     left: 80px;
     width: calc(100% - 80px);
     transition: left 250ms ease-in, width 250ms ease-in;

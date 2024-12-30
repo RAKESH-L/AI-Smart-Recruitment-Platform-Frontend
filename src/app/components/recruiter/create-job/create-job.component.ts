@@ -35,7 +35,7 @@ export class CreateJobComponent {
   ClientValue: string = '';
 
   isSkillsFocused: boolean = false;
-  SkillsValue: string[];
+  SkillsValue: string = '';
 
   isDescriptionFocused: boolean = false;
   DescriptionValue: string = '';
@@ -100,6 +100,8 @@ export class CreateJobComponent {
   }
 
   submitForm() {
+    const skillsArray = this.SkillsValue.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
+
     const jobData: JobPosting = {
       title: this.TitleValue,
       description: this.DescriptionValue,
@@ -112,7 +114,7 @@ export class CreateJobComponent {
       client: this.ClientValue,
       application_deadline: this.DeadlineValue,
       created_by: localStorage.getItem('username'),
-      skills: this.SkillsValue
+      skills: skillsArray 
     };
     console.log(jobData);
 
@@ -138,6 +140,8 @@ export class CreateJobComponent {
   }
 
   draftForm() {
+    const skillsArray = this.SkillsValue.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
+
     const jobData: JobPosting = {
       title: this.TitleValue,
       description: this.DescriptionValue,
@@ -150,7 +154,7 @@ export class CreateJobComponent {
       client: this.ClientValue,
       application_deadline: this.DeadlineValue,
       created_by: localStorage.getItem('username'),
-      skills: this.SkillsValue
+      skills: skillsArray 
     };
     console.log(jobData);
     

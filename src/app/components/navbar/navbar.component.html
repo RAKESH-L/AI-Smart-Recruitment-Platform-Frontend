@@ -16,7 +16,7 @@
   <div class="navbar-collapse">
     <ul class="navbar-nav me-auto">
       <li class="nav-item dropdown">
-        
+
 
       </li>
 
@@ -35,14 +35,16 @@
 
 
   <div class="ml-auto">
-  
-  <i class=" bi bi-gear-fill fa-solid fa-cog fa-spin" style="font-size: 1.1rem; cursor: pointer; color: #06D6A0; margin-right: 10px;" (click)="openSettings()"></i>
-</div>
+
+    <i class=" bi bi-gear-fill fa-solid fa-cog fa-spin"
+      style="font-size: 1.1rem; cursor: pointer; color: #06D6A0; margin-right: 10px;" (click)="openSettings()"></i>
+  </div>
 
   <div class="profile-logo ">
-    
-    <button  class="" data-bs-toggle="dropdown" (click)="toggleNotifications()" style="border: none; border-radius: 50px; background-color: transparent;">
-      <i class="bi bi-bell-fill" ></i>
+
+    <button class="" data-bs-toggle="dropdown" (click)="toggleNotifications()"
+      style="border: none; border-radius: 50px; background-color: transparent;">
+      <i class="bi bi-bell-fill"></i>
     </button>
     <div *ngIf="isNotificationOpen" class="notification-panel">
 
@@ -52,17 +54,19 @@
           <div>
             <h4>{{ notification.title }}</h4>
             <p>{{ notification.message }}</p>
-          </div><hr>
+          </div>
+          <hr>
         </li>
       </ul>
       <button class="view-all">See all notifications</button>
     </div>
-    
+
   </div>
 
   <div class="profile-logo dropdown" (click)="toggleProfileDropdown()">
 
-    <button  class="  " data-bs-toggle="dropdown" style="border: none; border-radius: 50px; background-color: transparent;">
+    <button class="  " data-bs-toggle="dropdown"
+      style="border: none; border-radius: 50px; background-color: transparent;">
 
       <!-- <img src="/assets/img/faces/user-1.jpg" width="35" class="rounded-circle object-cover"> -->
 
@@ -71,7 +75,8 @@
 
 
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-end" [ngClass]="{'show': isProfileDropdownOpen}">
-      <h3 class="card-title" style="margin-left: 30px; font-weight: bold;">User Profile</h3>
+      <h5 class="card-title" style="margin-left: 30px; font-weight: bold;">User Profile</h5>
+      <br>
       <div class="d-flex align-items-center">
 
 
@@ -80,9 +85,9 @@
         <div class="ms-2">
 
           <div style="width: 200px;"> <!-- Set the card width to 250px -->
-            <p class="card-title">{{employeeData.full_name}}</p>
+            <p class="card-text">{{employeeData.full_name}}</p>
             <p class="card-text">{{employeeData.role}}</p>
-            <p class="card-text">Age: 25</p>
+            <p class="card-text">{{employeeData.employee_id}}</p>
           </div>
         </div>
       </div>
@@ -158,8 +163,10 @@
         </div>
       </a>
 
+      <div style="padding: 20px;">
+        <button class="view-all" (click)="logout()">Logout</button>
+      </div>
       
-      <button class="view-all" (click)="logout()">Logout</button>
 
 
     </div>
