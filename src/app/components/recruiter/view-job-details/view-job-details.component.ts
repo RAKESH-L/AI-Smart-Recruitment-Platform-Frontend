@@ -163,7 +163,11 @@ export class ViewJobDetailsComponent {
     this.applicationService.getApplicationsByJobId(this.jobId).subscribe({
       next: (data) => {
           this.applications = data;
-          console.log("appliaction", this.applications);
+          this.applications.forEach(application => {
+            application.submitted_at = this.formatDate(application.submitted_at);
+        });
+
+        console.log("Application after formatting deadlines:", this.applications);
 
       },
       error: (error) => {

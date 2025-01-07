@@ -16,8 +16,8 @@ export class ScheduleInterviewComponent {
   isJobFocused: boolean = false;
   JobValue: string = '';
 
-  isStatusFocused: boolean = false;
-  StatusValue: string = '';
+  isApplicantFocused: boolean = false;
+  ApplicantValue: string = '';
 
   isInterviewModeFocused: boolean = false;
   InterviewModeValue: string = '';
@@ -112,7 +112,7 @@ export class ScheduleInterviewComponent {
       // Logic to schedule the interview
       console.log('Interview Scheduled!', {
         jobValue: this.jobValue,
-        statusValue: this.statusValue,
+        ApplicantValue: this.ApplicantValue,
         DateValue: this.DateValue,
         TimeValue: this.TimeValue,
         InterviewerValue: this.InterviewerValue,
@@ -124,7 +124,7 @@ export class ScheduleInterviewComponent {
         type: this.InterviewTypeValue,
         job_id: this.jobValue,
         interviewer_id: this.InterviewerValue,
-        application_id: this.statusValue,
+        application_id: this.ApplicantValue,
         owner_id: this.createdBy,
         schedule_date: this.DateValue + ' ' + this.TimeValue + ':00',
         status: 'scheduled',
@@ -174,7 +174,7 @@ export class ScheduleInterviewComponent {
   formValid(): boolean {
     // Check if all required fields have values
     return Boolean(this.jobValue) &&
-      Boolean(this.statusValue) &&
+      Boolean(this.ApplicantValue) &&
       Boolean(this.DateValue) &&
       Boolean(this.TimeValue) &&
       Boolean(this.InterviewerValue) &&
@@ -184,7 +184,7 @@ export class ScheduleInterviewComponent {
   }
   clearForm() {
     this.jobValue = '',
-      this.statusValue = '',
+      this.ApplicantValue = '',
       this.DateValue = '',
       this.TimeValue = '',
       this.InterviewerValue = '',
@@ -203,14 +203,14 @@ export class ScheduleInterviewComponent {
     }
   }
 
-  onStatusFocus() {
-    this.isStatusFocused = true;
+  onApplicantFocus() {
+    this.isApplicantFocused = true;
 
   }
 
-  onStatusBlur() {
-    if (!this.StatusValue) {
-      this.isStatusFocused = false;
+  onApplicantBlur() {
+    if (!this.ApplicantValue) {
+      this.isApplicantFocused = false;
     }
   }
 

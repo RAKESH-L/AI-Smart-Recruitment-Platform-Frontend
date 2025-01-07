@@ -334,3 +334,38 @@
 *, :after, :before {
   box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+.status-submitted {
+  background-color: #ecf2ff!important; /* Submitted color */
+  color: #5d87ff!important;
+  padding: 5px;
+}
+
+.status-interviewing {
+  background-color: #fef5e5!important; /* Interviewing color */
+  color: #ffae1f!important;
+  padding: 5px;
+}
+
+.status-rejected {
+  background-color: #fdede8!important; /* Rejected color */
+  color: #fa896b!important;
+  padding: 5px;
+}
+.status-shortlisted{
+  background-color: #e8f7ff!important;
+  color: #49beff!important;
+  padding: 5px;
+}
+.status-hired, .status-offered, .status-accepted{
+  background-color: #e6fffa!important;
+  color: #13deb9!important;
+  padding: 5px;
+}

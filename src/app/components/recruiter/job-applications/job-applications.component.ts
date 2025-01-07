@@ -76,7 +76,11 @@ export class JobApplicationsComponent implements OnInit{
             next: (data) => {
                 this.applications = data;
                 this.filteredApplications = data;
-                console.log("appliaction", this.applications);
+                this.filteredApplications.forEach(application => {
+                  application.submitted_at = this.formatDate(application.submitted_at);
+              });
+  
+              console.log("Application after formatting deadlines:", this.filteredApplications);
 
             },
             error: (error) => {
@@ -203,6 +207,17 @@ saveStatus() {
   }
   toggleDetailRow1(): void {
     this.showDetailRow = !this.showDetailRow; // Toggle the visibility on button click
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    };
+    return date.toLocaleDateString('en-US', options);
   }
 
   onJobFocus() {

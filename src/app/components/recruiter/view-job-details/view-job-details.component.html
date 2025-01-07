@@ -368,7 +368,20 @@
                                                                 </div>
                                                             </td>
                                                             <td mat-cell>{{application.job_title}}</td>
-                                                            <td mat-cell>{{application.application_status}}</td>
+                                                            <!-- <td mat-cell>{{application.application_status}}</td> -->
+                                                            <td mat-cell>
+                                                                <span [ngClass]="{
+                                                                    'status-submitted': application.application_status === 'submitted',
+                                                                    'status-interviewing': application.application_status === 'interviewing',
+                                                                    'status-rejected': application.application_status === 'rejected',
+                                                                    'status-shortlisted': application.application_status === 'shortlisted',
+                                                                    'status-hired': application.application_status === 'hired',
+                                                                    'status-accepted': application.application_status === 'accepted',
+                                                                    'status-offered': application.application_status === 'offered'
+                                                                }" class="text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                                    {{ application.application_status }}
+                                                                </span>
+                                                            </td>
                                                             <td mat-cell>
                                                                 <span mat-header-cell
                                                                     class="text-accent">{{application.submitted_at}}</span>

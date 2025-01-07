@@ -57,7 +57,7 @@
                             <div class="col-md-6" style="margin-top: -10px;">
                                 <div class="form-group" style="max-width: 100%;">
                                     <select id="applicantName" class="form-control custom-input"
-                                        [(ngModel)]="statusValue" (focus)="onStatusFocus()" (blur)="onStatusBlur()"
+                                        [(ngModel)]="ApplicantValue" (focus)="onApplicantFocus()" (blur)="onApplicantBlur()"
                                         style="height: 40px;" required>
                                         <option value="placeholder" disabled selected>Select Applicant</option>
                                         <!-- Placeholder -->
@@ -67,7 +67,7 @@
                                         </option>
                                     </select>
                                     <label for="customInput"
-                                        [ngClass]="{'active': isStatusFocused || statusValue}">Applicant Name</label>
+                                        [ngClass]="{'active': isApplicantFocused || ApplicantValue}">Applicant Name</label>
                                     <span class="outline"></span>
                                 </div>
                             </div>
